@@ -1,0 +1,85 @@
+.notifications-wrapper {
+  width: 550px;
+  margin: auto;
+  height: fit-content;
+}
+
+.notifications-title {
+  color: rgb(58, 58, 58);
+  font-size: 26px;
+  font-weight: 500;
+}
+.notifications-item-wrapper {
+  width: 100%;
+  margin-top: 10px;
+  background-color: rgb(232, 232, 232);
+  border-radius: 7px;
+}
+.notifications-item-wrapper:hover {
+  background-color: rgb(198, 198, 198);
+}
+.notifications-email-span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.notifications-email-icon {
+  color: rgb(0, 162, 255);
+  padding-top: 5px;
+}
+
+.notifications-top-content {
+  margin-top: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  color: black;
+  align-items: center;
+  font-size: 14px;
+}
+.notifications-item-wrapper {
+  padding: 10px;
+}
+.notifications-email-span {
+  color: rgb(0, 162, 255);
+  margin-left: 2px;
+  margin-right: 2px;
+}
+.notification-project-name {
+  color: rgb(45, 45, 45);
+  font-weight: 600;
+}
+.notification-proect-join {
+  color: rgb(100, 100, 100);
+}
+.notifications-accept-button {
+  background-color: rgb(0, 102, 255);
+  width: fit-content;
+  padding: 5px;
+  font-size: 14px;
+  border-radius: 3px;
+  width: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.notifications-accept-button:hover {
+  cursor: pointer;
+  background-color: rgb(0, 0, 171);
+}
+.notifications-lower-wrapper {
+  margin-top: 15px;
+  margin-bottom: 5px;
+  display: flex;
+}
+.notifications-cancel-button {
+  color: rgb(67, 67, 67);
+  width: fit-content;
+  padding: 5px;
+  font-size: 14px;
+  border-radius: 3px;
+  margin-left: 5px;
+}
+.notifications-cancel-button:hover {
+  cursor: pointer;
+  background-color: aliceblue;
+}

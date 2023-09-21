@@ -1,0 +1,46 @@
+* {
+  color: white;
+}
+
+.lander {
+  background-color: white;
+}
+
+.landingContainer {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.landingBox {
+  margin: auto;
+  /* background-color: white; */
+  max-width: 500px;
+  height: 200px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.landingIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 200px;
+  resize: 10;
+  animation: spin 3s linear infinite; /* 2 seconds duration, linear timing, infinite loop */
+}
+.landingBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}

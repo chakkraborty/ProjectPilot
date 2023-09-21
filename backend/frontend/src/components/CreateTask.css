@@ -1,0 +1,244 @@
+/* Styles for the modal container */
+.modal-1 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+@media (max-width: 530px) {
+  .modal-content-1 {
+    width: 100% !important;
+    height: 100%;
+  }
+  .create-task-top-sub-wrapper {
+    max-height: 80vh !important;
+    overflow-y: auto;
+  }
+}
+
+/* Styles for the modal content */
+.modal-content-1 {
+  background-color: #282e33;
+  width: 500px !important;
+
+  outline: 1px solid rgb(87, 87, 87);
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Styles for the close button */
+.close-button-1 {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #000000;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.create-task-description-area {
+  height: 100px;
+  width: 100%;
+  border-style: none;
+}
+.create-task-description-area:focus {
+  outline: 1px solid #5393ed;
+}
+.border-1px-solid-grey {
+  border: 1px solid grey;
+}
+
+.text-color-dark-grey {
+  color: rgb(47, 47, 47);
+}
+.font-weight-600 {
+  font-weight: 600;
+  /* font-size: 40px; */
+}
+.font-size-30px {
+  font-size: 30px;
+}
+.create-task-title-input {
+  width: 100%;
+
+  height: 30px;
+  padding: 5px;
+  color: #d4d4d4;
+  margin-top: 10px;
+  background-color: #22272b;
+  border-radius: 3px;
+}
+.create-task-title-input:focus {
+  outline: 1px solid rgb(109, 173, 230);
+}
+.margin-top-10px {
+  margin-top: 10px;
+}
+.create-task-status-dropdown-wrapper {
+  display: flex;
+  margin-top: 5px;
+  flex-direction: column;
+}
+.create-task-status-dropdown-wrapper > p {
+  color: #d4d4d4;
+  margin-bottom: 5px;
+}
+.create-task-browse-file {
+  margin-left: 5px;
+  color: #5393ed;
+  font-size: 13px;
+  font-weight: 500;
+}
+.margin-top-40px {
+  margin-top: 40px;
+}
+
+.create-task-upload-file {
+  height: 40px;
+  width: 100%;
+  border: 1px solid grey;
+  margin-top: 10px;
+}
+.padding-top-20px {
+  padding-top: 20px;
+}
+.create-button {
+  background-color: #579dff;
+  font-size: 14px;
+  width: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  border-radius: 3px;
+}
+.close-button {
+  width: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border-radius: 2px;
+
+  color: #d4d4d4;
+  margin-left: 10px;
+}
+.create-button:hover {
+  background-color: rgb(76, 101, 130);
+  cursor: pointer;
+}
+.close-button:hover {
+  cursor: pointer;
+  background-color: rgb(87, 88, 90);
+}
+.display-flex {
+  display: flex;
+}
+
+.create-task-upload-file {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: grey;
+  border: 1px dotted grey;
+}
+.create-task-upload-file:hover {
+  cursor: pointer;
+}
+
+/* ............................................ */
+
+.create-task-title {
+  color: #aab8c2;
+  display: flex;
+  align-items: center;
+}
+
+.create-task-task-icon {
+  margin-right: 10px;
+  margin-top: 8px;
+}
+
+.create-task-title-top {
+  color: #d4d4d4;
+}
+.create-task-description {
+  color: #d4d4d4;
+}
+.create-task-description-area {
+  background-color: #22272b;
+  margin-top: 10px;
+  border: 1px solid grey;
+  border-radius: 3px;
+  resize: none;
+  font-size: 14px;
+  padding: 5px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+.create-task-status {
+  color: #d4d4d4;
+}
+.create-task-attach-file {
+  color: #d4d4d4;
+}
+.create-task-status {
+  outline: green;
+}
+.create-task-add-tag-input-area {
+  height: 30px;
+  background-color: #22272b;
+}
+.create-task-add-tags-wrapper {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid rgb(0, 67, 143);
+  margin-top: 10px;
+  border-radius: 3px;
+  flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  background-color: #22272b;
+}
+.create-task-add-tags-wrapper > input {
+  width: fit-content;
+  border: none;
+  outline: none;
+  color: rgb(43, 43, 43);
+  padding: 5px;
+  color: #d4d4d4;
+}
+
+.create-task-tag-wrapper {
+  background-color: #075db9;
+  padding: 5px;
+  margin: 2px;
+  display: inline-block;
+  font-size: 13px;
+  border-radius: 3px;
+}
+.red {
+  color: rgb(255, 84, 84);
+}
+.margin-top-20px {
+  margin-top: 20px;
+}
+
+.create-task-top-sub-wrapper {
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 10px;
+}

@@ -1,0 +1,125 @@
+.dialog-wrapper {
+  background-color: rgb(58, 58, 58);
+}
+.opacity-100 {
+  background-color: rgb(32, 32, 37);
+}
+.delete-modal-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(33, 34, 41, 0.1);
+
+  display: flex;
+  justify-content: center;
+  cursor: auto;
+  z-index: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+@media (max-width: 510px) {
+  .delete-modal {
+    height: 100% !important;
+    width: 100% !important;
+
+    margin-top: 0px !important;
+  }
+}
+.delete-modal {
+  background-color: #323a3f;
+  outline: 1px solid rgb(87, 87, 87);
+  width: 400px;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 10%;
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.delete-modal-title {
+  color: #e3e2e2;
+  font-size: 25px;
+  font-weight: 600;
+  margin-left: 10px;
+}
+.delete-modal-description {
+  color: #e3e2e2;
+  font-size: 14px;
+  margin-top: 20px;
+}
+
+.delete-modal-lower-wrapper {
+  display: flex;
+  margin-top: 50px;
+  margin-bottom: 10px;
+}
+.delete-modal-delete-button {
+  background-color: rgb(117, 23, 23);
+  border-radius: 3px;
+  padding: 5px;
+  font-size: 14px;
+}
+.delete-modal-delete-button:hover {
+  background-color: rgb(129, 44, 17);
+  cursor: pointer;
+}
+.delete-modal-cancel-button {
+  color: #e3e2e2;
+  padding: 5px;
+  margin-left: 10px;
+}
+.delete-modal-cancel-button:hover {
+  background-color: rgb(54, 54, 61);
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.delete-modal-top-wrapper {
+  display: flex;
+  align-items: center;
+}
+.delete-popover {
+  color: #d4d4d4;
+  background-color: #383f46;
+  padding: 10px;
+  width: 200px;
+  border: none;
+
+  box-shadow: none;
+}
+.delete-popover:hover {
+  background-color: #30363b;
+}
+/* .delete-popover-wrapper {
+  background-color: white;
+} */
+.delete-popover-wrapper {
+  box-shadow: none;
+  border: none;
+  outline: none;
+}
+
+.delete-popover-wrapper:hover {
+  cursor: pointer;
+}
+
+.delete-modal-wrapper.MuiModal-root-entering {
+  opacity: 0;
+}
+
+.delete-modal-wrapper.MuiModal-root-entered {
+  opacity: 1;
+}
+
+/* Fade-out when the Modal disappears */
+.delete-modal-wrapper.MuiModal-root-exiting {
+  opacity: 1;
+}
+
+.delete-modal-wrapper.MuiModal-root-exited {
+  opacity: 0;
+}

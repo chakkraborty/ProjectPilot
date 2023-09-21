@@ -1,0 +1,324 @@
+/* YourComponent.css */
+
+/* Main container */
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  position: relative;
+}
+
+/* Navbar */
+.navbar {
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  position: sticky;
+  top: 0;
+  z-index: 100; /* Ensures it stays on top of other content */
+}
+
+/* Content container */
+.content-container {
+  display: flex;
+  flex: 1; /* Ensures content container takes available vertical space */
+  overflow-y: hidden;
+}
+
+/* Left Column */
+.left-col {
+  /* width: 20%; */
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+/* Middle Column */
+.middle-col {
+  flex: 1; /* Takes remaining horizontal space */
+  overflow-y: auto; /* Enable vertical scrolling when content overflows */
+  background-color: #1d2125;
+  padding: 13px;
+}
+
+/* .scrollable-content {
+   Add styling for the scrollable content here 
+} */
+
+/* Right Column */
+.right-col {
+  width: 30%;
+  position: sticky;
+  top: 0;
+  height: 100vh; /* Adjust as needed */
+  background-color: #1d2125; /* Optional styling */
+  padding: 20px; /* Optional styling */
+}
+
+/* ////////////////////////main/////////////////////////////////// */
+
+.task-page-right-wrapper {
+  height: 100%;
+  background-color: #1d2125;
+}
+
+.task-page-summary-title:focus {
+  background-color: #282d33;
+}
+.task-page-summary-title:hover {
+  background-color: #282d33;
+  cursor: pointer;
+}
+
+.task-page-text-area {
+  border: none;
+  outline: none;
+  min-height: 100px;
+  width: 100%;
+  resize: none;
+  background-color: #1d2125;
+  color: black;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 15px;
+  padding: 15px;
+  border: 1px solid rgb(52, 54, 72);
+  border-radius: 2px;
+  height: 300px;
+}
+
+.task-page-text-area:hover {
+  cursor: pointer;
+  background-color: #282d33;
+}
+
+.task-page-text-area:focus {
+  background-color: #282d33;
+  border: 1px solid rgb(69, 95, 147);
+}
+
+.task-page-text-area-line {
+  height: 2px;
+  color: black;
+  background-color: rgb(197, 197, 197);
+
+  margin-top: 10px;
+}
+.task-page-save-changes-wrapper {
+  display: flex;
+}
+
+.task-page-text-area-save-button {
+  background-color: rgb(0, 81, 255);
+  width: fit-content;
+  padding: 5px;
+  font-size: 15px;
+  border-radius: 3px;
+}
+.task-page-text-area-cancel-button {
+  color: rgb(41, 41, 41);
+  width: fit-content;
+  padding: 5px;
+  font-size: 15px;
+  border-radius: 3px;
+  margin-left: 10px;
+}
+.task-page-text-area-save-button:hover {
+  background-color: #007bff;
+  cursor: pointer;
+}
+.task-page-text-area-cancel-button:hover {
+  cursor: pointer;
+  background-color: rgb(54, 63, 71);
+}
+
+.task-page-summary-title {
+  font-size: 25px;
+  font-weight: 600;
+  color: #000000;
+  border: none;
+  height: 40px;
+  width: 100%;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  resize: none;
+
+  overflow-x: hidden;
+  padding: 3px;
+}
+.task-page-summary-title:focus {
+  outline: 2px solid rgb(1, 102, 255);
+}
+.task-page-add-issue-text-area {
+  resize: none;
+  width: 100%;
+  padding: 10px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  color: #1c1b1b;
+  font-size: 14px;
+  outline: none;
+  border: 1px solid rgb(50, 55, 71);
+  border-radius: 3px;
+}
+.task-page-add-issue-text-area:focus {
+  outline: 1px solid rgb(255, 213, 213);
+  background-color: #282d33;
+}
+
+.task-page-issue-report-button {
+  background-color: rgb(232, 54, 54);
+  width: fit-content;
+  font-size: 14px;
+  padding: 5px;
+  border-radius: 3px;
+  margin-top: 10px;
+}
+.task-page-issue-cancel-button {
+  font-size: 14px;
+  padding: 5px;
+  width: fit-content;
+  margin-left: 5px;
+  margin-top: 10px;
+  border-radius: 3px;
+}
+.task-page-create-issue-wrapper {
+  display: flex;
+}
+.task-page-issue-createdBy {
+  color: #a2b3c5;
+  font-weight: 500;
+  font-size: 17px;
+}
+.task-page-issue-cancel-button:hover {
+  cursor: pointer;
+  background-color: rgb(54, 63, 71);
+}
+.task-page-issue-report-button:hover {
+  background-color: rgb(192, 44, 4);
+  cursor: pointer;
+}
+
+.task-page-issues-title {
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.issue-wrapper {
+  /* background-color: grey; */
+  width: 100%;
+  background-color: #24292d;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+.issue-wrapper {
+  display: flex;
+
+  padding: 8px;
+}
+.issue-wrapper:hover {
+  cursor: pointer;
+  background-color: rgb(51, 51, 62);
+}
+.task-page-reported-by {
+  color: rgb(40, 40, 40);
+  font-size: 12px;
+}
+.task-page-reported-by-icon {
+  width: 25px;
+  height: 25px;
+  background-color: #007bff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin-left: 5px;
+}
+/* .issue-wrapper-icon {
+  margin-right: 5px;
+} */
+.task-page-reported-by-name {
+  background-color: #000000;
+  width: fit-content;
+  padding: 5px;
+  font-size: 13px;
+  border-radius: 5px;
+  margin-top: 3px;
+  visibility: hidden;
+  position: absolute;
+  margin-top: 50px;
+}
+.task-page-reported-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.task-page-issue-summary {
+  color: #1c1b1b;
+  margin-left: 10px;
+
+  padding: 5px;
+}
+.task-page-issue-summary {
+  font-size: 14px;
+
+  padding: 0px;
+}
+/* .task-page-reported-wrapper {
+ 
+} */
+.margin-top-15px {
+  margin-top: 15px;
+}
+.task-issue-delete-wrapper {
+  font-size: 12px;
+
+  color: #2d2d2d;
+  font-weight: 500;
+}
+.task-issue-delete-wrapper:hover {
+  cursor: pointer;
+  font-weight: black;
+  text-decoration: underline;
+}
+.margin-left-10px {
+  margin-left: 10px;
+}
+.task-page-description {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.task-page-reported-by-icon:hover + .task-page-reported-by-name {
+  visibility: visible;
+}
+
+.color-off-white {
+  color: #d4d4d4;
+}
+
+.task-page-issue-comment {
+  color: #c9c9c9;
+}
+.background-color-dark-theme {
+  background-color: #1d2125;
+}
+.margin-bottom-5px {
+  margin-bottom: 5px;
+}
+.task-issue-delete-wrapper {
+  color: rgb(159, 159, 159);
+}
+
+@media (min-width: 750px) {
+  .main-col-description {
+    display: none;
+  }
+}
+
+@media (max-width: 750px) {
+  .right-col {
+    display: none;
+  }
+}

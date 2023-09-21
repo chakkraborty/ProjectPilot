@@ -1,0 +1,257 @@
+.project-page-wrapper {
+  height: 100%;
+  flex-wrap: wrap;
+  display: flex;
+  flex-direction: column;
+  background-color: #1d2125;
+}
+
+.project-page-left-panel {
+  background-color: #1d2125;
+  /* width: 18%; */
+  height: 100vh;
+  position: sticky;
+  border-right: 1.5px solid rgb(50, 53, 60);
+}
+.project-left-panel-items-wrapper {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  padding: 5px;
+  margin: 10px;
+  border-radius: 3px;
+  color: #aab8c2;
+}
+
+.project-left-panel-items-wrapper > p {
+  margin-left: 5px;
+  color: #aab8c2;
+  font-size: 14px;
+}
+
+.project-left-panel-items-wrapper:hover {
+  cursor: pointer;
+  background-color: #5f676c;
+  outline: 1px solid rgb(0, 81, 255);
+}
+
+.l {
+  background-color: rgb(255, 183, 0);
+}
+.left-panel-line {
+  height: 2px;
+  width: 90%;
+  background-color: #5f676c;
+  margin: auto;
+}
+.project-left-panel-item-selected {
+  outline: 1px solid rgb(0, 81, 255);
+  background-color: rgb(3, 69, 169);
+}
+
+@media (max-width: 1000px) {
+  .project-left-panel-items-wrapper > p {
+    display: none;
+  }
+  .project-left-panel-items-wrapper {
+    width: fit-content;
+  }
+}
+
+@media (max-width: 780px) {
+  .project-page-left-panel {
+    display: none;
+  }
+}
+.projects-right-panel-header {
+  color: #aab8c2;
+}
+
+.projects-right-panel-name-wrapper {
+  display: flex;
+  align-items: center;
+
+  width: fit-content;
+
+  margin-bottom: 10px;
+}
+.projects-right-panel-name-wrapper > p {
+  font-size: 25px;
+  margin-left: 5px;
+  color: #b6c2cf;
+  font-weight: 500;
+}
+.projects-right-panel-header-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.project-page-search-wrapper {
+  display: flex;
+  align-items: center;
+  outline: 2px solid grey;
+  width: fit-content;
+  border-radius: 3px;
+  background-color: rgb(31, 53, 81);
+}
+
+.project-page-input {
+  height: 30px;
+  background-color: rgb(31, 53, 81);
+  border: 1px solid grey;
+  outline: none;
+  padding: 3px;
+  border: none;
+  width: 100px;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  color: rgb(211, 211, 211);
+}
+
+.project-page-right-panel-search-icon {
+  margin-left: 4px;
+  margin-right: 4px;
+  /* background-color: rgb(71, 71, 77); */
+}
+.project-page-right-panel-add-members-wrapper {
+  background-color: #093474;
+  padding: 7px;
+  display: flex;
+  align-items: center;
+  border-radius: 3px;
+  margin-left: 10px;
+}
+.project-page-right-panel-add-members-wrapper > p {
+  margin-left: 2px;
+  font-size: 13px;
+}
+.project-page-search-and-members-wrapper {
+  display: flex;
+  align-items: center;
+}
+.team-members-wrapper {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+  width: fit-content;
+}
+
+.project-page-right-panel-add-members-wrapper:hover {
+  cursor: pointer;
+  background-color: #344763;
+}
+.project-right-panel-header-top {
+  padding-bottom: 20px;
+  width: 100%;
+}
+.right-panel-wrapper {
+  background-color: #1d2125;
+  width: 100%;
+}
+
+@media (max-width: 410px) {
+  .projects-right-panel-header-wrapper {
+    flex-direction: column;
+    align-items: normal;
+  }
+  .project-page-search-and-members-wrapper {
+    flex-direction: column;
+    align-items: normal;
+  }
+  .team-members-wrapper {
+    margin-top: 10px;
+    margin-left: 5px;
+  }
+  .project-page-input {
+    width: 90%;
+  }
+}
+
+.kanban-board-title {
+  color: white;
+  margin: 5px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.kanban-board-wrapper {
+  background-color: #161a1d;
+  width: 260px;
+  margin-top: 10px;
+  border-radius: 10px;
+  margin: 5px;
+  margin-top: 10px;
+  height: fit-content;
+  padding: 5px;
+}
+
+.task-card {
+  background-color: #22272b;
+  border-radius: 5px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.kanban-board-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-radius: 5px;
+}
+.kanban-board-title > p {
+  font-size: 13px;
+  padding: 5px;
+}
+
+.kanban-board-header-add-icon {
+  border-radius: 50%;
+}
+
+.kanban-board-header-add-icon:hover {
+  cursor: pointer;
+  background-color: rgb(79, 96, 126);
+}
+
+@media (max-width: 915px) {
+  .project-page-lower-wrapper {
+    flex-direction: column;
+  }
+  .kanban-board-wrapper {
+    margin: 5px;
+    margin-top: 10px;
+    width: 100%;
+  }
+}
+
+/* .kanban-title-green {
+  background-color: rgb(7, 108, 0);
+}
+.kanban-title-yellow {
+  background-color: orange;
+} */
+
+.task-card-tag-wrapper {
+  padding: 5px;
+  font-size: 14px;
+  border-radius: 3px;
+
+  margin: 2px;
+
+  background-color: #2e393a;
+  color: rgb(222, 222, 222);
+  width: fit-content;
+}
+
+.task-card {
+  margin: 5px;
+  padding: 6px;
+  font-size: 15px;
+}
+.ncjxcnjncj {
+  color: rgb(57, 57, 57);
+}
+.task-card:hover {
+  cursor: pointer;
+  background-color: #2f3336;
+}

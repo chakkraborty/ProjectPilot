@@ -1,0 +1,110 @@
+.add-people-main-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  z-index: 1;
+
+  justify-content: center;
+}
+
+@media (max-width: 460px) {
+  .add-people-wrapper {
+    margin-top: 0px !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
+
+.add-people-wrapper {
+  margin-top: 10%;
+  width: 400px;
+  height: fit-content;
+  background-color: #323a3f;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  outline: 1px solid rgb(87, 87, 87);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 3px;
+}
+.add-members-title {
+  font-size: 20px;
+  color: #d4d4d4;
+  font-weight: 600;
+}
+.add-members-email-title {
+  color: #d4d4d4;
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 30px;
+}
+.add-members-email-items {
+  background-color: rgb(51, 78, 78);
+  padding: 5px;
+  border-radius: 4px;
+  font-size: 13px;
+  width: fit-content;
+  margin: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.add-people-email-list-wrapper {
+  margin-top: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  border: 1.5px solid rgb(50, 67, 92);
+  padding: 1px;
+  border-radius: 3px;
+  padding-bottom: 2px;
+  background-color: #22272b;
+}
+
+.add-people-text-area {
+  width: 100%;
+  height: 30px;
+  border: none;
+  outline: none;
+  color: rgb(199, 199, 199);
+  padding: 5px;
+  background-color: #22272b;
+}
+
+.add-members-invite-button {
+  background-color: rgb(39, 81, 155);
+  width: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 5px;
+  font-size: 13px;
+  border-radius: 3px;
+}
+.add-members-invite-button:hover {
+  cursor: pointer;
+  background-color: rgb(70, 100, 152);
+}
+.add-members-cancel-button {
+  color: rgb(216, 216, 216);
+  width: fit-content;
+  padding: 5px;
+  font-size: 13px;
+  border-radius: 3px;
+  margin-left: 10px;
+}
+.add-members-cancel-button:hover {
+  cursor: pointer;
+  background-color: rgb(45, 73, 98);
+}
+
+.add-members-lower-wrapper {
+  display: flex;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}

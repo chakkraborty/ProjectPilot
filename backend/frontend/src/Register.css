@@ -1,0 +1,76 @@
+.register-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+}
+.register-input {
+  margin-top: 12px;
+  height: 40px;
+  padding: 10px;
+  min-width: 300px;
+  font-size: 17px;
+  background-color: rgb(76, 76, 76);
+  border-radius: 2px;
+  box-shadow: none;
+  border: none;
+  outline: 1px solid rgb(121, 121, 121);
+}
+.register-input:focus {
+  outline: 1px solid rgb(10, 165, 255);
+}
+.register-page-icon {
+  margin-bottom: 20px;
+}
+.register-title {
+  font-family: monospace;
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+.register-button {
+  min-width: 300px;
+  margin-top: 10px;
+  background-color: rgb(10, 165, 255);
+
+  height: 40px;
+  border-radius: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  margin-top: 20px;
+}
+.register-button:hover {
+  cursor: pointer;
+  background-color: rgb(0, 133, 210);
+}
+.register-page-text {
+  color: rgb(10, 165, 255);
+  width: 300px;
+  margin-left: 2px;
+  margin-right: 2px;
+}
+.register-page-text:hover {
+  cursor: pointer;
+}
+.register-page-text-wrapper {
+  max-width: 300px;
+  margin-top: 15px;
+}
+
+.register-page-link {
+  margin-top: 10px;
+}
+
+.error {
+  margin-bottom: 10px;
+}
+.hidden {
+  visibility: hidden;
+}
+.error {
+  min-width: 300px;
+}

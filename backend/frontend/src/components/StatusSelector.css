@@ -1,0 +1,42 @@
+.status-selector-wrapper {
+  width: fit-content;
+  background-color: rgb(72, 77, 85);
+  font-size: 14px;
+  padding: 8px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-radius: 3px;
+}
+.status-selector-list-item-wrapper {
+  width: 150px;
+  margin-top: 5px;
+  border-radius: 3px;
+  background-color: rgb(72, 77, 85);
+  padding: 2px;
+}
+
+.status-selector-list-item {
+  background-color: rgb(72, 77, 85);
+  padding: 8px;
+  padding-left: 15px;
+  font-size: 14px;
+  width: 150px;
+}
+
+.status-selector-list-item:hover {
+  cursor: pointer;
+  background-color: rgb(88, 93, 101);
+}
+
+.inprogress {
+  background-color: orange;
+}
+.done {
+  background-color: green;
+}
+.orange {
+  background-color: orange;
+}
+.green {
+  background-color: green;
+}

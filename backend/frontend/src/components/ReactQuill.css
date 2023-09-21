@@ -1,0 +1,46 @@
+.rich-text-editor {
+  width: 100%;
+  margin: 20px auto;
+}
+.quill-editor-wrap {
+  background-color: #22272b;
+}
+
+.react-quill {
+  height: 300px; /* Set the desired height */
+  border: 1px solid #ccc;
+  background-color: #000000;
+  padding: 10px;
+  width: 50%;
+}
+
+.ql-editor {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #212121;
+  min-height: 150px; /* Minimum height for content area */
+}
+
+/* Style the Quill editor toolbar */
+.ql-toolbar {
+  border-top: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  background-color: #212121;
+}
+
+/* Style Quill toolbar buttons */
+.ql-toolbar button {
+  background-color: transparent;
+  color: #333;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s, background-color 0.2s;
+}
+
+/* Hover effect on Quill toolbar buttons */
+.ql-toolbar button:hover {
+  background-color: #ddd;
+  color: #000;
+}
