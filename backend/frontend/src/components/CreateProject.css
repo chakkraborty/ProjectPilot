@@ -1,0 +1,116 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(17, 31, 43, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background-color: #282e33;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.6);
+  position: relative;
+  width: 500px;
+  border: 1px solid rgb(86, 94, 123);
+  box-shadow: 0px 3px 10px #000000;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.create-project-input-field {
+  background-color: #22272b;
+  border: 1px solid rgb(56, 74, 105);
+  height: 30px;
+  width: 100%;
+  padding: 3px;
+  color: #e3e3e3;
+  border-radius: 3px;
+}
+
+.create-project-input-field:focus {
+  outline: 2px solid #85b8ff;
+}
+
+.create-project-title {
+  color: #d4d4d4;
+}
+.create-project-upper-title {
+  color: #d4d4d4;
+  font-size: 14px;
+  margin-top: 5px;
+  font-weight: 400;
+}
+
+.create-project-name {
+  color: #d4d4d4;
+  font-size: 17px;
+  margin-top: 10px;
+}
+.create-project-name-star {
+  color: rgb(188, 0, 0);
+  font-size: 18px;
+}
+.create-project-lower-text {
+  color: #d4d4d4;
+  font-size: 14px;
+  margin-top: 10px;
+  font-weight: 400;
+}
+.bold-text {
+  color: #d4d4d4;
+  font-weight: 700;
+}
+
+.create-project-create-button {
+  background-color: #1174ff;
+  border-radius: 2px;
+  padding: 6px;
+  font-size: 14px;
+  width: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.create-project-create-button:hover {
+  cursor: pointer;
+  background-color: rgb(57, 57, 253);
+}
+.create-project-cancel-button {
+  border-radius: 2px;
+  color: #ececec;
+  border-radius: 2px;
+  padding: 4px;
+  font-size: 14px;
+  width: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
+}
+.create-project-cancel-button:hover {
+  cursor: pointer;
+  background-color: rgb(61, 77, 91);
+}
+.create-project-bottom-wrapper {
+  display: flex;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.create-project-upper-title {
+  margin-top: 20px;
+}

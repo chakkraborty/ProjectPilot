@@ -76,8 +76,8 @@ app.post("/api/register", async (req, res) => {
 });
 
 app.post("/api/createProject", async (req, res) => {
-  let { createdBy, name, description, leadName } = req.body;
-  let a = await Project.create({ createdBy, name, leadName, description });
+  let { createdBy, name, leadName } = req.body;
+  let a = await Project.create({ createdBy, name, leadName });
   if (a) {
     a.list.push(createdBy);
     a = await a.save();
@@ -94,8 +94,12 @@ app.post("/api/getProjects", async (req, res) => {
   console.log(userId);
 
   let ans = await Project.find({ list: userId });
-  if (ans) res.status(201).json(ans);
-  else {
+  if (ans) {
+    console.log(ans);
+    console.log(typeof ans);
+
+    res.status(201).json(ans);
+  } else {
     res
       .status(401)
       .json({ message: "No projects foudn for this particular userId" });
@@ -154,6 +158,25 @@ app.post("/api/getUsers", async (req, res) => {
     response.push({ email: result[i].email, name: result[i].name });
   }
   res.status(201).json(response);
+});
+
+app.post("/api/searchProjects", async (req, res) => {
+  try {
+    let { userId, substr } = req.body;
+    const query = { name: { $regex: substr, $options: "i" } };
+    const result = await Project.find(query);
+    if (result) {
+      console.log("-------");
+      console.log(result);
+      console.log("-------");
+
+      res.status(201).json(result);
+    } else {
+      res.status(401).json({ message: "Couldn't find any project !" });
+    }
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 app.post("/api/assignToTask", async (req, res) => {
@@ -373,18 +396,77 @@ app.post("/api/invite", async (req, res) => {
       let b = await User.findOne({ _id: fromId });
       let c = await Project.findOne({ _id: projectId });
       if (a) {
-        let x = await Notification.create({
-          fromName: b.name,
-          fromEmail: b.email,
-          toId: a._id,
-          projectName: c.name,
-        });
-        console.log(x);
+        let to = a._id.toString();
+        console.log(to);
+
+        let idx = await c.list.findIndex((p) => p === to);
+        console.log(idx);
+
+        if (idx === -1) {
+          let x = await Notification.create({
+            fromName: b.name,
+            fromEmail: b.email,
+            toId: a._id,
+            projectName: c.name,
+            projectId,
+          });
+          console.log(x);
+        }
       } else {
         continue;
       }
     }
     res.status(201).json("All queries resolved!");
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+app.post("/api/getNotifications", async (req, res) => {
+  try {
+    const { userId } = req.body;
+    let a = await Notification.find({ toId: userId });
+
+    if (a) {
+      console.log(a);
+      console.log(typeof a);
+
+      res.status(201).send(a);
+    } else {
+      res.status(201).json({ message: "No invitations found!" });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+app.post("/api/acceptInvitation", async (req, res) => {
+  try {
+    const { notifId } = req.body;
+    let a = await Notification.findOne({ _id: notifId });
+    console.log("accept invitation called");
+    console.log("notif id : " + notifId);
+
+    if (a) {
+      console.log(a);
+
+      let projectId = a.projectId;
+      let proj = await Project.findOne({ _id: projectId });
+      console.log("projid is " + projectId);
+      if (proj) {
+        console.log(proj);
+        console.log(a.toId);
+
+        let idx = await proj.list.findIndex((p) => p === a.toId);
+        if (idx == -1) {
+          await proj.list.push(a.toId);
+          proj = await proj.save();
+        }
+        let x = await Notification.findByIdAndDelete({ _id: notifId });
+      }
+    } else {
+      console.log("not found");
+    }
   } catch (error) {
     console.log(error);
   }

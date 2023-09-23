@@ -29,6 +29,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+  background-color: #1d2125;
 }
 
 .project-list-container {
@@ -131,114 +132,13 @@
 }
 .project-list-title {
   color: #d4d4d4;
+  margin-bottom: 5px;
 }
 .add-project-button:hover {
   background-color: #4191f9;
   cursor: pointer;
 }
 
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(219, 219, 219, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.modal {
-  background-color: white;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  position: relative;
-  width: 500px;
-}
-
-.modal-close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-}
-
-.create-project-input-field {
-  background-color: aliceblue;
-  border: 1px solid grey;
-  height: 30px;
-  width: 100%;
-  padding: 3px;
-  color: rgb(46, 46, 46);
-}
-
-.create-project-title {
-  color: rgb(0, 0, 19);
-}
-.create-project-upper-title {
-  color: rgb(62, 62, 62);
-  font-size: 14px;
-  margin-top: 5px;
-}
-
-.create-project-name {
-  color: rgb(0, 0, 19);
-  font-size: 17px;
-}
-.create-project-name-star {
-  color: rgb(188, 0, 0);
-  font-size: 18px;
-}
-.create-project-lower-text {
-  color: rgb(62, 62, 62);
-  font-size: 14px;
-  margin-top: 5px;
-}
-.bold-text {
-  color: black;
-  font-weight: 700;
-}
-
-.create-project-create-button {
-  background-color: rgb(0, 0, 186);
-  border-radius: 2px;
-  padding: 6px;
-  font-size: 17px;
-  width: 70px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.create-project-create-button:hover {
-  cursor: pointer;
-  background-color: rgb(57, 57, 253);
-}
-.create-project-cancel-button {
-  background-color: rgb(195, 224, 249);
-  border-radius: 2px;
-  color: black;
-  padding: 6px;
-  font-size: 17px;
-  max-width: 70px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-left: 10px;
-}
-.create-project-cancel-button:hover {
-  cursor: pointer;
-  background-color: rgb(159, 210, 255);
-}
-.create-project-bottom-wrapper {
-  display: flex;
-  margin-top: 10px;
-  margin-bottom: 20px;
-}
 .flex-jus-align {
   align-items: center;
 

@@ -1,11 +1,13 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
+import "./CreateProject.css";
+
 import CircularProgress from "@mui/material/CircularProgress";
 const CreateProject = ({ isOpen, onClose, fetchProjects }) => {
   let createdBy = localStorage.getItem("_id");
   let leadName = localStorage.getItem("name");
-  const [description, setDescription] = useState("");
+
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(0);
 
@@ -19,7 +21,7 @@ const CreateProject = ({ isOpen, onClose, fetchProjects }) => {
       };
       let a = await axios.post(
         "/api/createProject",
-        { createdBy, leadName, description, name },
+        { createdBy, leadName, name },
         config
       );
       if (a) {

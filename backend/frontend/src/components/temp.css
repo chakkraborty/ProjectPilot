@@ -1,28 +1,18 @@
 .notifications-wrapper {
-  padding-right: 5px;
   width: 400px;
   margin: auto;
-  padding-bottom: 10px;
+  height: fit-content;
   background-color: #2a3034;
-  border-radius: 5px;
-  border: 1px solid rgb(86, 94, 123);
-  box-shadow: 0px 3px 10px #000000;
-}
-
-.notifications-overflow-wrapper {
-  height: 450px;
-  overflow-y: auto;
 }
 
 .notifications-title {
   font-size: 26px;
   font-weight: 500;
-  border-bottom: 1px solid #48576c;
 }
 .notifications-item-wrapper {
   width: 100%;
   border-bottom: 1px solid rgb(65, 65, 75);
-  background-color: #2a3034;
+  background-color: #22272b;
 }
 .notifications-title {
   padding-top: 10px;
@@ -41,11 +31,12 @@
 .notifications-item-wrapper:hover {
   background-color: rgb(43, 51, 59);
 }
-/* .notifications-email-span {
+.notifications-email-span {
   display: flex;
   align-items: center;
   justify-content: center;
-} */
+  display: inline-block;
+}
 .notifications-email-icon {
   color: rgb(0, 162, 255);
   padding-top: 5px;
@@ -57,41 +48,37 @@
   color: #d4d4d4;
   font-weight: 500;
   align-items: center;
-  font-size: 13px;
+  font-size: 14px;
   margin-left: 10px;
 }
 .notifications-invited {
   color: #d4d4d4;
   margin-left: 35px;
-  font-size: 12px;
+  font-size: 14px;
 }
 .notifications-item-wrapper {
   padding: 10px;
 }
 .notifications-email-span {
-  margin-left: 35px;
-  padding-right: 2px;
-  width: 90%;
-  overflow-wrap: break-word; /* Break text by characters */
-  word-wrap: break-word;
-  font-size: 12px;
-  color: #5699f9;
+  color: rgb(0, 162, 255);
+  margin-left: 2px;
+  margin-right: 2px;
 }
 .notification-project-name {
   color: #d4d4d4;
   font-weight: 600;
-  font-size: 13px;
+  font-size: 14px;
 }
 .notification-proect-join {
   color: #d4d4d4;
   margin-left: 35px;
-  font-size: 13px;
+  font-size: 14px;
 }
 .notifications-accept-button {
   background-color: rgb(45, 116, 223);
   width: fit-content;
   padding: 5px;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 3px;
   width: 55px;
   display: flex;
@@ -103,8 +90,8 @@
   background-color: rgb(48, 85, 145);
 }
 .notifications-lower-wrapper {
-  margin-top: 5px;
-  margin-bottom: 3px;
+  margin-top: 10px;
+  margin-bottom: 5px;
   display: flex;
   margin-left: 35px;
 }
@@ -112,7 +99,7 @@
   color: #b3b2b2;
   width: fit-content;
   padding: 5px;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 3px;
   margin-left: 5px;
 }
@@ -131,11 +118,11 @@
   align-items: center;
   justify-content: center;
 }
-/* .notifications-wrapper {
+.notifications-wrapper {
   max-height: 500px;
   overflow-y: auto;
   border-radius: 10px;
-} */
+}
 ::-webkit-scrollbar {
   width: 10px; /* Width of the scrollbar */
 }
@@ -163,8 +150,3 @@
 }
 
 /* .notifications-top-content{} */
-
-.notifications-lower-message-text {
-  font-size: 13px;
-  margin-top: 20px;
-}

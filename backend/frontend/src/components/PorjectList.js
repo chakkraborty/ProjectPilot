@@ -6,10 +6,14 @@ import axios from "axios";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import { deepOrange, deepPurple } from "@mui/material/colors";
+import Box from "./box.png";
+
 import "./ProjectList.css";
 const PorjectList = () => {
   const [open, setOpen] = useState(false);
   const [data, setData] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+
   const onClose = () => {
     setOpen(false);
   };
@@ -37,17 +41,52 @@ const PorjectList = () => {
     }
   }
 
+  async function searchProject(a) {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      const userId = localStorage.getItem("_id");
+      let b = await axios.post(
+        "/api/searchProjects",
+        { substr: a, userId },
+        config
+      );
+      if (a) {
+        setData([...b.data]);
+        console.log(b.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
-    fetchProjects();
-    console.log(data);
-  }, []);
+    console.log("in use effect !");
+    console.log(searchQuery);
+
+    // fetchProjects();
+    if (searchQuery) {
+      searchProject(searchQuery);
+    } else {
+      fetchProjects();
+    }
+  }, [searchQuery]);
 
   return (
     <div className="project-list-container">
       <div className="project-list-title">Your Projects</div>
       <div className="project-list-top-wrapper">
         <div className="project-list-search-wrapper">
-          <input type="text" className="project-list-input"></input>
+          <input
+            type="text"
+            className="project-list-input"
+            onChange={(e) => {
+              setSearchQuery(e.target.value);
+            }}
+          ></input>
 
           <SearchIcon className="search-icon" sx={{ fontSize: 20 }} />
         </div>

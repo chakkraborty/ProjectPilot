@@ -1,8 +1,43 @@
 import React from "react";
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
+import Notifications from "./Notifications";
+import { useState, useEffect } from "react";
+import { useRef } from "react";
+import Box from "./box.png";
 const Navbar = () => {
+  const ll = "(@arnikchakraborty2001@gmad.com)";
+
+  const [showNotification, setShowNotification] = useState(false);
+  const notifRef = useRef(null);
+
+  const toggleNotification = () => {
+    console.log(showNotification);
+
+    setShowNotification(!showNotification);
+  };
+
+  const closeNotificationOnClickOutside = (event) => {
+    if (notifRef.current && !notifRef.current.contains(event.target)) {
+      setShowNotification(false);
+    }
+  };
+
+  // Attach click event listener when the notification is shown
+  useEffect(() => {
+    if (showNotification) {
+      document.addEventListener("click", closeNotificationOnClickOutside);
+    } else {
+      document.removeEventListener("click", closeNotificationOnClickOutside);
+    }
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      document.removeEventListener("click", closeNotificationOnClickOutside);
+    };
+  }, [showNotification]);
+
   return (
-    <div className="navbar-wrapper">
+    <div className="navbar-wrapper" id="navbar">
       <div className="navbar-left-wrapper">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -36,18 +71,30 @@ const Navbar = () => {
         </div>
         <div className="create-project-button">Create</div>
       </div>
-      <div>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="18"
-          height="18"
-          fill="currentColor"
-          class="bi bi-bell-fill"
-          viewBox="0 0 16 16"
-          className="notification-icon"
-        >
-          <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z" />
-        </svg>
+      <div className="display-flex">
+        <div className="navbar-notification-wrapper" ref={notifRef}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            fill="currentColor"
+            class="bi bi-bell-fill"
+            viewBox="0 0 16 16"
+            className="notification-icon"
+            onClick={() => {
+              toggleNotification();
+            }}
+          >
+            <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z" />
+          </svg>
+          <div className="navbar-notifications">
+            {showNotification && (
+              <div>
+                <Notifications />
+              </div>
+            )}
+          </div>
+        </div>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="18"

@@ -271,3 +271,11 @@
 .task-page-right-wrapper {
   overflow-y: auto;
 }
+
+/* ---------------navbar notifications-------- */
+
+.navbar-notifications {
+  position: absolute;
+  z-index: 20;
+  right: 10px;
+}
