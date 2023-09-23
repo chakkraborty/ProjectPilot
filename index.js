@@ -163,7 +163,7 @@ app.post("/api/getUsers", async (req, res) => {
 app.post("/api/searchProjects", async (req, res) => {
   try {
     let { userId, substr } = req.body;
-    const query = { name: { $regex: substr, $options: "i" } };
+    const query = { name: { $regex: substr, $options: "i" }, list: userId };
     const result = await Project.find(query);
     if (result) {
       console.log("-------");
