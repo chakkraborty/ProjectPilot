@@ -7,13 +7,17 @@ import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import { deepOrange, deepPurple } from "@mui/material/colors";
 import Box from "./box.png";
-
+import { useNavigate } from "react-router-dom";
 import "./ProjectList.css";
+import NavbarSettingsDropdown from "./NavbarSettingsDropdown";
 const PorjectList = () => {
   const [open, setOpen] = useState(false);
   const [data, setData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-
+  const navigate = useNavigate();
+  function projectRouting(projId) {
+    navigate(`/project/${projId}`);
+  }
   const onClose = () => {
     setOpen(false);
   };
@@ -110,7 +114,12 @@ const PorjectList = () => {
       </div>
       {data.map((p) => (
         <div className="project-list-content">
-          <div className="col1 project-name-list text-color-blue">{p.name}</div>
+          <div
+            className="col1 project-name-list text-color-blue"
+            onClick={() => projectRouting(p._id)}
+          >
+            {p.name}
+          </div>
           <div className="col2">Team Managed</div>
           <div className="flex-jus-align col3 ">
             {/* <Avatar sx={{ bgcolor: deepOrange[500] }}>

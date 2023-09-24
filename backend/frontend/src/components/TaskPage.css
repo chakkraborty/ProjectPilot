@@ -6,6 +6,7 @@
   flex-direction: column;
   height: 100vh;
   position: relative;
+  background-color: #1d2125;
 }
 
 /* Navbar */
@@ -19,9 +20,15 @@
 }
 
 /* Content container */
+/* .content-container {
+  display: flex;
+  flex: 1;
+  overflow-y: hidden;
+} */
 .content-container {
   display: flex;
-  flex: 1; /* Ensures content container takes available vertical space */
+  width: 90%;
+  margin: auto;
   overflow-y: hidden;
 }
 

@@ -3,7 +3,7 @@ const dotenv = require("dotenv");
 const express = require("express");
 const app = express();
 
-app.use(express.json()); // required this to be written else it wasn't getting implemented
+app.use(express.json());
 const PORT = 5000;
 dotenv.config();
 const mongoose = require("mongoose");

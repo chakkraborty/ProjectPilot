@@ -31,6 +31,7 @@
   flex-direction: column;
   justify-content: space-between;
   border-radius: 3px;
+  box-shadow: 0px 3px 10px #000000;
 }
 .add-members-title {
   font-size: 20px;
