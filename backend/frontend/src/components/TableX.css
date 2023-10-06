@@ -1,0 +1,233 @@
+.overflow-container {
+  width: 100%; /* Set your desired fixed width for the container */
+  height: 100%; /* Set your desired fixed height for the container */
+  overflow-x: auto; /* Enable horizontal scrolling */
+  overflow-y: auto; /* Enable vertical scrolling */
+  display: flex; /* Use flexbox to create a column layout */
+  border: 2px solid #3c414c;
+}
+
+.div-list {
+  display: flex;
+  flex-direction: column; /* Arrange divs vertically */
+  position: relative;
+}
+
+.div-item {
+  width: fit-content; /* Set your desired width for each div item */
+  /*height: 100px; /* Set your desired height for each div item */
+  /* Set the margin between div items */
+  /* Set a background color for div items */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.left-column-item-dark {
+  height: 40px; /* Set the height to match the div items */
+  display: flex;
+  align-items: center;
+  background-color: rgb(15, 23, 32);
+
+  /* Set background color for left column items */
+}
+.left-column-item-light {
+  height: 40px; /* Set the height to match the div items */
+  display: flex;
+  align-items: center;
+  background-color: rgb(27, 35, 46);
+}
+.left-column-item-light > p {
+  font-size: 13px;
+  color: #d4d4d4;
+}
+.left-column-item-dark > p {
+  font-size: 13px;
+  color: #d4d4d4;
+}
+.overflow-container {
+  width: 100%;
+}
+/* .div-item {
+  width: 3000px;
+} */
+
+.left-column {
+  position: sticky;
+  left: 0;
+  z-index: 200;
+  min-width: 300px;
+  border-right: 2px solid #3c414c;
+  background-color: #1d2125;
+
+  /* Set background color for the left column */
+}
+.left-column-top-x-wrapper {
+  background-color: #282d33;
+  height: 60px;
+  width: 100%;
+  border-bottom: 2px solid #3c414c;
+}
+.left-col-table-x-item-icon {
+  background-color: rgb(0, 166, 255);
+  width: 15px;
+  height: 15px;
+  padding: 5px;
+}
+/* .left-column {
+  padding-top: 60px;
+  background-color: rgb(92, 101, 134);
+} */
+.table-x-left-col-icon-wrapper {
+  background-color: rgb(0, 119, 255);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 18px;
+  width: 18px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.time-line-wrapper-div-dark {
+  background-color: rgb(27, 35, 46);
+  width: 7500px;
+  min-height: 40px;
+}
+.time-line-wrapper-div-light {
+  background-color: rgb(15, 23, 32);
+  width: 7500px;
+  min-height: 40px;
+}
+
+.abcd-xy {
+  height: 50px;
+
+  background-color: grey;
+}
+
+.div-list {
+  /* background-color: blue; */
+  width: 100%;
+}
+.calender-dates-wrapper {
+  box-shadow: 0 8px 6px -6px #080a0e !important;
+}
+
+.overflow-container {
+  margin-left: 10px;
+  background-color: #1d2125;
+}
+
+.left-column-item-light:hover + .time-line-wrapper-div-dark {
+  background-color: #414448;
+}
+.left-column-item-light:hover + .time-line-wrapper-div-light {
+  background-color: #414448;
+}
+.left-column-item-dark:hover + .time-line-wrapper-div-dark {
+  background-color: #414448;
+}
+.left-column-item-dark:hover {
+  background-color: #2f3946;
+}
+.time-line-wrapper-div-dark:hover {
+  background-color: #2f3946;
+}
+.left-column-item-light:hover {
+  background-color: #2f3946;
+}
+.time-line-wrapper-div-light:hover {
+  background-color: #2f3946;
+}
+
+.div-item:first-child {
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background-color: black; /* Set background color to hide overlapping div */
+}
+
+.calender-dates-wrapper {
+  position: sticky !important;
+  z-index: 20;
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+}
+/* Style the scrollbar */
+/* For WebKit browsers (such as Chrome and Safari) */
+::-webkit-scrollbar {
+  width: 12px; /* Set the width of the scrollbar */
+  background-color: #e4e4e4; /* Set the background color of the scrollbar */
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #cfcfcf; /* Set the background color of the track */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; /* Set the background color of the scrollbar handle */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Change the background color of the scrollbar handle on hover */
+}
+
+.table-x-create-task-wrapper {
+  padding: 10px;
+  margin: 5px;
+  border-radius: 2px;
+  color: #d4d4d4;
+  font-weight: 500;
+}
+.table-x-create-task-wrapper:hover {
+  background-color: rgb(45, 49, 52);
+  cursor: pointer;
+}
+
+.timeline-bar-mark {
+  width: 2px;
+  height: 100%;
+
+  background-color: orange;
+
+  position: absolute;
+}
+
+.calender-timeline-date-item-subwrapper {
+  background-color: rgb(86, 93, 104);
+  display: flex;
+  font-size: 13px;
+  width: 45px;
+  align-items: center;
+  display: flex;
+  border-radius: 3px;
+  justify-content: center;
+}
+
+.calender-timeline-date-item-subwrapper > p {
+  margin: 2px;
+}
+
+.left-column-top-x-wrapper {
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.overflow-container {
+  margin-left: 0px;
+}
+
+.table-x-task-title:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}

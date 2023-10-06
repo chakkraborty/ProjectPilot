@@ -1,4 +1,6 @@
 import React, { useEffect } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -10,9 +12,12 @@ import axios from "axios";
 import CancelIcon from "@mui/icons-material/Cancel";
 import "./CreateTask.css";
 import StatusSelector from "./StatusSelector";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
-import "./ReactQuill.css";
+// import ReactQuill from "react-quill";
+// import "react-quill/dist/quill.snow.css";
+// import "./ReactQuill.css";
+// import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+// import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+// import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 const CreateTask = ({ onClose, onOpen, fetchTasks }) => {
   const [status, setStatus] = React.useState("");
   const [title, setTitle] = useState("");
@@ -72,6 +77,17 @@ const CreateTask = ({ onClose, onOpen, fetchTasks }) => {
 
     setPlainTextContent(plainText);
   };
+  const [selectedStartDate, setSelectedStartDate] = useState(null);
+
+  const handleStartDateChange = (date) => {
+    setSelectedStartDate(date);
+  };
+
+  const [selectedDueDate, setSelectedDueDate] = useState(null);
+
+  const handleDueDateChange = (date) => {
+    setSelectedDueDate(date);
+  };
 
   async function addTaskHandler() {
     const config = {
@@ -89,6 +105,8 @@ const CreateTask = ({ onClose, onOpen, fetchTasks }) => {
         createdById,
         title,
         tags: arr,
+        startDate: selectedStartDate,
+        dueDate: selectedDueDate,
       },
       config
     );
@@ -98,6 +116,11 @@ const CreateTask = ({ onClose, onOpen, fetchTasks }) => {
     } else {
       return;
     }
+  }
+
+  function printer() {
+    let d = new Date(selectedDueDate);
+    console.log(d);
   }
 
   // useEffect(() => {}, [arr]);
@@ -227,6 +250,52 @@ const CreateTask = ({ onClose, onOpen, fetchTasks }) => {
                 onChange={(e) => setTag(e.target.value)}
                 onKeyDown={handleKeyPress}
                 className="create-task-add-tag-input-area"
+              />
+            </div>
+            <div className="create-task-select-start-date-wrapper">
+              <p onClick={() => printer()}>Start Date :</p>
+            </div>
+            <div className="display-flex align-items-center margin-top-5px">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="15"
+                height="15"
+                fill="#d4d4d4"
+                class="bi bi-calendar"
+                viewBox="0 0 16 16"
+              >
+                <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
+              </svg>
+              <DatePicker
+                selected={selectedStartDate}
+                onChange={handleStartDateChange}
+                dateFormat="yyyy/MM/dd"
+                placeholderText="Select a date"
+                className="date-picker-start-date margin-left-10px"
+              />
+            </div>
+
+            <div className="create-task-select-start-date-wrapper">
+              <p>Due Date :</p>
+            </div>
+            <div className="display-flex align-items-center margin-top-5px margin-bottom-10px">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="15"
+                height="15"
+                fill="#d4d4d4"
+                class="bi bi-calendar"
+                viewBox="0 0 16 16"
+              >
+                <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
+              </svg>
+
+              <DatePicker
+                selected={selectedDueDate}
+                onChange={handleDueDateChange}
+                dateFormat="yyyy/MM/dd"
+                placeholderText="Select a date"
+                className="date-picker-start-date margin-left-10px"
               />
             </div>
           </div>

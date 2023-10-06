@@ -121,7 +121,16 @@ app.post("/api/getMembers", async (req, res) => {
 });
 
 app.post("/api/createTask", async (req, res) => {
-  let { createdById, projectId, title, description, status, tags } = req.body;
+  let {
+    createdById,
+    projectId,
+    title,
+    description,
+    status,
+    tags,
+    startDate,
+    dueDate,
+  } = req.body;
   //console.log(req.body);
   let a = await Task.create({
     createdById,
@@ -130,6 +139,8 @@ app.post("/api/createTask", async (req, res) => {
     description,
     status,
     tags,
+    startDate,
+    dueDate,
   });
   if (a) res.status(201).json(a);
   else {

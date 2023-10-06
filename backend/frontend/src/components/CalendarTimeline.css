@@ -1,0 +1,124 @@
+.calender-timeline-date-top-main-wrapper {
+  display: flex;
+}
+
+.calender-timeline-date-item {
+  display: flex;
+  justify-content: space-evenly;
+  width: 50px;
+  height: 58px;
+  background-color: #282d33;
+}
+.calender-timeline-date-top-main-wrapper {
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid rgb(75, 86, 97); */
+
+  background-color: #282d33;
+}
+.calender-timeline-date-item {
+  display: flex;
+  align-items: center;
+  background-color: #282d33;
+}
+
+.calender-timeline-date-item > p {
+  font-size: 13px;
+  color: #d4d4d4;
+}
+
+.calender-timeline-left-wrapper {
+  background-color: #1d2125;
+  width: 250px;
+}
+.calender-timeline-task-title {
+  font-size: 14px;
+  color: #d4d4d4;
+}
+.calender-timeline-left-wrapper {
+  padding-top: 32.5px;
+}
+.calender-timeline-task-title {
+  height: 45px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.calender-timeline-task-items {
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+  text-align: center;
+  height: 45px;
+}
+
+.calender-timeline-task-items:hover {
+  cursor: pointer;
+  background-color: #2f363d;
+}
+.calender-timeline-task-items > p {
+  padding: 0px;
+  font-size: 13.5px;
+  margin-left: 5px;
+}
+
+.calender-timeline-date-top-main-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  height: 100%;
+  overflow-y: visible;
+}
+.calender-timeline-lower-main-wrapper {
+  margin-left: 10px;
+}
+.calender-timeline-task-item-icon {
+  background-color: rgb(0, 140, 255);
+  padding: 3px;
+  font-weight: 500;
+  border-radius: 2px;
+}
+.calender-timeline-create-task-wrapper {
+  background-color: #1d2125;
+  height: 45px;
+  display: flex;
+  border-radius: 3px;
+  align-items: center;
+  padding: 20px;
+  text-align: center;
+  width: 90%;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+.calender-timeline-create-task-wrapper:hover {
+  cursor: pointer;
+  background-color: #2f363d;
+}
+
+.calender-timeline-lower-left-col {
+  width: 200px;
+  height: 35px;
+  background-color: grey;
+}
+
+.calender-timeline-lower-wrapper-items {
+  display: flex;
+}
+.calender-timeline-lower-right-col {
+}
+
+.calender-timeline-main-wrapper {
+  height: 100vh;
+  background-color: #1d2125;
+  overflow: hidden;
+  background-color: antiquewhite;
+}
+
+.calender-timeline-lower-main-wrapper {
+  overflow-y: auto;
+  height: 500px;
+}
+.calender-dates-wrapper {
+  border-bottom: 2px solid #3c414c;
+}
+/* ------------- */

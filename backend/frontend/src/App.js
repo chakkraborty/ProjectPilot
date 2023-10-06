@@ -7,6 +7,7 @@ import Home from "./components/Home.js";
 import ProjectPage from "./components/ProjectPage";
 import TaskPage from "./components/TaskPage";
 import Notifications from "./components/Notifications";
+import CalendarTimeline from "./components/CalendarTimeline.js";
 function App() {
   return (
     <>
@@ -19,6 +20,10 @@ function App() {
           <Route path="/project/:projectId" element={<ProjectPage />}></Route>
           <Route path="/task/:taskId" element={<TaskPage />}></Route>
           <Route path="/notifications" element={<Notifications />}></Route>
+          <Route
+            path="/timeline/:projectId"
+            element={<CalendarTimeline />}
+          ></Route>
         </Routes>
       </BrowserRouter>
     </>
