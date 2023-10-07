@@ -339,6 +339,8 @@ app.post("/api/fetchDescriptionDetails", async (req, res) => {
         assignedToName: a.assignedToName,
         createdByName: c.name,
         status: a.status,
+        startDate: a.startDate,
+        dueDate: a.dueDate,
       };
       res.status(201).json(b);
     } else {
@@ -478,6 +480,31 @@ app.post("/api/acceptInvitation", async (req, res) => {
     } else {
       console.log("not found");
     }
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+app.post("/api/setStartDate", async (req, res) => {
+  try {
+    let taskId = req.body.taskId;
+    let date = req.body.stDate;
+    let a = await Task.findOne({ _id: taskId });
+    a.startDate = date;
+    console.log("date is : " + date);
+    a = await a.save();
+  } catch (error) {
+    console.log(error);
+  }
+});
+app.post("/api/setDueDate", async (req, res) => {
+  try {
+    let taskId = req.body.taskId;
+    let date = req.body.dueDate;
+    let a = await Task.findOne({ _id: taskId });
+    a.dueDate = date;
+    console.log("date is : " + date);
+    a = await a.save();
   } catch (error) {
     console.log(error);
   }

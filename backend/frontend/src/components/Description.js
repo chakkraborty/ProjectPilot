@@ -1,4 +1,5 @@
 import React from "react";
+import DatePicker from "react-datepicker";
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import CancelIcon from "@mui/icons-material/Cancel";
@@ -14,13 +15,51 @@ import "./Description.css";
 const Description = ({ taskId }) => {
   console.log(taskId);
 
+  const [selectedStartDate, setSelectedStartDate] = useState(null);
+
+  const handleStartDateChange = async (date) => {
+    try {
+      setSelectedStartDate(date);
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      let stDate = new Date(date);
+      let a = await axios.post("/api/setStartDate", { taskId, stDate }, config);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  function print() {
+    console.log(selectedStartDate);
+  }
+
+  const [selectedDueDate, setSelectedDueDate] = useState(null);
+
+  const handleDueDateChange = async (date) => {
+    try {
+      setSelectedDueDate(date);
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      let dueDate = new Date(date);
+      let a = await axios.post("/api/setDueDate", { taskId, dueDate }, config);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const [users, setUsers] = useState([]);
   const [show, setShow] = useState(0);
   const [outLine, setOutLine] = useState(0);
   const [updateTag, setUpdateTag] = useState(0);
   const [tags, setTags] = useState([]);
   const [displayList, setDisplayList] = useState(0);
-  const [assignedTo, setAssignedTo] = useState("");
+  const [assignedTo, setAssignedTo] = useState("Unassigned");
   const assignToRef = useRef();
   const [status, setStatus] = useState("todo");
   const [createdByName, setCreatedByName] = useState("");
@@ -95,6 +134,8 @@ const Description = ({ taskId }) => {
     setUsers(a.data);
     console.log(users);
   }
+  const moment = require("moment");
+
   async function fetchDescriptionDetails() {
     const config = {
       headers: {
@@ -109,11 +150,33 @@ const Description = ({ taskId }) => {
     console.log(a.data);
     setTags(a.data.tags);
     setAssignedTo(a.data.assignedToName);
+    console.log(typeof a.data.startDate);
+    console.log(a.data.startDate);
+    if (a.data.startDate) {
+      let x = a.data.startDate.substring(0, 10);
+      console.log("x is :");
+      console.log(x);
+      setSelectedStartDate(new Date(x));
+    }
+    if (a.data.dueDate) {
+      let y = a.data.dueDate.substring(0, 10);
+      setSelectedDueDate(new Date(y));
+    }
+
+    // setSelectedStartDate(a.data.startDate.substring(0, 10));
+
+    if (!assignedTo) {
+      setAssignedTo("Unassigned");
+    }
     setCreatedByName(a.data.createdByName);
     setStatus(a.data.status);
 
     console.log(a.data);
     assignToRef.current.value = a.data.assignedToName;
+    if (assignToRef.current.value === "") {
+      assignToRef.current.value = "Unassigned";
+      setAssignedTo("Unassigned");
+    }
   }
 
   async function handleAssignToUpdate(email) {
@@ -248,7 +311,7 @@ const Description = ({ taskId }) => {
             }
             onClick={() => console.log(outLine)}
           >
-            {!assignedTo ? (
+            {/* {assignedTo === "Unassigned" ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="25"
@@ -265,11 +328,27 @@ const Description = ({ taskId }) => {
               </svg>
             ) : (
               <></>
+            )} */}
+            {assignedTo === "Unassigned" ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="25"
+                height="25"
+                fill="#d4d4d4"
+                class="bi bi-person-circle"
+                viewBox="0 0 16 16"
+              >
+                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                <path
+                  fill-rule="evenodd"
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
+                />
+              </svg>
+            ) : (
+              <div className="description-text-area-icon">
+                {assignedTo ? <>{assignedTo[0].toUpperCase()}</> : <></>}
+              </div>
             )}
-
-            <div className="description-text-area-icon">
-              {assignedTo ? <>{assignedTo[0].toUpperCase()}</> : <></>}
-            </div>
 
             <input
               defaultValue={assignedTo}
@@ -309,6 +388,55 @@ const Description = ({ taskId }) => {
               </div>
             </div>
           )}
+        </div>
+
+        <div className="description-select-start-date-wrapper">
+          <p className="description-date-title" onClick={() => print()}>
+            Start Date :
+          </p>
+        </div>
+        <div className="display-flex align-items-center margin-top-5px margin-left-20px">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="15"
+            height="15"
+            fill="#d4d4d4"
+            class="bi bi-calendar"
+            viewBox="0 0 16 16"
+          >
+            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
+          </svg>
+          <DatePicker
+            selected={selectedStartDate}
+            onChange={handleStartDateChange}
+            dateFormat="yyyy/MM/dd"
+            placeholderText="Select a date"
+            className="date-picker-start-date margin-left-10px"
+          />
+        </div>
+
+        <div className="description-select-start-date-wrapper">
+          <p className="description-date-title">Due Date :</p>
+        </div>
+        <div className="display-flex align-items-center margin-top-5px margin-bottom-10px margin-left-20px">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="15"
+            height="15"
+            fill="#d4d4d4"
+            class="bi bi-calendar"
+            viewBox="0 0 16 16"
+          >
+            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
+          </svg>
+
+          <DatePicker
+            selected={selectedDueDate}
+            onChange={handleDueDateChange}
+            dateFormat="yyyy/MM/dd"
+            placeholderText="Select a date"
+            className="date-picker-start-date margin-left-10px"
+          />
         </div>
 
         <div className="margin-left-20px margin-top-15px task-page-tags-title">

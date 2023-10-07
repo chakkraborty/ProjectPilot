@@ -6,11 +6,13 @@ import axios from "axios";
 import TimeLineComponent from "./TimeLineComponent";
 import { useNavigate } from "react-router-dom";
 const App = () => {
+  const scrollDivRef = useRef(null);
+
   const navigate = useNavigate();
   function taskRouting(taskId) {
     navigate(`/task/${taskId}`);
   }
-  const divs = Array.from({ length: 20 }, (_, index) => index + 1); // Create an array of 20 elements for demonstration
+
   let { projectId } = useParams();
   console.log(projectId);
 
@@ -63,6 +65,14 @@ const App = () => {
   };
 
   useEffect(() => {
+    const setScrollPosition = () => {
+      if (scrollDivRef.current) {
+        scrollDivRef.current.scrollLeft = lp;
+      }
+    };
+
+    const timeout = setTimeout(setScrollPosition, 100);
+
     console.log("m is : " + m);
     for (let i = m - 2; i <= m + 2; i++) {
       console.log("month is: " + i);
@@ -77,12 +87,20 @@ const App = () => {
       }
       console.log(a);
     }
+    console.log("difference is here :-)");
+
+    let diff = new Date() - new Date(currentDate.getFullYear(), m - 2, 0);
+    let lo = diff / (1000 * 24 * 60 * 60);
+    const lp = lo * 50 - 100;
 
     setC([...a]);
     console.log(a);
     console.log(c);
     fetchMembers();
     fetchTasks();
+    return () => {
+      clearTimeout(timeout);
+    };
   }, []);
   const [addMembers, setAddMembers] = useState(0);
 
@@ -152,7 +170,11 @@ const App = () => {
   const div2Ref = useRef(null);
 
   return (
-    <div className="overflow-container" onClick={() => print()}>
+    <div
+      className="overflow-container"
+      ref={scrollDivRef}
+      onClick={() => print()}
+    >
       <div className="left-column">
         <div className="left-column-top-x-wrapper"></div>
         {tasks.map((p, index) => (

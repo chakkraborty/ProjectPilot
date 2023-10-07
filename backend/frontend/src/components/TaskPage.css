@@ -45,7 +45,8 @@
   flex: 1; /* Takes remaining horizontal space */
   overflow-y: auto; /* Enable vertical scrolling when content overflows */
   background-color: #1d2125;
-  padding: 13px;
+  padding: 10px;
+  /* padding: 13px; */
 }
 
 /* .scrollable-content {
@@ -80,7 +81,7 @@
 .task-page-text-area {
   border: none;
   outline: none;
-  min-height: 100px;
+
   width: 100%;
   resize: none;
   background-color: #1d2125;
@@ -91,7 +92,7 @@
   padding: 15px;
   border: 1px solid rgb(52, 54, 72);
   border-radius: 2px;
-  height: 300px;
+  height: 350px;
 }
 
 .task-page-text-area:hover {
@@ -154,7 +155,7 @@
   padding: 3px;
 }
 .task-page-summary-title:focus {
-  outline: 2px solid rgb(1, 102, 255);
+  border: 2px solid rgb(1, 102, 255);
 }
 .task-page-add-issue-text-area {
   resize: none;
@@ -328,4 +329,10 @@
   .right-col {
     display: none;
   }
+}
+
+.task-page-summary-title {
+  outline: none;
+  font-size: 22px;
+  height: 45px;
 }

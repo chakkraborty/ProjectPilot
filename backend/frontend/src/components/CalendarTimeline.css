@@ -108,7 +108,7 @@
 }
 
 .calender-timeline-main-wrapper {
-  height: 100vh;
+  /* height: 100vh; */
   background-color: #1d2125;
   overflow: hidden;
   background-color: antiquewhite;
