@@ -8,6 +8,7 @@ import ProjectPage from "./components/ProjectPage";
 import TaskPage from "./components/TaskPage";
 import Notifications from "./components/Notifications";
 import CalendarTimeline from "./components/CalendarTimeline.js";
+import ProjectSettings from "./components/ProjectSettings";
 function App() {
   return (
     <>
@@ -24,6 +25,7 @@ function App() {
             path="/timeline/:projectId"
             element={<CalendarTimeline />}
           ></Route>
+          <Route path="/project/settings" element={<ProjectSettings />}></Route>
         </Routes>
       </BrowserRouter>
     </>

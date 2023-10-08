@@ -46,6 +46,8 @@
   overflow-y: auto; /* Enable vertical scrolling when content overflows */
   background-color: #1d2125;
   padding: 10px;
+  width: 100%;
+
   /* padding: 13px; */
 }
 
@@ -329,10 +331,19 @@
   .right-col {
     display: none;
   }
+  .middle-col {
+    padding: 10px;
+  }
 }
 
 .task-page-summary-title {
   outline: none;
   font-size: 22px;
   height: 45px;
+}
+
+@media (max-width: 950px) {
+  .content-container {
+    width: 100%;
+  }
 }

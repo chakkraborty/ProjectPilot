@@ -10,6 +10,7 @@ import Box from "./box.png";
 import { useNavigate } from "react-router-dom";
 import "./ProjectList.css";
 import NavbarSettingsDropdown from "./NavbarSettingsDropdown";
+import Pagination from "./Pagination";
 const PorjectList = () => {
   const [open, setOpen] = useState(false);
   const [data, setData] = useState([]);
@@ -131,6 +132,7 @@ const PorjectList = () => {
           <div className="col4">--</div>
         </div>
       ))}
+      <Pagination />
     </div>
   );
 };

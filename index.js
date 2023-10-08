@@ -416,6 +416,7 @@ app.post("/api/invite", async (req, res) => {
         console.log(idx);
 
         if (idx === -1) {
+          console.log("well yes");
           let x = await Notification.create({
             fromName: b.name,
             fromEmail: b.email,

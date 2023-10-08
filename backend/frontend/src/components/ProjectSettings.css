@@ -1,0 +1,113 @@
+.project-settings-page {
+  height: 100vh;
+  background-color: #1d2125;
+  overflow: hidden;
+}
+
+.project-settings-lower-wrapper {
+  width: 90%;
+  margin: auto;
+  height: 100%;
+  display: flex;
+}
+.project-settings-right-panel {
+  width: 60%;
+  margin-left: 100px;
+}
+
+.project-settings-top-title {
+  color: #d4d4d4;
+  font-size: 30px;
+}
+
+.project-settings-name-input-field {
+  width: 100%;
+  height: 35px;
+  background-color: #282e33;
+  color: #d4d4d4;
+  padding: 5px;
+  padding-left: 10px;
+  border: none;
+  outline: none;
+  border-radius: 2px;
+  border: 1px solid #313737;
+}
+
+.project-settings-name-input-field:focus {
+  outline: 1.5px solid #3c8eff;
+}
+
+.project-category-wrapper {
+  width: 100%;
+  background-color: #282e33;
+  border: 1px solid #313737;
+  display: flex;
+  justify-content: space-between;
+  height: 35px;
+  border-radius: 2px;
+  align-items: center;
+  padding: 10px;
+}
+
+.project-category-wrapper > p {
+  font-size: 14px;
+  color: #d4d4d4;
+}
+
+.project-category-wrapper:hover {
+  cursor: pointer;
+  background-color: #313737;
+}
+
+.project-category-list {
+  background-color: #282e33;
+  padding-top: 5px;
+  margin-top: 10px;
+  border-radius: 2px;
+  padding-bottom: 5px;
+}
+
+.project-category-list-item {
+  color: rgb(218, 218, 218);
+  font-weight: 500;
+  font-size: 14px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  display: flex;
+  align-items: center;
+  padding-top: 10px;
+}
+.project-category-list-item:hover {
+  background-color: #313737;
+  cursor: pointer;
+}
+
+.project-settings-save-changes-button {
+  background-color: #0a70ff;
+  width: 120px;
+  font-size: 14px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  border-radius: 3px;
+  margin-top: 20px;
+}
+
+.project-settings-category-head {
+  color: #d1d1d1;
+  font-size: 13.5px;
+  margin-top: 10px;
+}
+
+.project-settings-name-head {
+  color: #d1d1d1;
+  font-size: 13.5px;
+  margin-top: 10px;
+}
+.project-settings-top-init {
+  color: #d1d1d1;
+  font-size: 14px;
+  margin-top: 10px;
+}

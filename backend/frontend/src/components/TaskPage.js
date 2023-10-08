@@ -333,7 +333,7 @@ const TaskPage = () => {
                       xmlns="http://www.w3.org/2000/svg"
                       width="25"
                       height="25"
-                      fill="green"
+                      fill="#04cd2d"
                       class="bi bi-patch-check-fill"
                       viewBox="0 0 16 16"
                       className="issue-wrapper-icon"
