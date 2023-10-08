@@ -1,11 +1,17 @@
 import React from "react";
 import "./ProjectSettings.css";
+import CircularProgress from "@mui/material/CircularProgress";
 import ProjectLeftPanel from "./ProjectLeftPanel";
 import Navbar from "./Navbar.js";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import MembersList from "./MembersList";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 const ProjectSettings = () => {
   const [catList, setCatList] = useState(false);
-  const [category, setCategory] = useState("Software");
+  const [category, setCategory] = useState("");
+  const [changesLoader, setChangesLoader] = useState(false);
+
   function toggleList() {
     setCatList(!catList);
   }
@@ -13,6 +19,54 @@ const ProjectSettings = () => {
     setCategory(a);
     toggleList();
   }
+
+  const { projectId } = useParams();
+  console.log(projectId);
+
+  const [title, setTitle] = useState("");
+
+  async function updateProject() {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      setChangesLoader(true);
+      let a = await axios.post(
+        "/api/updateProject",
+        { name: title, category, projectId },
+        config
+      );
+      if (a) {
+        setChangesLoader(0);
+        fetchProjectDetails();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function fetchProjectDetails() {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      let a = await axios.post("/api/getProjectDetails", { projectId }, config);
+      setTitle(a.data.name);
+      if (a.data.category) {
+        setCategory(a.data.category);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    fetchProjectDetails();
+  }, []);
 
   return (
     <div className="project-settings-page">
@@ -25,7 +79,12 @@ const ProjectSettings = () => {
           </p>
           <p className="project-settings-top-title">Project Details</p>
           <p className="project-settings-name-head">Name</p>
-          <input type="text" className="project-settings-name-input-field" />
+          <input
+            type="text"
+            className="project-settings-name-input-field"
+            defaultValue={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
           <p className="project-settings-category-head">Project Category</p>
           <div
             className="project-category-wrapper"
@@ -71,9 +130,13 @@ const ProjectSettings = () => {
             <></>
           )}
 
-          <div className="project-settings-save-changes-button">
-            Save changes
+          <div
+            className="project-settings-save-changes-button"
+            onClick={() => updateProject()}
+          >
+            {changesLoader ? <CircularProgress size={20} /> : <>Save changes</>}
           </div>
+          <MembersList />
         </div>
       </div>
     </div>

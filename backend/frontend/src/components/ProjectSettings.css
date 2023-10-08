@@ -95,6 +95,11 @@
   margin-top: 20px;
 }
 
+.project-settings-save-changes-button:hover {
+  cursor: pointer;
+  background-color: #207dfe;
+}
+
 .project-settings-category-head {
   color: #d1d1d1;
   font-size: 13.5px;

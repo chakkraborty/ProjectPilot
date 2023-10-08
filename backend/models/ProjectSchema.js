@@ -15,6 +15,10 @@ const ProjectSchema = new mongoose.Schema({
   list: {
     type: Array,
   },
+  category: {
+    type: String,
+    default: "Software",
+  },
 });
 
 module.exports = mongoose.model("Project", ProjectSchema);

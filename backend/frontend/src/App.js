@@ -25,7 +25,10 @@ function App() {
             path="/timeline/:projectId"
             element={<CalendarTimeline />}
           ></Route>
-          <Route path="/project/settings" element={<ProjectSettings />}></Route>
+          <Route
+            path="/project/settings/:projectId"
+            element={<ProjectSettings />}
+          ></Route>
         </Routes>
       </BrowserRouter>
     </>

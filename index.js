@@ -510,3 +510,38 @@ app.post("/api/setDueDate", async (req, res) => {
     console.log(error);
   }
 });
+
+app.post("/api/getProjectDetails", async (req, res) => {
+  try {
+    let { projectId } = req.body;
+    let a = await Project.findOne({ _id: projectId });
+    if (a) {
+      res.status(201).json({
+        name: a.name,
+        leadName: a.leadName,
+        category: a.category,
+      });
+    } else res.status(401).send({ message: "Project Not Found !" });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+app.post("/api/updateProject", async (req, res) => {
+  try {
+    let { name, projectId, category } = req.body;
+    let a = await Project.findOne({ _id: projectId });
+    if (a) {
+      a.name = name;
+      a.category = category;
+      console.log(category);
+
+      a = await a.save();
+      console.log(a);
+
+      res.status(201).json({ message: "Seccessfully Updated !" });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});

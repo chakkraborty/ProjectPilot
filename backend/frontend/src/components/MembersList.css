@@ -1,0 +1,132 @@
+.members-list-invite-button {
+  background-color: #0a70ff;
+  width: fit-content;
+  padding: 5px;
+  justify-content: center;
+  align-items: center;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 3px;
+}
+
+.members-list-search-div {
+  display: flex;
+  align-items: center;
+}
+
+.members-list-search-input-area {
+  background-color: #282e33;
+  border: none;
+  outline: none;
+  color: #d4d4d4;
+}
+.members-list {
+  margin-top: 10px;
+}
+.members-list-title {
+  font-size: 20px;
+  color: #d4d4d4;
+}
+.members-list-search-div {
+  background-color: #282e33;
+  padding: 7px;
+  border-radius: 2px;
+  border: 1.5px solid #34393f;
+}
+
+.members-list-invite-button:hover {
+  cursor: pointer;
+  background-color: #207dfe;
+}
+
+.members-list-top-section-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.members-list-search-wrapper {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.members-list-table-top {
+  display: flex;
+  margin-top: 10px;
+  align-items: center;
+  border-bottom: 1.5px solid rgb(51, 59, 81);
+  padding-bottom: 5px;
+  padding-left: 10px;
+}
+.members-list-table-col-1 {
+  width: 40%;
+  font-size: 14px;
+  color: #d4d4d4;
+}
+.members-list-table-col-2 {
+  width: 50%;
+  font-size: 14px;
+  color: #d4d4d4;
+}
+.members-list-table-col-3 {
+  width: 10%;
+  font-size: 14px;
+  color: #d4d4d4;
+  display: flex;
+  align-items: center;
+}
+.members-list-item-remove-col {
+  background-color: rgb(255, 74, 74);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.members-list-item-remove-col:hover {
+  cursor: pointer;
+  background-color: rgb(252, 89, 89);
+}
+.members-list-item-remove-col > p {
+  font-size: 12px;
+  margin-right: 1px;
+  padding: 2px;
+}
+.members-list-table-item {
+  display: flex;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+}
+
+.members-list-table-item:hover {
+  background-color: #28303c;
+}
+.members-list-name-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.members-list-table-icon {
+  background-color: #0a70ff;
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  margin-right: 5px;
+  outline: 1.5px solid rgb(53, 75, 107);
+}
+
+.members-list-table-title {
+  color: rgb(162, 177, 202);
+  font-weight: 500;
+}
+
+.members-list-table-items-wrapper {
+  border-bottom: 2px solid rgb(51, 59, 81);
+}
