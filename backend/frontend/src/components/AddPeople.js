@@ -62,7 +62,7 @@ const AddPeople = ({ projectId, toggleAddMembers }) => {
     <div className="add-people-main-wrapper">
       <div className="add-people-wrapper">
         <div>
-          <p className="add-members-title">Add Members</p>
+          <p className="add-members-title">Invite members</p>
           <p className="add-members-email-title">Email(s)</p>
           <div className="add-people-email-list-wrapper">
             {arr.map((p) => (

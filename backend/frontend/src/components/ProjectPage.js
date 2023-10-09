@@ -121,6 +121,7 @@ const ProjectPage = () => {
 
       <div className="display-flex project-page-container">
         <ProjectLeftPanel projectId={projectId} />
+
         <div className="text-color-grey right-panel-wrapper">
           <div className="project-right-panel-header-top">
             <div className="projects-right-panel-header-wrapper">

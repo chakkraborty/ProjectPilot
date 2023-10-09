@@ -107,17 +107,58 @@ app.post("/api/getProjects", async (req, res) => {
 });
 
 app.post("/api/getMembers", async (req, res) => {
-  let { projectId } = req.body;
+  try {
+    let { projectId } = req.body;
 
-  let a = await Project.findOne({ _id: projectId });
-  let b = a.list;
-  let ans = [];
-  for (let i = 0; i < b.length; i++) {
-    let currId = b[i];
-    let x = await User.findOne({ _id: currId });
-    ans.push({ name: x.name, email: x.email });
+    let a = await Project.findOne({ _id: projectId });
+    let b = a.list;
+    let ans = [];
+    for (let i = 0; i < b.length; i++) {
+      let currId = b[i];
+      let x = await User.findOne({ _id: currId });
+      if (x) ans.push({ name: x.name, email: x.email });
+    }
+    res.status(201).json(ans);
+  } catch (error) {
+    console.log(error);
   }
-  res.status(201).json(ans);
+});
+
+app.post("/api/deleteMember", async (req, res) => {
+  try {
+    let { emailId, projectId } = req.body;
+    console.log(emailId);
+    console.log(projectId);
+    let a = await User.findOne({ email: emailId });
+    if (a) {
+      let userId = a._id;
+      let x = await Project.findOne({ _id: projectId });
+      if (x) {
+        console.log("userId to be deleted is : " + userId);
+
+        let b = x.list;
+        console.log("here");
+        console.log(b);
+
+        let idx = await b.findIndex(
+          (p) => p.toString().trim() === userId.toString().trim()
+        );
+        console.log();
+        console.log("idx is : " + idx);
+
+        if (idx !== -1) {
+          b.splice(idx, 1);
+          x.list = b;
+          console.log(b);
+
+          x = await x.save();
+          res.status(201).json({ message: "Has been removed !" });
+        }
+      }
+    }
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 app.post("/api/createTask", async (req, res) => {
