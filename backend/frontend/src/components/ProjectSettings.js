@@ -73,7 +73,7 @@ const ProjectSettings = () => {
     <div className="project-settings-page">
       <Navbar />
       <div className="project-settings-lower-wrapper">
-        <ProjectLeftPanel />
+        <ProjectLeftPanel type={4} />
         <div className="project-settings-right-panel">
           <div className="width-95-percent margin-auto">
             <p className="project-settings-top-init">

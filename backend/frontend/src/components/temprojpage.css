@@ -1,3 +1,17 @@
+.project-page-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  position: relative;
+  background-color: #1d2125;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+.project-page-container {
+  width: 90%;
+  margin: auto;
+}
+
 .project-page-lower-wrapper {
   display: flex;
 }
@@ -12,19 +26,17 @@
 .project-left-panel-items-wrapper {
   display: flex;
   align-items: center;
-  margin-top: 5px;
+  margin-top: 10px;
   padding: 10px;
-  margin-left: 10px;
-  margin-right: 10px;
-  border-radius: 2px;
+  margin: 10px;
+  border-radius: 50%;
   color: #d4d4d4;
-  width: 170px;
 }
 
 .project-left-panel-items-wrapper > p {
-  margin-left: 15px;
+  margin-left: 5px;
   color: #aab8c2;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .project-left-panel-items-wrapper:hover {
@@ -35,26 +47,35 @@
 .l {
   background-color: rgb(255, 183, 0);
 }
+.left-panel-line {
+  height: 2px;
+  width: 90%;
+  background-color: #5f676c;
+  margin: auto;
+}
+.project-left-panel-item-selected {
+  background-color: rgb(20, 92, 201);
+}
 
-@media (max-width: 1000px) {
+/* @media (max-width: 1000px) {
   .project-left-panel-items-wrapper > p {
     display: none;
   }
   .project-left-panel-items-wrapper {
     width: fit-content;
   }
-}
+} */
 
 .kanban-board-overflow-wrapper {
   height: 400px;
   overflow-y: auto;
 }
 
-@media (max-width: 780px) {
+/* @media (max-width: 780px) {
   .project-page-left-panel {
     display: none;
   }
-}
+} */
 .projects-right-panel-header {
   color: #aab8c2;
 }
@@ -149,7 +170,7 @@
   padding: 30px;
 }
 
-@media (max-width: 410px) {
+/* @media (max-width: 410px) {
   .projects-right-panel-header-wrapper {
     flex-direction: column;
     align-items: normal;
@@ -165,7 +186,7 @@
   .project-page-input {
     width: 90%;
   }
-}
+} */
 
 .kanban-board-title {
   color: white;
@@ -260,7 +281,7 @@
   width: 260px;
 }
 
-@media (max-width: 1016px) {
+/* @media (max-width: 1016px) {
   .right-panel-wrapper {
     padding: 10px;
   }
@@ -293,7 +314,7 @@
   .team-members-wrapper {
     margin-left: 12px;
   }
-}
+} */
 
 .task-card {
   box-shadow: 1px 1px 1px #252e41;
@@ -304,7 +325,7 @@
 .project-board-page {
   height: 100vh;
   background-color: #1d2125;
-  overflow: hidden !important;
+  overflow: hidden;
   box-sizing: border-box;
 }
 
@@ -317,22 +338,7 @@
 }
 
 .project-board-right-panel {
-  margin-left: 20px;
-  margin-top: 10px;
+  margin-left: 100px;
   overflow-y: auto;
-}
-
-body {
-  overflow: hidden;
-}
-
-.left-panel-bg-highlight {
-  background-color: #212526;
-}
-
-.left-panel-bg-highlight > p {
-  color: #548dca;
-}
-.left-panel-icon-hightlight {
-  color: #548dca;
+  height: 100vh;
 }

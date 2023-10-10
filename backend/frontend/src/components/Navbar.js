@@ -4,6 +4,7 @@ import Notifications from "./Notifications";
 import { useState, useEffect } from "react";
 import { useRef } from "react";
 import Box from "./box.png";
+import Logo from "./Logo5.png";
 import NavbarSettingsDropdown from "./NavbarSettingsDropdown";
 const Navbar = () => {
   const ll = "(@arnikchakraborty2001@gmad.com)";
@@ -60,7 +61,7 @@ const Navbar = () => {
   return (
     <div className="navbar-wrapper" id="navbar">
       <div className="navbar-left-wrapper">
-        <svg
+        {/* <svg
           xmlns="http://www.w3.org/2000/svg"
           width="25"
           height="25"
@@ -74,8 +75,20 @@ const Navbar = () => {
             d="M12.995 8.195c0 .937-.312 1.912-.78 2.693l1.99 1.99c.976-1.327 1.6-2.966 1.6-4.683 0-1.795-.624-3.434-1.561-4.76l-2.068 2.028c.468.781.78 1.679.78 2.732h.04Z"
           />
           <path d="M8 13.151a4.995 4.995 0 1 1 0-9.99c1.015 0 1.951.273 2.732.82l1.95-2.03a7.805 7.805 0 1 0 .04 12.449l-1.951-2.03a5.072 5.072 0 0 1-2.732.781H8Z" />
-        </svg>
-        <p className="navbar-title-wrapper">Collaborator</p>
+        </svg> */}
+        <img src={Logo} className="navbar-logo-image" />
+        {/* <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="22"
+          height="22"
+          fill="#"
+          class="bi bi-stop-circle"
+          viewBox="0 0 16 16"
+        >
+          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+          <path d="M5 6.5A1.5 1.5 0 0 1 6.5 5h3A1.5 1.5 0 0 1 11 6.5v3A1.5 1.5 0 0 1 9.5 11h-3A1.5 1.5 0 0 1 5 9.5v-3z" />
+        </svg> */}
+        <p className="navbar-title-wrapper">Project Pilot</p>
         <div className="projects-button">
           <p className="text-color-1">Projects</p>
           <svg

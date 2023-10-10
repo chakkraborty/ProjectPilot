@@ -3,11 +3,11 @@
 }
 .navbar-wrapper {
   background-color: #1d2125;
-  height: 50px;
+  height: 50px !important;
   width: 100%;
   color: black;
   display: flex;
-  border-bottom: 2px solid rgb(78, 85, 110);
+  border-bottom: 1.5px solid rgb(52, 55, 66);
   align-items: center;
   justify-content: space-between;
 }
@@ -273,4 +273,10 @@
   position: absolute;
   z-index: 20;
   right: 10px;
+}
+
+.navbar-logo-image {
+  width: 25px;
+  margin-left: 10px;
+  margin-right: 0px;
 }

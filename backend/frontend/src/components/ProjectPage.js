@@ -116,13 +116,11 @@ const ProjectPage = () => {
   }, []);
 
   return (
-    <div className="project-page-wrapper">
+    <div className="project-board-page">
       <Navbar />
-
-      <div className="display-flex project-page-container">
-        <ProjectLeftPanel projectId={projectId} />
-
-        <div className="text-color-grey right-panel-wrapper">
+      <div className="project-board-lower-wrapper">
+        <ProjectLeftPanel type={2} />
+        <div className="project-board-right-panel">
           <div className="project-right-panel-header-top">
             <div className="projects-right-panel-header-wrapper">
               <div className="projects-right-panel-name-wrapper">
