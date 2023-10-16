@@ -1,71 +1,14 @@
-import React, { useEffect, useState } from "react";
-import "./CalendarTimeline.css";
-import TimeLineComponent from "./TimeLineComponent.js";
-import Navbar from "./Navbar.js";
+import React from "react";
+import "./t.css";
+import TableX from "./TableX";
 import ProjectLeftPanel from "./ProjectLeftPanel";
+import Navbar from "./Navbar";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import AddPeople from "./AddPeople";
-import CreateTask from "./CreateTask";
-import TableX from "./TableX";
+import { useState, useEffect } from "react";
 
-const CalendarTimeline = () => {
-  const [currentDate, setCurrentDate] = useState(new Date());
-
-  console.log(currentDate.getMonth());
-  console.log(currentDate.getDay());
-  console.log(currentDate.getDate());
-
-  let m = currentDate.getMonth();
-
-  const date = new Date(currentDate.getFullYear() + 1, 0, 1);
-
-  const timelineItems = [];
-  let a = [];
-  const [c, setC] = useState([]);
-
-  function printMonth(pol) {}
-  let monthsArray = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
-
-  const changeMonth = (delta) => {
-    const newDate = new Date(currentDate);
-    newDate.setMonth(currentDate.getMonth() + delta);
-    setCurrentDate(newDate);
-  };
-  function daysInMonth(year, month) {
-    return new Date(year, month, 0).getDate();
-  }
-  useEffect(() => {
-    console.log("m is : " + m);
-    for (let i = m - 2; i <= m + 2; i++) {
-      console.log("month is: " + i);
-      const d = new Date(currentDate.getFullYear(), i, 1);
-      const tot = daysInMonth(currentDate.getFullYear(), m);
-
-      for (let x = 0; x < tot; x++) {
-        const p = new Date(currentDate.getFullYear(), i, x);
-        console.log(p);
-
-        a.push(p);
-      }
-    }
-    setC([...a]);
-    console.log(a);
-    console.log(c);
-  }, []);
+const TimeLine = () => {
   const [addMembers, setAddMembers] = useState(0);
   let { projectId } = useParams();
   console.log(projectId);
@@ -87,39 +30,25 @@ const CalendarTimeline = () => {
       console.log(a.data);
     }
   }
-
-  const [tasks, setTasks] = useState([]);
-
-  async function fetchTasks() {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-    let a = await axios.post("/api/fetchTasks", { projectId }, config);
-    if (a) {
-      await setTasks(a.data);
-
-      console.log(tasks);
-      console.log(a.data);
-    }
-  }
-
   useEffect(() => {
     fetchMembers();
-    fetchTasks();
   }, []);
-
   return (
-    <div className="project-settings-page">
+    <div className="t-wrapper">
       <Navbar />
-      <div className="project-settings-lower-wrapper">
-        <ProjectLeftPanel type={4} />
-        <div className="project-timeline-screen-right-panel">
+      <div className="t-lower-wrapper">
+        <div className="t-left">
+          <ProjectLeftPanel type={3} />
+        </div>
+
+        <div className="t-right-panel">
           <div className="project-right-panel-header-top">
             <div className="projects-right-panel-header-wrapper">
               <div className="projects-right-panel-name-wrapper margin-top-10px">
-                <p>Project-Euler / Timeline</p>
+                <p className="projects-right-panel-header-top">
+                  Project-Euler / Timeline
+                </p>
+                <p className="projects-right-panel-header-lower">Timeline</p>
               </div>
             </div>
             <div className="project-page-search-and-members-wrapper">
@@ -127,7 +56,7 @@ const CalendarTimeline = () => {
                 <input
                   type="text"
                   className="project-page-input text-dark"
-                  placeholder="Search..."
+                  placeholder=""
                 ></input>
 
                 <svg
@@ -173,13 +102,11 @@ const CalendarTimeline = () => {
           ) : (
             <></>
           )}
-          {/* <div className="test-div-timeline">
-            <TableX />
-          </div> */}
+          <TableX />
         </div>
       </div>
     </div>
   );
 };
 
-export default CalendarTimeline;
+export default TimeLine;

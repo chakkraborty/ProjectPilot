@@ -9,34 +9,9 @@ body {
   color: black;
   padding: 0;
 }
-.landing-bottom-wrapper {
-  display: flex;
-}
+
 * {
   padding: 0;
   box-sizing: border-box;
   margin: 0;
-}
-
-.landing-page-button {
-  background-color: rgb(10, 165, 255);
-  margin-top: 10px;
-  padding: 10px;
-  border-radius: 5px;
-  margin-left: 10px;
-  color: white;
-}
-
-.landing-page-button:hover {
-  cursor: pointer;
-  background-color: rgb(0, 133, 210);
-}
-
-.landing-page-title {
-  font-size: 40px;
-  font-family: monospace;
-  font-weight: 800;
-}
-.landing-page-sub-title {
-  font-size: 18px;
 }

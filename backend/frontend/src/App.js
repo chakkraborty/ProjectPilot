@@ -9,6 +9,7 @@ import TaskPage from "./components/TaskPage";
 import Notifications from "./components/Notifications";
 import CalendarTimeline from "./components/CalendarTimeline.js";
 import ProjectSettings from "./components/ProjectSettings";
+import TimeLine from "./components/TimeLine";
 function App() {
   return (
     <>
@@ -29,6 +30,7 @@ function App() {
             path="/project/settings/:projectId"
             element={<ProjectSettings />}
           ></Route>
+          <Route exact path="/test/:projectId" element={<TimeLine />}></Route>
         </Routes>
       </BrowserRouter>
     </>

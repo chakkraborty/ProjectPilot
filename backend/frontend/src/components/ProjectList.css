@@ -34,7 +34,7 @@
 
 .project-list-container {
   color: black;
-  width: 100%;
+  width: 95%;
   padding: 10px;
   font-weight: 600;
   font-size: 25px;
@@ -101,7 +101,7 @@
   font-weight: 400;
 }
 .project-list-lead-name {
-  color: #5699f9;
+  color: #559af9;
 }
 .col3 {
   width: 30%;
@@ -110,32 +110,35 @@
   width: 20%;
 }
 .text-color-blue {
-  color: rgb(15, 147, 255);
+  color: #559af9;
 }
 .project-name-list:hover {
   cursor: poiner;
   text-decoration: underline;
 }
 .add-project-button {
-  background-color: #2684ff;
-  font-size: 16px;
-  padding: 0px;
+  background-color: #64a4f7;
+  font-size: 14px;
+  padding-left: 5px;
+  padding-right: 5px;
+
   align-items: center;
   justify-content: center;
   width: fit-content;
   display: flex;
   border-radius: 2px;
   color: #001031;
-  height: fit-content;
-  padding: 9px;
+  height: 32px;
+
   margin-left: 10px;
 }
 .project-list-title {
-  color: #d4d4d4;
+  color: #aab8c2;
   margin-bottom: 5px;
+  font-weight: 400;
 }
 .add-project-button:hover {
-  background-color: #4191f9;
+  background-color: #7bb1f8;
   cursor: pointer;
 }
 
@@ -149,6 +152,7 @@
 }
 
 .circle {
+  color: #d4d4d4;
   border-radius: 50%;
   align-items: center;
   justify-content: center;
@@ -166,13 +170,14 @@
 
 .project-list-search-wrapper {
   background-color: #22272b;
-  outline: 2px solid #374048;
-  border: none;
+  border: 2px solid #394956;
+
   border-radius: 2px;
-  padding: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 .project-list-search-wrapper:focus-within {
-  outline: 2px solid #0052cc;
+  border: 2px solid rgb(109, 173, 230);
 }
 
 .search-icon {

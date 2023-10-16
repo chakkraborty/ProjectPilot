@@ -4,8 +4,11 @@ import { useParams } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import TimeLineComponent from "./TimeLineComponent";
+import StarsIcon from "@mui/icons-material/Stars";
 import { useNavigate } from "react-router-dom";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 const App = () => {
+  const tableXRef = useRef(null);
   const scrollDivRef = useRef(null);
 
   const navigate = useNavigate();
@@ -65,6 +68,15 @@ const App = () => {
   };
 
   useEffect(() => {
+    const resizeTableX = () => {
+      const parentHeight = scrollDivRef.current.parentElement.clientHeight;
+      const parentWidth = scrollDivRef.current.parentElement.clientWidth;
+      scrollDivRef.current.style.height = `${parentHeight}px`;
+      scrollDivRef.current.style.width = `${parentWidth}px`;
+    };
+
+    // Initial resize
+    resizeTableX();
     const setScrollPosition = () => {
       if (scrollDivRef.current) {
         scrollDivRef.current.scrollLeft = lp;
@@ -98,8 +110,13 @@ const App = () => {
     console.log(c);
     fetchMembers();
     fetchTasks();
+    window.addEventListener("resize", resizeTableX);
+
+    // Cleanup event listener on component unmount
+
     return () => {
       clearTimeout(timeout);
+      window.removeEventListener("resize", resizeTableX);
     };
   }, []);
   const [addMembers, setAddMembers] = useState(0);
@@ -170,99 +187,89 @@ const App = () => {
   const div2Ref = useRef(null);
 
   return (
-    <div
-      className="overflow-container"
-      ref={scrollDivRef}
-      onClick={() => print()}
-    >
-      <div className="left-column">
-        <div className="left-column-top-x-wrapper"></div>
-        {tasks.map((p, index) => (
-          <div
-            className={
-              index % 2 === 0
-                ? "left-column-item-light"
-                : "left-column-item-dark"
-            }
-            key={index}
-          >
-            <div className="table-x-left-col-icon-wrapper">
-              {/* <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="12"
-                height="12"
-                fill="currentColor"
-                class="bi bi-shuffle"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M0 3.5A.5.5 0 0 1 .5 3H1c2.202 0 3.827 1.24 4.874 2.418.49.552.865 1.102 1.126 1.532.26-.43.636-.98 1.126-1.532C9.173 4.24 10.798 3 13 3v1c-1.798 0-3.173 1.01-4.126 2.082A9.624 9.624 0 0 0 7.556 8a9.624 9.624 0 0 0 1.317 1.918C9.828 10.99 11.204 12 13 12v1c-2.202 0-3.827-1.24-4.874-2.418A10.595 10.595 0 0 1 7 9.05c-.26.43-.636.98-1.126 1.532C4.827 11.76 3.202 13 1 13H.5a.5.5 0 0 1 0-1H1c1.798 0 3.173-1.01 4.126-2.082A9.624 9.624 0 0 0 6.444 8a9.624 9.624 0 0 0-1.317-1.918C4.172 5.01 2.796 4 1 4H.5a.5.5 0 0 1-.5-.5z"
-                />
-                <path d="M13 5.466V1.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192zm0 9v-3.932a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192z" />
-              </svg> */}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="rgb(0, 119, 255)"
-                class="bi bi-slash-square-fill"
-                viewBox="0 0 16 16"
-              >
-                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm9.354 5.354-6 6a.5.5 0 0 1-.708-.708l6-6a.5.5 0 0 1 .708.708z" />
-              </svg>
-            </div>
-            <p
-              className="table-x-task-title"
-              onClick={() => taskRouting(p._id)}
+    <div className="t-overflow">
+      <div
+        className="overflow-container"
+        ref={scrollDivRef}
+        onClick={() => print()}
+      >
+        <div className="left-column">
+          <div className="left-column-top-x-wrapper"></div>
+          {tasks.map((p, index) => (
+            <div
+              className={
+                index % 2 === 0
+                  ? "left-column-item-light"
+                  : "left-column-item-dark"
+              }
+              key={index}
             >
-              {p.title}
-            </p>
-          </div>
-        ))}
-        <div className="table-x-create-task-wrapper">+ Create Task</div>
-      </div>
-      <div className="div-list">
-        <div className="div-item">
-          <div ref={div1Ref} className="display-flex calender-dates-wrapper">
-            {c.map((x) => (
-              <div className="calender-timeline-date-item">
-                <div className="calender-timeline-date-item-subwrapper">
-                  <p>{monthsArray[x.getMonth()]}</p>
-                  <p>{x.getDate()}</p>
+              <div className="table-x-left-col-icon-wrapper">
+                {/* <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="rgb(0, 119, 255)"
+                  class="bi bi-slash-square-fill"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm9.354 5.354-6 6a.5.5 0 0 1-.708-.708l6-6a.5.5 0 0 1 .708.708z" />
+                </svg> */}
+                {/* <KeyboardArrowRightIcon sx={{ fontSize: 17 }} /> */}
+                <div className="table-x-item-icon-wrapper">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="12"
+                    height="12"
+                    fill="currentColor"
+                    class="bi bi-bezier2"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M1 2.5A1.5 1.5 0 0 1 2.5 1h1A1.5 1.5 0 0 1 5 2.5h4.134a1 1 0 1 1 0 1h-2.01c.18.18.34.381.484.605.638.992.892 2.354.892 3.895 0 1.993.257 3.092.713 3.7.356.476.895.721 1.787.784A1.5 1.5 0 0 1 12.5 11h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5H6.866a1 1 0 1 1 0-1h1.711a2.839 2.839 0 0 1-.165-.2C7.743 11.407 7.5 10.007 7.5 8c0-1.46-.246-2.597-.733-3.355-.39-.605-.952-1-1.767-1.112A1.5 1.5 0 0 1 3.5 5h-1A1.5 1.5 0 0 1 1 3.5v-1zM2.5 2a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm10 10a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1z"
+                    />
+                  </svg>
                 </div>
               </div>
-            ))}
-          </div>
+              <p
+                className="table-x-task-title"
+                onClick={() => taskRouting(p._id)}
+              >
+                {"[TASK] " + p.title}
+              </p>
+            </div>
+          ))}
+          <div className="table-x-create-task-wrapper">+ Create Task</div>
         </div>
-
-        {/* {tasks.map((p, index) => {
-          <div
-            className={
-              index % 2
-                ? "time-line-wrapper-div-light"
-                : "time-line-wrapper-div-dark"
-            }
-          >
-            <TimeLineComponent />
-          </div>;
-        })} */}
-        <div className="timeline-bar-mark" style={divStyle}></div>
-        {tasks.map((div, index) => (
-          // <div className="div-item" key={index}>
-          //   Div {div}
-          // </div>
-          <div
-            ref={div2Ref}
-            className={
-              index % 2
-                ? "time-line-wrapper-div-light"
-                : "time-line-wrapper-div-dark"
-            }
-          >
-            <TimeLineComponent s={div.startDate} e={div.dueDate} />
+        <div className="div-list">
+          <div className="div-item">
+            <div ref={div1Ref} className="display-flex calender-dates-wrapper">
+              {c.map((x) => (
+                <div className="calender-timeline-date-item">
+                  <div className="calender-timeline-date-item-subwrapper">
+                    <p>{monthsArray[x.getMonth()]}</p>
+                    <p>{x.getDate()}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
-        ))}
+
+          <div className="timeline-bar-mark" style={divStyle}></div>
+          {tasks.map((div, index) => (
+            <div
+              ref={div2Ref}
+              className={
+                index % 2
+                  ? "time-line-wrapper-div-light"
+                  : "time-line-wrapper-div-dark"
+              }
+            >
+              <TimeLineComponent s={div.startDate} e={div.dueDate} />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

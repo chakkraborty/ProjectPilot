@@ -124,17 +124,12 @@ const ProjectPage = () => {
           <div className="project-right-panel-header-top">
             <div className="projects-right-panel-header-wrapper">
               <div className="projects-right-panel-name-wrapper">
-                {/* <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="30"
-                    height="30"
-                    fill="orange"
-                    class="bi bi-dropbox"
-                    viewBox="0 0 16 16"
-                  >
-                    <path d="M8.01 4.555 4.005 7.11 8.01 9.665 4.005 12.22 0 9.651l4.005-2.555L0 4.555 4.005 2 8.01 4.555Zm-4.026 8.487 4.006-2.555 4.005 2.555-4.005 2.555-4.006-2.555Zm4.026-3.39 4.005-2.556L8.01 4.555 11.995 2 16 4.555 11.995 7.11 16 9.665l-4.005 2.555L8.01 9.651Z" />
-                  </svg> */}
-                <p>Project-Euler / Kanban</p>
+                <p className="projects-right-panel-header-top">
+                  Project / Kanban board
+                </p>
+                <p className="projects-right-panel-header-lower">
+                  Kanban board
+                </p>
               </div>
             </div>
             <div className="project-page-search-and-members-wrapper">
@@ -142,7 +137,7 @@ const ProjectPage = () => {
                 <input
                   type="text"
                   className="project-page-input text-dark"
-                  placeholder="Search..."
+                  placeholder=""
                 ></input>
 
                 <svg
@@ -202,12 +197,12 @@ const ProjectPage = () => {
           <div className="project-page-lower-wrapper">
             <div className="text-color-grey kanban-board-wrapper">
               <div className="kanban-board-title">
-                <p className="">TO DO</p>
+                <p className="task-card-top-text-color">TO DO</p>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="30"
                   height="30"
-                  fill="currentColor"
+                  fill="#8c9bab"
                   class="bi bi-plus"
                   viewBox="0 0 16 16"
                   className="kanban-board-header-add-icon"
@@ -222,7 +217,7 @@ const ProjectPage = () => {
                     return (
                       <div className="task-card" key={p._id}>
                         <div className="task-card-top-wrapper">
-                          <div className="task-card-left text-color-off-white">
+                          <div className="task-card-left task-card-title-text">
                             {p.title}
                           </div>
                           <svg
@@ -231,7 +226,7 @@ const ProjectPage = () => {
                             height="18"
                             class="bi bi-three-dots-vertical"
                             viewBox="0 0 16 16"
-                            fill="white"
+                            fill="#8c9bab"
                             className="task-card-right"
                             onClick={(event) => handleDeleteOpen(event, p._id)}
                           >
@@ -341,12 +336,12 @@ const ProjectPage = () => {
             </div>
             <div className="text-color-grey kanban-board-wrapper">
               <div className="kanban-board-title">
-                <p className="">IN PROGRESS</p>
+                <p className="task-card-top-text-color">IN PROGRESS</p>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="30"
                   height="30"
-                  fill="currentColor"
+                  fill="#8c9bab"
                   class="bi bi-plus"
                   viewBox="0 0 16 16"
                   className="kanban-board-header-add-icon"
@@ -361,7 +356,7 @@ const ProjectPage = () => {
                     return (
                       <div className="task-card" key={p._id}>
                         <div className="task-card-top-wrapper">
-                          <div className="task-card-left text-color-off-white">
+                          <div className="task-card-left task-card-title-text">
                             {p.title}
                           </div>
                           <svg
@@ -370,7 +365,7 @@ const ProjectPage = () => {
                             height="18"
                             class="bi bi-three-dots-vertical"
                             viewBox="0 0 16 16"
-                            fill="white"
+                            fill="#8c9bab"
                             className="task-card-right"
                             onClick={(event) => handleDeleteOpen(event, p._id)}
                           >
@@ -480,12 +475,12 @@ const ProjectPage = () => {
             </div>
             <div className="text-color-grey kanban-board-wrapper">
               <div className="kanban-board-title">
-                <p className="">DONE</p>
+                <p className="task-card-top-text-color">DONE</p>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="30"
                   height="30"
-                  fill="currentColor"
+                  fill="#8c9bab"
                   class="bi bi-plus"
                   viewBox="0 0 16 16"
                   className="kanban-board-header-add-icon"
@@ -500,7 +495,7 @@ const ProjectPage = () => {
                     return (
                       <div className="task-card" key={p._id}>
                         <div className="task-card-top-wrapper">
-                          <div className="task-card-left text-color-off-white">
+                          <div className="task-card-left task-card-title-text">
                             {p.title}
                           </div>
                           <svg
@@ -509,7 +504,7 @@ const ProjectPage = () => {
                             height="18"
                             class="bi bi-three-dots-vertical"
                             viewBox="0 0 16 16"
-                            fill="white"
+                            fill="#8c9bab"
                             className="task-card-right"
                             onClick={(event) => handleDeleteOpen(event, p._id)}
                           >
@@ -569,7 +564,7 @@ const ProjectPage = () => {
                               xmlns="http://www.w3.org/2000/svg"
                               width="23"
                               height="23"
-                              fill="rgb(57, 57, 57)"
+                              fill="#b8a899"
                               className="bi bi-person-circle margin-top-10px card-icon-project-page cbdc"
                               viewBox="0 0 16 16"
                               aria-describedby={id}

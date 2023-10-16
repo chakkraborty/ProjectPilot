@@ -3,6 +3,15 @@
   flex-direction: column; /* Arrange divs vertically */
   position: relative;
 }
+.table-x-item-icon-wrapper {
+  width: 17px;
+  height: 17px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #af0707;
+  border-radius: 2px;
+}
 
 .div-item {
   width: fit-content; /* Set your desired width for each div item */
@@ -19,7 +28,7 @@
   height: 40px; /* Set the height to match the div items */
   display: flex;
   align-items: center;
-  background-color: rgb(15, 23, 32);
+  background-color: #161a1d;
 
   /* Set background color for left column items */
 }
@@ -27,19 +36,19 @@
   height: 40px; /* Set the height to match the div items */
   display: flex;
   align-items: center;
-  background-color: rgb(27, 35, 46);
+  background-color: #1d2125;
 }
-.left-column-item-light > p {
+/* .left-column-item-light > p {
   font-size: 13px;
   color: #d4d4d4;
 }
 .left-column-item-dark > p {
   font-size: 13px;
   color: #d4d4d4;
-}
-.overflow-container {
+} */
+/* .overflow-container {
   width: 100%;
-}
+} */
 /* .div-item {
   width: 3000px;
 } */
@@ -71,22 +80,20 @@
   background-color: rgb(92, 101, 134);
 } */
 .table-x-left-col-icon-wrapper {
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: white;
 
   margin-left: 10px;
   margin-right: 10px;
 }
 .time-line-wrapper-div-dark {
-  background-color: rgb(27, 35, 46);
+  background-color: #1d2125;
   width: 7500px;
   min-height: 40px;
 }
 .time-line-wrapper-div-light {
-  background-color: rgb(15, 23, 32);
+  background-color: #161a1d;
   width: 7500px;
   min-height: 40px;
 }
@@ -106,7 +113,7 @@
 }
 
 .overflow-container {
-  margin-left: 10px;
+  /* margin-left: 10px; */
   background-color: #1d2125;
 }
 
@@ -214,20 +221,25 @@
 }
 
 .overflow-container {
-  margin-left: 0px;
+  /* margin-left: 0px; */
 }
 
 .table-x-task-title:hover {
   text-decoration: underline;
   cursor: pointer;
+  /* font-size: 25px; */
 }
 
 .overflow-container {
-  width: 100%; /* Set your desired fixed width for the container */
-  height: 100%; /* Set your desired fixed height for the container */
-  overflow-x: scroll; /* Enable horizontal scrolling */
-  overflow-y: auto; /* Enable vertical scrolling */
-  display: flex; /* Use flexbox to create a column layout */
+  /* overflow-x: scroll;
+  overflow-y: auto; */
+  display: flex;
   border: 2px solid #3c414c;
-  scroll-behavior: smooth;
+  /* margin-bottom: 500px; */
+}
+
+.table-x-task-title {
+  font-size: 13px;
+  /* color: rgb(241, 230, 207); */
+  color: #c3d7e3;
 }

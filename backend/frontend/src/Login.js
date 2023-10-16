@@ -6,6 +6,8 @@ import Alert from "@mui/material/Alert";
 import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useEffect } from "react";
+import Logo5 from "./components/Logo5.png";
+
 const Login = () => {
   const [error, setError] = useState(0);
   const [password, setPassword] = useState("");
@@ -43,6 +45,7 @@ const Login = () => {
       if (a) {
         localStorage.setItem("name", a.data.name);
         localStorage.setItem("_id", a.data._id);
+        localStorage.setItem("email", a.data.email);
         console.log(a.data);
         setLoading(0);
         navigate("/home");
@@ -72,11 +75,7 @@ const Login = () => {
           {errorMessage}
         </Alert>
       )}
-
-      <GroupWorkIcon
-        className="landingIcon register-page-icon"
-        sx={{ fontSize: 60 }}
-      />
+      <img src={Logo5} className="register-page-logo" />
       <p className="register-title">Welcome Back !</p>
 
       <input
@@ -95,14 +94,14 @@ const Login = () => {
         {loading ? <CircularProgress size={25} /> : <p>Log in</p>}
       </div>
 
-      <p className="register-page-link">
+      <p className="register-page-link color-c5cfd6">
         Don't have an account ?{" "}
         <span className="register-page-text" onClick={linkToRegister}>
           Sign up
         </span>
       </p>
 
-      <p className="register-page-text-wrapper">
+      <p className="register-page-text-wrapper color-c5cfd6">
         By logging in you accept our
         <span className="register-page-text">Privacy Policy</span>
         and <span className="register-page-text">Terms of Service</span>.

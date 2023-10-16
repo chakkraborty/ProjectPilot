@@ -6,6 +6,9 @@
   background-color: #1d2125;
   /* width: 18%; */
   /* height: 100vh; */
+  height: 100vh;
+  width: 250px;
+
   position: sticky;
   border-right: 1.5px solid rgb(50, 53, 60);
 }
@@ -18,13 +21,12 @@
   margin-right: 10px;
   border-radius: 2px;
   color: #d4d4d4;
-  width: 170px;
 }
 
 .project-left-panel-items-wrapper > p {
   margin-left: 15px;
   color: #aab8c2;
-  font-size: 16px;
+  font-size: 15px;
 }
 
 .project-left-panel-items-wrapper:hover {
@@ -60,7 +62,6 @@
 }
 
 .projects-right-panel-name-wrapper {
-  display: flex;
   align-items: center;
 
   width: fit-content;
@@ -68,11 +69,18 @@
   margin-bottom: 10px;
 }
 .projects-right-panel-name-wrapper > p {
-  font-size: 25px;
+  /* font-size: 25px;
   margin-left: 5px;
   color: #b6c2cf;
-  font-weight: 500;
+  font-weight: 500; */
 }
+
+.projects-right-panel-header-lower {
+  font-size: 27px;
+
+  color: #b6c2cf;
+}
+
 .projects-right-panel-header-wrapper {
   display: flex;
   align-items: center;
@@ -81,15 +89,14 @@
 .project-page-search-wrapper {
   display: flex;
   align-items: center;
-  outline: 2px solid #374048;
+  border: 2px solid #374048;
   width: fit-content;
   border-radius: 1px;
   background-color: #22272b;
-  margin-left: 10px;
 }
 
 .project-page-search-wrapper:focus-within {
-  outline: 2px solid #0052cc;
+  border: 2px solid #0052cc;
 }
 
 .project-page-input {
@@ -176,10 +183,11 @@
 
 .kanban-board-wrapper {
   background-color: #161a1d;
+
   width: 260px;
   margin-top: 10px;
   border-radius: 5px;
-  margin: 5px;
+  margin-right: 5px;
   margin-top: 10px;
   height: fit-content;
   padding: 5px;
@@ -187,6 +195,7 @@
 
 .task-card {
   background-color: #22272b;
+
   border-radius: 5px;
   flex-wrap: wrap;
   margin-top: 10px;
@@ -232,14 +241,15 @@
 } */
 
 .task-card-tag-wrapper {
-  padding: 5px;
+  padding: 2px;
   font-size: 14px;
   border-radius: 3px;
 
   margin: 2px;
 
-  background-color: #2e393a;
-  color: rgb(222, 222, 222);
+  background-color: #1f2d39;
+
+  color: #b6c2cf;
   width: fit-content;
 }
 
@@ -253,7 +263,6 @@
 }
 .task-card:hover {
   cursor: pointer;
-  background-color: #2f3336;
 }
 
 .kanban-board-wrapper {
@@ -295,10 +304,6 @@
   }
 }
 
-.task-card {
-  box-shadow: 1px 1px 1px #252e41;
-}
-
 /* ----------------------------- ui2 ------------------------- */
 
 .project-board-page {
@@ -309,7 +314,7 @@
 }
 
 .project-board-lower-wrapper {
-  width: 90%;
+  width: 100%;
   margin: auto;
   height: 100vh;
   overflow: hidden;
@@ -322,9 +327,9 @@
   overflow-y: auto;
 }
 
-body {
+/* body {
   overflow: hidden;
-}
+} */
 
 .left-panel-bg-highlight {
   background-color: #212526;
@@ -335,4 +340,50 @@ body {
 }
 .left-panel-icon-hightlight {
   color: #548dca;
+}
+
+.project-left-panel-project-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 0px;
+
+  margin-left: 10px;
+}
+
+.project-left-panel-project-info-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.project-left-panel-project-info-top-wrapper {
+  padding-top: 20px;
+  margin-bottom: 20px;
+}
+.project-left-panel-project-title {
+  color: #c2d4e3;
+
+  font-weight: 600;
+}
+.project-left-panel-project-info-wrapper {
+  margin-left: 10px;
+}
+.project-left-panel-project-type {
+  color: #bcaa9b;
+  font-size: 14px;
+}
+
+.projects-right-panel-header-top {
+  color: #bcaa9b;
+}
+
+.task-card-top-text-color {
+  color: #8c9bab;
+}
+
+.task-card-title-text {
+  color: #adb8c5;
+}
+
+body {
+  overflow: hidden;
 }

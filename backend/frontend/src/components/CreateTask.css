@@ -10,23 +10,27 @@
   justify-content: center;
   align-items: center;
   z-index: 1;
+  overflow-y: auto;
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 
-@media (max-width: 700px) {
+/* @media (max-width: 700px) {
   .modal-content-1 {
     width: 100% !important;
     height: 100% !important;
   }
-  .create-task-top-sub-wrapper {
-    max-height: 80vh !important;
-    overflow-y: auto;
-  }
+} */
+
+.bg-color-22272b {
+  background-color: #22272b !important;
 }
 
 /* Styles for the modal content */
 .modal-content-1 {
   background-color: #282e33;
-  width: 700px !important;
+  width: 800px !important;
+  margin-top: 150px;
 
   outline: 1px solid rgb(87, 87, 87);
   padding: 20px;
@@ -36,7 +40,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 95%;
+  height: fit-content;
 }
 
 /* Styles for the close button */
@@ -56,7 +60,7 @@
   border-style: none;
 }
 .create-task-description-area:focus {
-  outline: 1px solid #5393ed;
+  border: 1.5px solid rgb(106, 173, 230);
 }
 .border-1px-solid-grey {
   border: 1px solid grey;
@@ -74,16 +78,17 @@
 }
 .create-task-title-input {
   width: 100%;
-
-  height: 30px;
+  height: 37px;
   padding: 5px;
   color: #d4d4d4;
   margin-top: 10px;
   background-color: #22272b;
   border-radius: 3px;
+  outline: none;
+  border: 1.5px solid rgb(66, 71, 75);
 }
 .create-task-title-input:focus {
-  outline: 1px solid rgb(109, 173, 230);
+  border: 1.5px solid rgb(109, 173, 230);
 }
 .margin-top-10px {
   margin-top: 10px;
@@ -94,7 +99,9 @@
   flex-direction: column;
 }
 .create-task-status-dropdown-wrapper > p {
-  color: #d4d4d4;
+  color: #aab8c2;
+  font-size: 14px;
+  font-weight: 500;
   margin-bottom: 5px;
 }
 .create-task-browse-file {
@@ -117,33 +124,40 @@
   padding-top: 20px;
 }
 .create-button {
-  background-color: #579dff;
+  background-color: #004db9;
+
   font-size: 14px;
-  width: 80px;
+
   display: flex;
+  padding: 8px;
+  border-radius: 2px;
+  padding-left: 15px;
+  padding-right: 15px;
   justify-content: center;
   align-items: center;
-  padding: 5px;
+  font-weight: 500;
   border-radius: 3px;
 }
 .close-button {
-  width: 80px;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px;
+  padding: 8px;
   border-radius: 2px;
-
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 14px;
+  font-weight: 500;
   color: #d4d4d4;
   margin-left: 10px;
 }
 .create-button:hover {
-  background-color: rgb(76, 101, 130);
+  background-color: #2767c1;
   cursor: pointer;
 }
 .close-button:hover {
   cursor: pointer;
-  background-color: rgb(87, 88, 90);
+  background-color: rgb(49, 52, 57);
 }
 .display-flex {
   display: flex;
@@ -166,6 +180,7 @@
   color: #aab8c2;
   display: flex;
   align-items: center;
+  font-size: 23.5px;
 }
 
 .create-task-task-icon {
@@ -174,19 +189,30 @@
 }
 
 .create-task-title-top {
-  color: #d4d4d4;
+  color: #aab8c2;
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 500;
 }
 .create-task-description {
-  color: #d4d4d4;
+  color: #aab8c2;
+
+  font-size: 14px;
+  font-weight: 500;
 }
 .create-task-description-area {
   background-color: #22272b;
   margin-top: 10px;
-  border: 1px solid grey;
-  border-radius: 3px;
+
   resize: none;
   font-size: 14px;
   padding: 5px;
+  color: #d4d4d4;
+
+  background-color: #22272b;
+  border-radius: 3px;
+  outline: none;
+  border: 1.5px solid rgb(66, 71, 75);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
@@ -194,7 +220,9 @@
   color: #d4d4d4;
 }
 .create-task-attach-file {
-  color: #d4d4d4;
+  color: #aab8c2;
+  font-weight: 500;
+  font-size: 14px;
 }
 .create-task-status {
   outline: green;
@@ -203,16 +231,26 @@
   height: 30px;
   background-color: #22272b;
 }
+.margin-left-2px {
+  margin-left: 2px;
+}
 .create-task-add-tags-wrapper {
   width: 100%;
   padding: 5px;
-  border: 1px solid rgb(0, 67, 143);
+  border: 1.5px solid rgb(75, 77, 89);
   margin-top: 10px;
   border-radius: 3px;
   flex-wrap: wrap;
   display: flex;
   align-items: center;
   background-color: #22272b;
+  margin-top: 30px;
+}
+.create-task-loader {
+  margin-right: 10px;
+}
+.create-task-add-tags-wrapper:focus-within {
+  border: 1.5px solid rgb(109, 173, 230);
 }
 .create-task-add-tags-wrapper > input {
   width: fit-content;
@@ -224,7 +262,7 @@
 }
 
 .create-task-tag-wrapper {
-  background-color: #075db9;
+  background-color: #1f2d39;
   padding: 5px;
   margin: 2px;
   display: inline-block;
@@ -236,12 +274,6 @@
 }
 .margin-top-20px {
   margin-top: 20px;
-}
-
-.create-task-top-sub-wrapper {
-  overflow-y: auto;
-  padding-right: 10px;
-  height: 500px;
 }
 
 .create-task-start-date-picker {
@@ -270,10 +302,14 @@
   align-items: center;
   margin-top: 20px;
 }
+.border-light-dark {
+  border: 1.5px solid rgb(58, 62, 72) !important;
+}
 .create-task-select-start-date-wrapper > p {
-  color: #d4d4d4;
+  color: #aab8c2;
   margin-right: 10px;
-  font-size: 15px;
+  font-size: 14px;
+  font-weight: 500;
 }
 .date-picker-start-date:focus-within {
   outline: 2px solid rgb(0, 123, 255);

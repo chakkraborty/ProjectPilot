@@ -1,10 +1,36 @@
 import React from "react";
 import "./NavbarSettingsDropdown.css";
-
+import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import LoadingPage from "./LoadingPage";
+import { useState } from "react";
 const NavbarSettingsDropdown = () => {
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  function toProjects() {
+    navigate("/home");
+  }
+  const name = localStorage.getItem("name");
+  const email = localStorage.getItem("email");
+
   return (
     <div className="navbar-settings-dropdown-wrapper">
-      <div className="navbar-settings-dropdown-item-wrapper">
+      {loading ? <LoadingPage /> : <></>}
+      <p className="navbar-settings-dropdown-account-title">ACCOUNT</p>
+      <div className="navbar-settings-details-wrapper">
+        <div className="navbar-settings-details-left">
+          {name[0].toUpperCase()}
+        </div>
+        <div className="navbar-settings-details-right">
+          <p className="navbar-settings-details-name">{name}</p>
+          <p className="navbar-settings-details-email">{email}</p>
+        </div>
+      </div>
+
+      <div
+        className="navbar-settings-dropdown-item-wrapper"
+        onClick={() => toProjects()}
+      >
         <div className="navbar-settings-dropdown-icon">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -19,41 +45,16 @@ const NavbarSettingsDropdown = () => {
         </div>
         <div className="navbar-setting-dropdown-items-text">Projects</div>
       </div>
-      <div className="navbar-settings-dropdown-item-wrapper">
-        <div className="navbar-settings-dropdown-icon">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            fill="currentColor"
-            class="bi bi-diagram-2"
-            viewBox="0 0 16 16"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M6 3.5A1.5 1.5 0 0 1 7.5 2h1A1.5 1.5 0 0 1 10 3.5v1A1.5 1.5 0 0 1 8.5 6v1H11a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0v-1A.5.5 0 0 1 5 7h2.5V6A1.5 1.5 0 0 1 6 4.5v-1zM8.5 5a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1zM3 11.5A1.5 1.5 0 0 1 4.5 10h1A1.5 1.5 0 0 1 7 11.5v1A1.5 1.5 0 0 1 5.5 14h-1A1.5 1.5 0 0 1 3 12.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm4.5.5a1.5 1.5 0 0 1 1.5-1.5h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1A1.5 1.5 0 0 1 9 12.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1z"
-            />
-          </svg>
-        </div>
-        <div className="navbar-setting-dropdown-items-text">Groups</div>
-      </div>
-      <div className="navbar-settings-dropdown-item-wrapper">
-        <div className="navbar-settings-dropdown-icon">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            fill="currentColor"
-            class="bi bi-chat-left-dots"
-            viewBox="0 0 16 16"
-          >
-            <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
-            <path d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
-          </svg>
-        </div>
-        <div className="navbar-setting-dropdown-items-text">Messages</div>
-      </div>
-      <div className="navbar-settings-dropdown-item-wrapper">
+
+      <div
+        className="navbar-settings-dropdown-item-wrapper"
+        onClick={() => {
+          setLoading(true);
+
+          localStorage.removeItem("_id");
+          navigate("/");
+        }}
+      >
         <div className="navbar-settings-dropdown-icon">
           <svg
             xmlns="http://www.w3.org/2000/svg"

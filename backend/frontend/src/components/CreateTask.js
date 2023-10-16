@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import DatePicker from "react-datepicker";
+import CircularProgress from "@mui/material/CircularProgress";
 import "react-datepicker/dist/react-datepicker.css";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -19,6 +20,8 @@ import StatusSelector from "./StatusSelector";
 // import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 // import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 const CreateTask = ({ onClose, onOpen, fetchTasks }) => {
+  const [loader, setLoader] = useState(false);
+
   const [status, setStatus] = React.useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -90,31 +93,38 @@ const CreateTask = ({ onClose, onOpen, fetchTasks }) => {
   };
 
   async function addTaskHandler() {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-    let createdById = await localStorage.getItem("_id");
-    let a = await axios.post(
-      "/api/createTask",
-      {
-        projectId,
-        status,
-        description: description,
-        createdById,
-        title,
-        tags: arr,
-        startDate: selectedStartDate,
-        dueDate: selectedDueDate,
-      },
-      config
-    );
-    if (a) {
-      fetchTasks();
-      onClose();
-    } else {
-      return;
+    try {
+      setLoader(true);
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      let createdById = await localStorage.getItem("_id");
+      let a = await axios.post(
+        "/api/createTask",
+        {
+          projectId,
+          status,
+          description: description,
+          createdById,
+          title,
+          tags: arr,
+          startDate: selectedStartDate,
+          dueDate: selectedDueDate,
+        },
+        config
+      );
+      if (a) {
+        fetchTasks();
+        onClose();
+      } else {
+        return;
+      }
+    } catch (error) {
+      console.log(error);
+      setLoader(false);
     }
   }
 
@@ -130,25 +140,6 @@ const CreateTask = ({ onClose, onOpen, fetchTasks }) => {
       <div className="modal-content-1">
         <div className="create-task-top-half">
           <div className="create-task-title font-weight-600 font-size-30px">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="30"
-              height="30"
-              fill="currentColor"
-              class="bi bi-list-task"
-              viewBox="0 0 16 16"
-              className="create-task-task-icon"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M2 2.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V3a.5.5 0 0 0-.5-.5H2zM3 3H2v1h1V3z"
-              />
-              <path d="M5 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM5.5 7a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 4a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9z" />
-              <path
-                fill-rule="evenodd"
-                d="M1.5 7a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5V7zM2 7h1v1H2V7zm0 3.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5H2zm1 .5H2v1h1v-1z"
-              />
-            </svg>
             <>Create a task </>
           </div>
 
@@ -170,47 +161,10 @@ const CreateTask = ({ onClose, onOpen, fetchTasks }) => {
                 onChange={(e) => setDescription(e.target.value)}
               ></textarea>
             </div>
-            {/* <ReactQuill
-              value={htmlContent}
-              onChange={handleText}
-              className="margin-top-10px quill-editor-wrap"
-            /> */}
+
             <div className="create-task-status-dropdown-wrapper">
-              {/* <p
-            className="create-task-status margin-top-10px padding-top-20px"
-            onClick={print}
-          >
-            Status
-          </p> */}
               <p>Status</p>
               <StatusSelector statusHandler={statusHandler} />
-              {/* <FormControl
-            sx={{ marginLeft: 8, minWidth: 80, height: 20 }}
-            className="status-dropdown create-task-status"
-          >
-            <InputLabel id="demo-simple-select-autowidth-label">
-              Status
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-autowidth-label"
-              id="demo-simple-select-autowidth"
-              value={status}
-              onChange={handleChange}
-              autoWidth
-              label="Age"
-              className="create-task-status"
-            >
-              <MenuItem value={"todo"}>
-                <p className="text-color-dark-grey">Todo</p>
-              </MenuItem>
-              <MenuItem value={"inprogress"}>
-                <p className="text-color-dark-grey">In progress</p>
-              </MenuItem>
-              <MenuItem value={"done"}>
-                <p className="text-color-dark-grey">Done</p>
-              </MenuItem>
-            </Select>
-          </FormControl> */}
             </div>
             <p className="margin-top-10px create-task-attach-file">
               Attach file
@@ -256,22 +210,12 @@ const CreateTask = ({ onClose, onOpen, fetchTasks }) => {
               <p onClick={() => printer()}>Start Date :</p>
             </div>
             <div className="display-flex align-items-center margin-top-5px">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="15"
-                height="15"
-                fill="#d4d4d4"
-                class="bi bi-calendar"
-                viewBox="0 0 16 16"
-              >
-                <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
-              </svg>
               <DatePicker
                 selected={selectedStartDate}
                 onChange={handleStartDateChange}
                 dateFormat="yyyy/MM/dd"
-                placeholderText="Select a date"
-                className="date-picker-start-date margin-left-10px"
+                placeholderText="None"
+                className="date-picker-start-date-description border-light-dark margin-left-2px bg-color-22272b"
               />
             </div>
 
@@ -279,23 +223,12 @@ const CreateTask = ({ onClose, onOpen, fetchTasks }) => {
               <p>Due Date :</p>
             </div>
             <div className="display-flex align-items-center margin-top-5px margin-bottom-10px">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="15"
-                height="15"
-                fill="#d4d4d4"
-                class="bi bi-calendar"
-                viewBox="0 0 16 16"
-              >
-                <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
-              </svg>
-
               <DatePicker
                 selected={selectedDueDate}
                 onChange={handleDueDateChange}
                 dateFormat="yyyy/MM/dd"
-                placeholderText="Select a date"
-                className="date-picker-start-date margin-left-10px"
+                placeholderText="None"
+                className="date-picker-start-date-description border-light-dark margin-left-2px bg-color-22272b"
               />
             </div>
           </div>
@@ -303,6 +236,11 @@ const CreateTask = ({ onClose, onOpen, fetchTasks }) => {
 
         <div className="display-flex margin-top-20px">
           <div className="create-button" onClick={addTaskHandler}>
+            {loader ? (
+              <CircularProgress size={20} className="create-task-loader" />
+            ) : (
+              <></>
+            )}
             Create Task
           </div>
           <div className="close-button" onClick={onClose}>

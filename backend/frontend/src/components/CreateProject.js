@@ -41,9 +41,6 @@ const CreateProject = ({ isOpen, onClose, fetchProjects }) => {
   return (
     <div className="modal-overlay">
       <div className="modal">
-        <button className="modal-close" onClick={onClose}>
-          &times;
-        </button>
         <p className="create-project-title">Create project</p>
         <p className="create-project-upper-title">
           Explore what's possible when you collaborate with your team. Edit

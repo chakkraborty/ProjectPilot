@@ -1,9 +1,32 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import ProjectImage from "./renderlogo.jpg";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
 const ProjectLeftPanel = ({ type }) => {
   let { projectId } = useParams();
   const navigate = useNavigate();
+  const [category, setCategory] = useState("Software");
+  const [title, setTitle] = useState("The Terminal List");
+
+  async function fetchProjectDetails() {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      let a = await axios.post("/api/getProjectDetails", { projectId }, config);
+      setTitle(a.data.name);
+      if (a.data.category) {
+        setCategory(a.data.category);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   function navigateToHome() {
     navigate("/home");
   }
@@ -13,16 +36,33 @@ const ProjectLeftPanel = ({ type }) => {
   }
 
   function navigateToTimeline() {
-    navigate(`/timeline/${projectId}`);
+    navigate(`/test/${projectId}`);
   }
 
   function navigateToSettings() {
     navigate(`/project/settings/${projectId}`);
   }
 
+  useEffect(() => {
+    fetchProjectDetails();
+  }, []);
+
   return (
     <div className="project-page-left-panel">
       <div>
+        <div className="display-flex project-left-panel-project-info-top-wrapper">
+          <img
+            src={ProjectImage}
+            className="project-left-panel-project-image"
+          />
+          <div className="project-left-panel-project-info-wrapper">
+            <div className="project-left-panel-project-title">{title}</div>
+            <div className="project-left-panel-project-type">
+              {category + " project"}
+            </div>
+          </div>
+        </div>
+
         <div
           className="display-flex project-left-panel-items-wrapper"
           onClick={() => navigateToHome()}
@@ -31,7 +71,7 @@ const ProjectLeftPanel = ({ type }) => {
             xmlns="http://www.w3.org/2000/svg"
             width="20"
             height="20"
-            fill="currentColor"
+            fill="#aab8c2"
             class="bi bi-grid-3x3-gap-fill"
             viewBox="0 0 16 16"
           >
@@ -52,7 +92,7 @@ const ProjectLeftPanel = ({ type }) => {
             xmlns="http://www.w3.org/2000/svg"
             width="20"
             height="20"
-            fill={type === 2 ? "#548dca" : "#d4d4d4"}
+            fill={type === 2 ? "#548dca" : "#aab8c2"}
             class="bi bi-kanban-fill"
             viewBox="0 0 16 16"
             className={type === 2 ? "left-panel-icon-hightlight" : ""}
@@ -62,14 +102,18 @@ const ProjectLeftPanel = ({ type }) => {
           <p>Kanban Board</p>
         </div>
         <div
-          className="display-flex project-left-panel-items-wrapper"
+          className={
+            type === 3
+              ? "display-flex project-left-panel-items-wrapper left-panel-bg-highlight"
+              : "display-flex project-left-panel-items-wrapper"
+          }
           onClick={() => navigateToTimeline()}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"
             height="20"
-            fill="currentColor"
+            fill={type === 3 ? "#548dca" : "#aab8c2"}
             class="bi bi-diagram-2"
             viewBox="0 0 16 16"
           >
@@ -93,7 +137,7 @@ const ProjectLeftPanel = ({ type }) => {
             xmlns="http://www.w3.org/2000/svg"
             width="20"
             height="20"
-            fill={type === 4 ? "#548dca" : "#d4d4d4"}
+            fill={type === 4 ? "#548dca" : "#aab8c2"}
             class="bi bi-gear"
             viewBox="0 0 16 16"
           >
@@ -107,7 +151,7 @@ const ProjectLeftPanel = ({ type }) => {
             xmlns="http://www.w3.org/2000/svg"
             width="20"
             height="20"
-            fill="currentColor"
+            fill="#aab8c2"
             class="bi bi-box-arrow-left"
             viewBox="0 0 16 16"
           >
@@ -128,7 +172,7 @@ const ProjectLeftPanel = ({ type }) => {
             xmlns="http://www.w3.org/2000/svg"
             width="20"
             height="20"
-            fill="currentColor"
+            fill="#aab8c2"
             class="bi bi-github"
             viewBox="0 0 16 16"
           >

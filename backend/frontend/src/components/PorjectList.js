@@ -82,7 +82,7 @@ const PorjectList = () => {
 
   return (
     <div className="project-list-container">
-      <div className="project-list-title">Your Projects</div>
+      <div className="project-list-title">Projects</div>
       <div className="project-list-top-wrapper">
         <div className="project-list-search-wrapper">
           <input
@@ -96,7 +96,7 @@ const PorjectList = () => {
           <SearchIcon className="search-icon" sx={{ fontSize: 20 }} />
         </div>
         <div className="add-project-button" onClick={onOpen}>
-          Add project
+          Create Project
         </div>
       </div>
 

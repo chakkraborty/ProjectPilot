@@ -88,6 +88,8 @@ const Description = ({ taskId }) => {
   }
 
   async function updateTagsDescription() {
+    setUpdateTag(0);
+
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -392,55 +394,55 @@ const Description = ({ taskId }) => {
 
         <div className="description-select-start-date-wrapper">
           <p className="description-date-title" onClick={() => print()}>
-            Start Date :
+            Start date
           </p>
         </div>
         <div className="display-flex align-items-center margin-top-5px margin-left-20px">
-          <svg
+          {/* <svg
             xmlns="http://www.w3.org/2000/svg"
             width="15"
             height="15"
-            fill="#d4d4d4"
+            fill="#9fadb0"
             class="bi bi-calendar"
             viewBox="0 0 16 16"
           >
             <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
-          </svg>
+          </svg> */}
           <DatePicker
             selected={selectedStartDate}
             onChange={handleStartDateChange}
             dateFormat="yyyy/MM/dd"
-            placeholderText="Select a date"
-            className="date-picker-start-date margin-left-10px"
+            placeholderText="None"
+            className="date-picker-start-date-description"
           />
         </div>
 
         <div className="description-select-start-date-wrapper">
-          <p className="description-date-title">Due Date :</p>
+          <p className="description-date-title">Due date</p>
         </div>
-        <div className="display-flex align-items-center margin-top-5px margin-bottom-10px margin-left-20px">
-          <svg
+        <div className="display-flex align-items-center margin-top-5px margin-bottom-10px margin-left-10px">
+          {/* <svg
             xmlns="http://www.w3.org/2000/svg"
             width="15"
             height="15"
-            fill="#d4d4d4"
+            fill="#9fadb0"
             class="bi bi-calendar"
             viewBox="0 0 16 16"
           >
             <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
-          </svg>
+          </svg> */}
 
           <DatePicker
             selected={selectedDueDate}
             onChange={handleDueDateChange}
             dateFormat="yyyy/MM/dd"
-            placeholderText="Select a date"
-            className="date-picker-start-date margin-left-10px"
+            placeholderText="None"
+            className="date-picker-start-date-description"
           />
         </div>
 
         <div className="margin-left-20px margin-top-15px task-page-tags-title">
-          Tags :
+          Tags
         </div>
         {updateTag ? (
           <></>
@@ -466,7 +468,7 @@ const Description = ({ taskId }) => {
                 <div className="description-tags-item display-flex description-tags-item-wrapper">
                   <p className="description-tags-items">{p}</p>
                   <CancelIcon
-                    sx={{ fontSize: 15 }}
+                    sx={{ fontSize: 10 }}
                     className="tags-cancel-icon"
                     onClick={() => removeTag(p)}
                   />

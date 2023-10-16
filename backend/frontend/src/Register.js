@@ -6,7 +6,16 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Alert from "@mui/material/Alert";
 import CircularProgress from "@mui/material/CircularProgress";
+import Logo5 from "./components/Logo5.png";
+import LoadingPage from "./components/LoadingPage";
+
 const Register = () => {
+  let currId = localStorage.getItem("_id");
+  if (currId) {
+    navigate("home");
+  }
+
+  const [loaderScreen, setLoaderScreen] = useState(false);
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -62,11 +71,15 @@ const Register = () => {
 
   useEffect(() => {
     let a = localStorage.getItem("_id");
-    if (a) navigate("/login");
+    if (a) {
+      setLoaderScreen(true);
+      navigate("/home");
+    }
   }, []);
 
   return (
     <div className="register-wrapper">
+      {loaderScreen ? <LoadingPage /> : <></>}
       {!error ? (
         <Alert severity="error" className="error hidden" variant="filled">
           This is an error alert — check it out!
@@ -77,10 +90,7 @@ const Register = () => {
         </Alert>
       )}
 
-      <GroupWorkIcon
-        className="landingIcon register-page-icon"
-        sx={{ fontSize: 60 }}
-      />
+      <img src={Logo5} className="register-page-logo" />
       <p className="register-title">Create your account </p>
       <input
         className="register-input"
@@ -109,13 +119,13 @@ const Register = () => {
         {loading ? <CircularProgress size={25} /> : <p>Register</p>}
       </div>
 
-      <p className="register-page-link">
+      <p className="register-page-link color-c5cfd6">
         Already have an account ?{" "}
         <span className="register-page-text" onClick={linkToLogin}>
           Log in
         </span>
       </p>
-      <p className="register-page-text-wrapper">
+      <p className="register-page-text-wrapper color-c5cfd6">
         By registering in you accept our
         <span className="register-page-text">Privacy Policy</span>
         and <span className="register-page-text">Terms of Service</span>.

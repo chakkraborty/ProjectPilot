@@ -33,8 +33,8 @@
 
 .create-project-input-field {
   background-color: #22272b;
-  border: 1px solid rgb(56, 74, 105);
-  height: 30px;
+  border: 1.5px solid rgb(53, 57, 63);
+  height: 35px;
   width: 100%;
   padding: 3px;
   color: #e3e3e3;
@@ -42,36 +42,39 @@
 }
 
 .create-project-input-field:focus {
-  outline: 2px solid #85b8ff;
+  border: 1.5px solid #85b8ff;
+  outline: none;
 }
 
 .create-project-title {
-  color: #d4d4d4;
+  color: #aab8c2;
+  font-size: 22px;
+  font-weight: 400;
 }
 .create-project-upper-title {
-  color: #d4d4d4;
-  font-size: 14px;
+  color: #aab8c2;
+  font-size: 13px;
   margin-top: 5px;
   font-weight: 400;
 }
 
 .create-project-name {
-  color: #d4d4d4;
-  font-size: 17px;
+  color: #aab8c2;
+  font-size: 14px;
   margin-top: 10px;
 }
 .create-project-name-star {
-  color: rgb(188, 0, 0);
+  color: rgb(255, 60, 0);
   font-size: 18px;
 }
 .create-project-lower-text {
-  color: #d4d4d4;
+  color: #aab8c2;
   font-size: 14px;
   margin-top: 10px;
   font-weight: 400;
 }
 .bold-text {
-  color: #d4d4d4;
+  color: #d1cdc7;
   font-weight: 700;
 }
 
@@ -87,11 +90,11 @@
 }
 .create-project-create-button:hover {
   cursor: pointer;
-  background-color: rgb(57, 57, 253);
+  background-color: rgb(80, 159, 248);
 }
 .create-project-cancel-button {
   border-radius: 2px;
-  color: #ececec;
+  color: #d1d1d1;
   border-radius: 2px;
   padding: 4px;
   font-size: 14px;

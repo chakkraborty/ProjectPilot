@@ -5,14 +5,14 @@
 }
 
 .project-settings-lower-wrapper {
-  width: 90%;
+  width: 100%;
   margin: auto;
   height: 100%;
   display: flex;
 }
 .project-settings-right-panel {
   width: 70%;
-  margin-left: 20px;
+  margin-left: 0px;
   overflow-y: auto;
 }
 .width-95-percent {

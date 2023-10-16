@@ -4,24 +4,62 @@
   box-shadow: 0px 3px 10px #000000;
   padding-bottom: 15px;
   padding-top: 5px;
-  width: 170px;
+  width: 250px;
   border-radius: 3px;
   position: absolute;
   right: 10px;
   z-index: 20;
 }
+.navbar-settings-details-name {
+  font-size: 14px;
+  color: #d5e0f4;
+}
+.navbar-settings-details-email {
+  font-size: 12.5px;
+  color: rgb(103, 162, 229);
+}
+.navbar-settings-details-wrapper {
+  display: flex;
+  margin-top: 10px;
+  padding-left: 5px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid #3c464e;
+  margin-bottom: 5px;
+}
+.navbar-settings-details-left {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background-color: #0052cc;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  margin-right: 5px;
+  margin-left: 5px;
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+}
 .navbar-settings-dropdown-icon {
   display: none;
+}
+.navbar-settings-dropdown-account-title {
+  font-size: 12px;
+  font-weight: 500;
+  color: #99a6b4;
+  margin-left: 10px;
+  margin-top: 10px;
+  margin-bottom: 15px;
 }
 .navbar-settings-dropdown-item-wrapper {
   display: flex;
   align-items: center;
-
-  padding: 5px;
+  height: 40px;
+  padding-left: 5px;
 }
 .navbar-setting-dropdown-items-text {
   font-size: 14px;
-  color: #d4d4d4;
+  color: #b6c2cf;
   margin-left: 10px;
 }
 .navbar-settings-dropdown-item-wrapper:hover {

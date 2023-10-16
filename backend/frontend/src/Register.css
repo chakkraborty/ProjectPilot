@@ -5,44 +5,56 @@
   justify-content: center;
   height: 100vh;
   text-align: center;
+  background-color: #1d2125;
+}
+.register-page-logo {
+  width: 40px;
+  position: absolute;
+  top: 0;
+  margin-top: 20px;
 }
 .register-input {
   margin-top: 12px;
-  height: 40px;
+  height: 35px;
   padding: 10px;
   min-width: 300px;
-  font-size: 17px;
-  background-color: rgb(76, 76, 76);
+  font-size: 14px;
+  background-color: #22272b;
   border-radius: 2px;
   box-shadow: none;
   border: none;
-  outline: 1px solid rgb(121, 121, 121);
+  outline: 2px solid rgb(48, 49, 53);
 }
 .register-input:focus {
-  outline: 1px solid rgb(10, 165, 255);
+  outline: 2px solid rgb(109, 173, 230);
 }
 .register-page-icon {
   margin-bottom: 20px;
 }
 .register-title {
-  font-family: monospace;
-  font-size: 28px;
-  font-weight: 800;
+  font-size: 32px;
+  font-weight: 500;
   margin-bottom: 10px;
+  color: #aab8c2;
+}
+.register-button > p {
+  color: #fafafa;
 }
 .register-button {
   min-width: 300px;
   margin-top: 10px;
-  background-color: rgb(10, 165, 255);
+  background-color: rgb(0, 119, 255);
 
   height: 40px;
   border-radius: 2px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-weight: 600;
+  font-weight: 500;
   margin-top: 20px;
+  color: #aab8c3;
 }
+
 .register-button:hover {
   cursor: pointer;
   background-color: rgb(0, 133, 210);
@@ -59,10 +71,13 @@
 .register-page-text-wrapper {
   max-width: 300px;
   margin-top: 15px;
+  font-size: 13px;
 }
 
 .register-page-link {
   margin-top: 10px;
+  font-size: #000000;
+  font-size: 13px;
 }
 
 .error {
@@ -73,4 +88,8 @@
 }
 .error {
   min-width: 300px;
+}
+
+.color-c5cfd6 {
+  color: #c5cfd6;
 }

@@ -46,8 +46,10 @@ app.post("/api/login", async (req, res) => {
   let { email, password } = req.body;
   const a = await User.findOne({ email });
   if (a) {
+    console.log(a);
+
     if (a.password === password)
-      res.status(201).json({ _id: a._id, name: a.name, email: a.email });
+      res.status(201).json({ _id: a._id, name: a.name, email });
     else res.status(401).json({ message: "Invalid credentials !" });
   } else {
     res.status(401).json({ message: "Invalid credentials !" });
@@ -111,7 +113,8 @@ app.post("/api/getMembers", async (req, res) => {
     let { projectId } = req.body;
 
     let a = await Project.findOne({ _id: projectId });
-    let b = a.list;
+    let b = [];
+    if (a) b = a.list;
     let ans = [];
     for (let i = 0; i < b.length; i++) {
       let currId = b[i];

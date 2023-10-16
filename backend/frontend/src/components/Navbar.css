@@ -3,7 +3,7 @@
 }
 .navbar-wrapper {
   background-color: #1d2125;
-  height: 50px !important;
+  min-height: 50px !important;
   width: 100%;
   color: black;
   display: flex;
@@ -184,13 +184,16 @@
   width: 100%;
 }
 .task-card-assigned-to {
-  background-color: rgb(46, 81, 255);
+  background-color: rgb(32, 100, 219);
   width: 23px;
   height: 23px;
   border-radius: 50%;
   align-items: center;
   justify-content: center;
   display: flex;
+  font-size: 12px;
+  font-weight: 500;
+  color: #d4d4d4;
 }
 .task-card-assigned-to-wrapper {
   max-width: fit-content;
