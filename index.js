@@ -48,9 +48,12 @@ app.post("/api/login", async (req, res) => {
   if (a) {
     console.log(a);
 
-    if (a.password === password)
-      res.status(201).json({ _id: a._id, name: a.name, email });
-    else res.status(401).json({ message: "Invalid credentials !" });
+    const isMatch = await a.matchPasswords(password);
+    if (isMatch) {
+      res.status(201).send({ name: a.name, email: a.email, _id: a._id });
+    } else {
+      res.status(404).send({ message: "Wrong password" });
+    }
   } else {
     res.status(401).json({ message: "Invalid credentials !" });
   }
@@ -61,19 +64,24 @@ app.post("/api/login", async (req, res) => {
 app.listen(PORT, console.log(`serving is running on PORT no. ${PORT}`));
 
 app.post("/api/register", async (req, res) => {
-  console.log(req.body);
-  let { name, email, password } = req.body;
+  try {
+    let { name, email, password } = req.body;
 
-  const a = await User.findOne({ email });
-  if (a) {
-    res.status(401).json({ message: "This email id is already in use !" });
-  } else {
-    const obj = await User.create({ name, email, password });
-    if (obj) {
-      res.status(201).json({ _id: obj._id, name: obj.name, email: obj.email });
+    const a = await User.findOne({ email });
+    if (a) {
+      res.status(401).json({ message: "This email id is already in use !" });
     } else {
-      res.status(201).json({ message: "An error occured !" });
+      const obj = await User.create({ name, email, password });
+      if (obj) {
+        res
+          .status(201)
+          .json({ _id: obj._id, name: obj.name, email: obj.email });
+      } else {
+        res.status(201).json({ message: "An error occured !" });
+      }
     }
+  } catch (error) {
+    console.log(error);
   }
 });
 

@@ -11,12 +11,13 @@ import LoadingPage from "./components/LoadingPage";
 
 const Register = () => {
   let currId = localStorage.getItem("_id");
+  const navigate = useNavigate();
   if (currId) {
-    navigate("home");
+    navigate("/home");
   }
 
   const [loaderScreen, setLoaderScreen] = useState(false);
-  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
