@@ -2,7 +2,7 @@ console.log("hello this is arnik");
 const dotenv = require("dotenv");
 const express = require("express");
 const app = express();
-
+const jwt = require("jsonwebtoken");
 app.use(express.json());
 const PORT = 5000;
 dotenv.config();
@@ -41,24 +41,30 @@ app.use((err, req, res, next) => {
     .status(statusCode)
     .json({ error: err.message || "Internal Server Error" });
 });
-app.post("/api/login", async (req, res) => {
+app.post("/api/login", async (req, res, next) => {
   console.log(req.body);
   let { email, password } = req.body;
   const a = await User.findOne({ email });
-  if (a) {
-    console.log(a);
 
+  if (a) {
     const isMatch = await a.matchPasswords(password);
     if (isMatch) {
-      res.status(201).send({ name: a.name, email: a.email, _id: a._id });
+      const token = jwt.sign(
+        { _id: a._id, name: a.name, email: a.email },
+        process.env.secret,
+        { expiresIn: process.env.time }
+      );
+      console.log("token is : " + token);
+      let decoded = jwt.verify(token, process.env.secret);
+      console.log(decoded);
+
+      res.status(201).send({ name: a.name, email: a.email, _id: a._id, token });
     } else {
-      res.status(404).send({ message: "Wrong password" });
+      res.status(404).send({ message: "Wrong password !" });
     }
   } else {
     res.status(401).json({ message: "Invalid credentials !" });
   }
-
-  //res.status(401).json({ message: "this is the message from the server" });
 });
 
 app.listen(PORT, console.log(`serving is running on PORT no. ${PORT}`));

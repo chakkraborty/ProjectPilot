@@ -1,0 +1,48 @@
+.sliding-div {
+  width: 200px;
+  height: 200px;
+  background-color: #3498db;
+  transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+  opacity: 0;
+  transform: translateX(-50px);
+}
+
+.sliding-div.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.toast-wrapper {
+  background-color: rgb(194, 0, 0);
+  position: absolute;
+  margin: auto;
+  top: 0;
+  margin-top: 10px;
+  z-index: 10;
+
+  width: 400px;
+  font-weight: 500;
+  font-size: 15px;
+  padding: 10px;
+  border-radius: 3px;
+  color: rgb(189, 189, 189);
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.toast-message-icon-wrapper {
+  margin-right: 20px;
+}
+
+.toast-message-right-wrappper {
+  display: flex;
+  flex-direction: column;
+}
+.toast-message-text {
+  font-weight: 500;
+  font-size: 15px;
+
+  color: #c6cfd4;
+}

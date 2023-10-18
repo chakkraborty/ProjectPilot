@@ -7,6 +7,7 @@ import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useEffect } from "react";
 import Logo5 from "./components/Logo5.png";
+import Toast from "./Toast";
 
 const Login = () => {
   const [error, setError] = useState(0);
@@ -46,6 +47,8 @@ const Login = () => {
         localStorage.setItem("name", a.data.name);
         localStorage.setItem("_id", a.data._id);
         localStorage.setItem("email", a.data.email);
+        localStorage.setItem("token", a.data.token);
+
         console.log(a.data);
         setLoading(0);
         navigate("/home");
@@ -66,15 +69,7 @@ const Login = () => {
 
   return (
     <div className="register-wrapper">
-      {!error ? (
-        <Alert severity="error" className="error hidden" variant="filled">
-          This is an error alert — check it out!
-        </Alert>
-      ) : (
-        <Alert severity="error" className="error" variant="filled">
-          {errorMessage}
-        </Alert>
-      )}
+      {!error ? <></> : <Toast message={errorMessage} />}
       <img src={Logo5} className="register-page-logo" />
       <p className="register-title">Welcome Back !</p>
 

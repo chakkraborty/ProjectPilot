@@ -8,16 +8,16 @@ import Alert from "@mui/material/Alert";
 import CircularProgress from "@mui/material/CircularProgress";
 import Logo5 from "./components/Logo5.png";
 import LoadingPage from "./components/LoadingPage";
+import Toast from "./Toast";
 
 const Register = () => {
   let currId = localStorage.getItem("_id");
-  const navigate = useNavigate();
   if (currId) {
     navigate("/home");
   }
 
   const [loaderScreen, setLoaderScreen] = useState(false);
-
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -41,6 +41,11 @@ const Register = () => {
 
   async function registerHandler() {
     try {
+      if (!password || !cnfpassword || !email || name) {
+        errorDisplay("Please fill up all the fields !");
+        return;
+      }
+
       if (password !== cnfpassword) {
         setErrorMessage("Passwords do not match !");
         errorDisplay("Passwords do not match !");
@@ -81,56 +86,51 @@ const Register = () => {
   return (
     <div className="register-wrapper">
       {loaderScreen ? <LoadingPage /> : <></>}
-      {!error ? (
-        <Alert severity="error" className="error hidden" variant="filled">
-          This is an error alert — check it out!
-        </Alert>
-      ) : (
-        <Alert severity="error" className="error" variant="filled">
-          {errorMessage}
-        </Alert>
-      )}
+      {!error ? <></> : <Toast message={errorMessage} />}
 
       <img src={Logo5} className="register-page-logo" />
-      <p className="register-title">Create your account </p>
-      <input
-        className="register-input"
-        placeholder="User name"
-        onChange={(e) => setName(e.target.value)}
-      />
-      <input
-        placeholder="Email"
-        className="register-input"
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        placeholder="Password"
-        type="password"
-        className="register-input"
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <input
-        placeholder="Confirm password"
-        type="password"
-        className="register-input"
-        onChange={(e) => setCnfPassword(e.target.value)}
-      />
 
-      <div className="register-button" onClick={registerHandler}>
-        {loading ? <CircularProgress size={25} /> : <p>Register</p>}
+      <div className="register-page-subwrapper">
+        <p className="register-title">Create your account </p>
+        <input
+          className="register-input"
+          placeholder="User name"
+          onChange={(e) => setName(e.target.value)}
+        />
+        <input
+          placeholder="Email"
+          className="register-input"
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          placeholder="Password"
+          type="password"
+          className="register-input"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <input
+          placeholder="Confirm password"
+          type="password"
+          className="register-input"
+          onChange={(e) => setCnfPassword(e.target.value)}
+        />
+
+        <div className="register-button" onClick={registerHandler}>
+          {loading ? <CircularProgress size={25} /> : <p>Register</p>}
+        </div>
+
+        <p className="register-page-link color-c5cfd6">
+          Already have an account ?{" "}
+          <span className="register-page-text" onClick={linkToLogin}>
+            Log in
+          </span>
+        </p>
+        <p className="register-page-text-wrapper color-c5cfd6">
+          By registering in you accept our
+          <span className="register-page-text">Privacy Policy</span>
+          and <span className="register-page-text">Terms of Service</span>.
+        </p>
       </div>
-
-      <p className="register-page-link color-c5cfd6">
-        Already have an account ?{" "}
-        <span className="register-page-text" onClick={linkToLogin}>
-          Log in
-        </span>
-      </p>
-      <p className="register-page-text-wrapper color-c5cfd6">
-        By registering in you accept our
-        <span className="register-page-text">Privacy Policy</span>
-        and <span className="register-page-text">Terms of Service</span>.
-      </p>
     </div>
   );
 };

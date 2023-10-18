@@ -93,3 +93,8 @@
 .color-c5cfd6 {
   color: #c5cfd6;
 }
+
+.register-page-subwrapper {
+  display: flex;
+  flex-direction: column;
+}
