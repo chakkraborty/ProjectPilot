@@ -69,7 +69,7 @@ const Login = () => {
 
   useEffect(() => {
     setToken(localStorage.getItem("token"));
-    if (localStorage.getItem("token")) {
+    if (localStorage.getItem("_id")) {
       navigate("/home");
     }
     console.log(token);
@@ -77,7 +77,7 @@ const Login = () => {
 
   return (
     <>
-      {localStorage.getItem("token") ? (
+      {localStorage.getItem("_id") ? (
         <LoadingPage />
       ) : (
         <div className="register-wrapper">

@@ -7,7 +7,7 @@ app.use(express.json());
 const PORT = 5000;
 dotenv.config();
 const mongoose = require("mongoose");
-
+const protect = require("./middlewares/protect");
 const User = require("./backend/models/UserSchema");
 const Project = require("./backend/models/ProjectSchema");
 const Task = require("./backend/models/TaskSchema");
@@ -105,7 +105,7 @@ app.post("/api/createProject", async (req, res) => {
 
 // fetch all projects that the current user is participating in
 
-app.post("/api/getProjects", async (req, res) => {
+app.post("/api/getProjects", protect, async (req, res) => {
   let { userId } = req.body;
   console.log(userId);
 

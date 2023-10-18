@@ -36,7 +36,11 @@ const PorjectList = () => {
       let userId = await localStorage.getItem("_id");
       console.log(userId);
 
-      let a = await axios.post("/api/getProjects", { userId }, config);
+      let a = await axios.post(
+        "/api/getProjects",
+        { userId, token: localStorage.getItem("token") },
+        config
+      );
       if (a.data) {
         // console.log(a.data);
         setData([...a.data]);
