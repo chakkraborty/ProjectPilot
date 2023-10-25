@@ -41,7 +41,7 @@ const Register = () => {
 
   async function registerHandler() {
     try {
-      if (!password || !cnfpassword || !email || name) {
+      if (!password || !cnfpassword || !email || !name) {
         errorDisplay("Please fill up all the fields !");
         return;
       }
