@@ -1,0 +1,22 @@
+.members-skeletal-circle {
+  width: 33px;
+  height: 33px;
+  background-color: rgb(106, 110, 115);
+  border-radius: 50%;
+  margin-left: -8px;
+  animation: colorChange 1s infinite alternate; /* Stretch and color change animation */
+}
+.members-skeletal-wrapper {
+  display: flex;
+  margin-left: 20px;
+}
+
+@keyframes colorChange {
+  0% {
+    background-color: rgb(106, 110, 115);
+  }
+
+  100% {
+    background-color: #4b4c4f; /* Change to your desired color */
+  }
+}
