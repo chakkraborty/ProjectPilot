@@ -1,0 +1,23 @@
+.kanban-skeletal-wrapper {
+  width: 260px;
+  height: 100%;
+  background-color: rgb(106, 110, 115);
+  border-radius: 5px;
+  margin-right: 5px;
+  animation: colorChange 1s infinite alternate;
+}
+
+@keyframes colorChange {
+  0% {
+    background-color: rgb(106, 110, 115);
+  }
+
+  100% {
+    background-color: #4b4c4f; /* Change to your desired color */
+  }
+}
+
+.kanban-skeletal-top-wrapper {
+  flex: 1;
+  height: 460px;
+}
