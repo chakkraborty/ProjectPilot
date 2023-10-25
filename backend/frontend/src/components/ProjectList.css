@@ -219,3 +219,7 @@
     width: 25% !important;
   }
 }
+
+.project-list-content {
+  border-bottom: 1px solid rgb(127, 127, 127);
+}

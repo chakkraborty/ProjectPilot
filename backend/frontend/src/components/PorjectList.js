@@ -2,6 +2,8 @@ import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import CreateProject from "./CreateProject";
 import { useState, useEffect } from "react";
+import ProjectListSkeletal from "../skeletal/projectSettingsSkeletal.js";
+
 import axios from "axios";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
@@ -14,6 +16,7 @@ import Pagination from "./Pagination";
 const PorjectList = () => {
   const [open, setOpen] = useState(false);
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
   function projectRouting(projId) {
@@ -41,12 +44,18 @@ const PorjectList = () => {
         { userId, token: localStorage.getItem("token") },
         config
       );
+
       if (a.data) {
         // console.log(a.data);
         setData([...a.data]);
+        setLoading(false);
+      }
+      if (a) {
+        setLoading(false);
       }
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   }
 
@@ -117,25 +126,33 @@ const PorjectList = () => {
         <div className="col3 text-color-1">Lead</div>
         <div className="col4 text-color-1">Due</div>
       </div>
-      {data.map((p) => (
-        <div className="project-list-content">
-          <div
-            className="col1 project-name-list text-color-blue"
-            onClick={() => projectRouting(p._id)}
-          >
-            {p.name}
-          </div>
-          <div className="col2">Team Managed</div>
-          <div className="flex-jus-align col3 ">
-            {/* <Avatar sx={{ bgcolor: deepOrange[500] }}>
+
+      {loading ? (
+        <ProjectListSkeletal />
+      ) : (
+        <div className="project-list-content-wrapper">
+          {data.map((p) => (
+            <div className="project-list-content">
+              <div
+                className="col1 project-name-list text-color-blue"
+                onClick={() => projectRouting(p._id)}
+              >
+                {p.name}
+              </div>
+              <div className="col2">Team Managed</div>
+              <div className="flex-jus-align col3 ">
+                {/* <Avatar sx={{ bgcolor: deepOrange[500] }}>
               {p.leadName[0].toUpperCase()}
             </Avatar> */}
-            <div className="circle">{p.leadName[0].toUpperCase()}</div>
-            <div className="project-list-lead-name">{p.leadName}</div>
-          </div>
-          <div className="col4">--</div>
+                <div className="circle">{p.leadName[0].toUpperCase()}</div>
+                <div className="project-list-lead-name">{p.leadName}</div>
+              </div>
+              <div className="col4">--</div>
+            </div>
+          ))}
         </div>
-      ))}
+      )}
+
       <Pagination />
     </div>
   );

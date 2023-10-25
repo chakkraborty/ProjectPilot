@@ -1,7 +1,7 @@
 import React from "react";
 import "./ProjectSettings.css";
 import TableX from "./TableX";
-
+import ProjectSettingsSkeletal from "../skeletal/projectSettingsSkeletal";
 import CircularProgress from "@mui/material/CircularProgress";
 import ProjectLeftPanel from "./ProjectLeftPanel";
 import Navbar from "./Navbar.js";

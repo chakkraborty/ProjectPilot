@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import AddPeople from "./AddPeople";
 import axios from "axios";
+import ProjectSettingsSkeletal from "../skeletal/projectSettingsSkeletal";
+
 const MembersList = () => {
   let { projectId } = useParams();
   const [addPeopleState, setAddPeopleState] = useState(false);
@@ -102,25 +104,30 @@ const MembersList = () => {
             Action
           </div>
         </div>
-        <div className="members-list-table-items-wrapper">
-          {members.map((p) => (
-            <div className="members-list-table-item">
-              <div className="members-list-table-col-1 members-list-name-wrapper">
-                <div className="members-list-table-icon">
-                  {p.name[0].toUpperCase()}
+        {!members.length ? (
+          <ProjectSettingsSkeletal />
+        ) : (
+          <div className="members-list-table-items-wrapper">
+            {members.map((p) => (
+              <div className="members-list-table-item">
+                <div className="members-list-table-col-1 members-list-name-wrapper">
+                  <div className="members-list-table-icon">
+                    {p.name[0].toUpperCase()}
+                  </div>
+                  <p>{p.name}</p>
                 </div>
-                <p>{p.name}</p>
+                <div className="members-list-table-col-2">{p.email}</div>
+                <div
+                  className="members-list-table-col-3 members-list-item-remove-col"
+                  onClick={() => deleteMember(p.email)}
+                >
+                  <p>Remove</p>
+                </div>
               </div>
-              <div className="members-list-table-col-2">{p.email}</div>
-              <div
-                className="members-list-table-col-3 members-list-item-remove-col"
-                onClick={() => deleteMember(p.email)}
-              >
-                <p>Remove</p>
-              </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
+
         {addPeopleState ? (
           <AddPeople
             projectId={projectId}
