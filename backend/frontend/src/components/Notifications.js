@@ -5,8 +5,10 @@ import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import EmailIcon from "./EmailIcon";
 import Box from "./box.png";
 import axios from "axios";
+import NotificationSkeletal from "../skeletal/notificationSkeletal";
 const Notifications = () => {
   const ll = "(@arnikchakraborty2001@gmad.com)";
+  const [loading, setLoading] = useState(true);
 
   const [p, setP] = useState([]);
 
@@ -20,7 +22,7 @@ const Notifications = () => {
         },
       };
       let a = await axios.post("/api/acceptInvitation", { notifId }, config);
-      fetchNotifications();
+      if (a) fetchNotifications();
     } catch (error) {
       console.log(error);
     }
@@ -38,10 +40,12 @@ const Notifications = () => {
       let a = await axios.post("/api/getNotifications", { userId }, config);
       if (a.data) {
         setP([...a.data]);
+        setLoading(false);
       }
       console.log(p);
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   }
 
@@ -60,124 +64,49 @@ const Notifications = () => {
         <p className="notifications-title color-off-white" onClick={testFunc}>
           Notifications
         </p>
-
-        <div className="notifications-overflow-wrapper">
-          {p.map((notif) => (
-            <div className="notifications-item-wrapper">
-              <div className="notifications-sender-details-wrapper">
-                <div className="notifications-sender-icon">A</div>
-                <p className="notifications-top-content">{notif.fromName}</p>
-              </div>
-              <div className="notifications-email-span">{notif.fromEmail}</div>
-
-              <p className="notifications-invited">
-                Invited you to join a project.
-              </p>
-              <p className="notification-proect-join">
-                Join{" "}
-                <span className="notification-project-name">
-                  {notif.projectName}
-                </span>{" "}
-                ?
-              </p>
-              <div className="notifications-lower-wrapper">
-                <div
-                  className="notifications-accept-button"
-                  onClick={() => acceptInvitation(notif._id)}
-                >
-                  Accept
+        {loading ? (
+          <NotificationSkeletal />
+        ) : (
+          <div className="notifications-overflow-wrapper">
+            {p.map((notif) => (
+              <div className="notifications-item-wrapper">
+                <div className="notifications-sender-details-wrapper">
+                  <div className="notifications-sender-icon">A</div>
+                  <p className="notifications-top-content">{notif.fromName}</p>
                 </div>
-                <div className="notifications-cancel-button">Cancel</div>
+                <div className="notifications-email-span">
+                  {notif.fromEmail}
+                </div>
+
+                <p className="notifications-invited">
+                  Invited you to join a project.
+                </p>
+                <p className="notification-proect-join">
+                  Join{" "}
+                  <span className="notification-project-name">
+                    {notif.projectName}
+                  </span>{" "}
+                  ?
+                </p>
+                <div className="notifications-lower-wrapper">
+                  <div
+                    className="notifications-accept-button"
+                    onClick={() => acceptInvitation(notif._id)}
+                  >
+                    Accept
+                  </div>
+                  <div className="notifications-cancel-button">Cancel</div>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
 
-          {/* <div className="notifications-item-wrapper">
-            <div className="notifications-sender-details-wrapper">
-              <div className="notifications-sender-icon">A</div>
-              <p className="notifications-top-content">Arnik</p>
-            </div>
-            <div className="notifications-email-span">{ll}</div>
-
-            <p className="notifications-invited">
-              Invited you to join a project.
-            </p>
-            <p className="notification-proect-join">
-              Join{" "}
-              <span className="notification-project-name">Project-Euler</span> ?
-            </p>
-            <div className="notifications-lower-wrapper">
-              <div className="notifications-accept-button">Accept</div>
-              <div className="notifications-cancel-button">Cancel</div>
+            <div className="notifications-lower-message-wrapper">
+              <p className="color-off-white notifications-lower-message-text">
+                No more notifications for you!
+              </p>
             </div>
           </div>
-          <div className="notifications-item-wrapper">
-            <div className="notifications-sender-details-wrapper">
-              <div className="notifications-sender-icon">A</div>
-              <p className="notifications-top-content">Arnik</p>
-            </div>
-            <div className="notifications-email-span">{ll}</div>
-
-            <p className="notifications-invited">
-              Invited you to join a project.
-            </p>
-            <p className="notification-proect-join">
-              Join{" "}
-              <span className="notification-project-name">Project-Euler</span> ?
-            </p>
-            <div className="notifications-lower-wrapper">
-              <div className="notifications-accept-button">Accept</div>
-              <div className="notifications-cancel-button">Cancel</div>
-            </div>
-          </div>
-
-          <div className="notifications-item-wrapper">
-            <div className="notifications-sender-details-wrapper">
-              <div className="notifications-sender-icon">A</div>
-              <p className="notifications-top-content">Arnik</p>
-            </div>
-            <div className="notifications-email-span">{ll}</div>
-
-            <p className="notifications-invited">
-              Invited you to join a project.
-            </p>
-            <p className="notification-proect-join">
-              Join{" "}
-              <span className="notification-project-name">Project-Euler</span> ?
-            </p>
-            <div className="notifications-lower-wrapper">
-              <div className="notifications-accept-button">Accept</div>
-              <div className="notifications-cancel-button">Cancel</div>
-            </div>
-          </div>
-
-          <div className="notifications-item-wrapper">
-            <div className="notifications-sender-details-wrapper">
-              <div className="notifications-sender-icon">A</div>
-              <p className="notifications-top-content">Arnik</p>
-            </div>
-            <div className="notifications-email-span">{ll}</div>
-
-            <p className="notifications-invited">
-              Invited you to join a project.
-            </p>
-            <p className="notification-proect-join">
-              Join{" "}
-              <span className="notification-project-name">Project-Euler</span> ?
-            </p>
-            <div className="notifications-lower-wrapper">
-              <div className="notifications-accept-button">Accept</div>
-              <div className="notifications-cancel-button">Cancel</div>
-            </div>
-          </div> */}
-
-          <div className="notifications-lower-message-wrapper">
-            {/* <img src={Box} className="notifications-box-image" /> */}
-            <p className="color-off-white notifications-lower-message-text">
-              No more notifications for you!
-            </p>
-          </div>
-        </div>
+        )}
       </div>
     </div>
   );

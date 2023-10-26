@@ -1,0 +1,42 @@
+.notification-skeletal-left-col-circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #26292f;
+  animation: notificationSkeletalColorChange 1s infinite alternate;
+}
+
+.notification-skeletal-wrapper {
+  display: flex;
+  padding: 10px;
+}
+.notification-skeletal-right-col-small-element {
+  height: 15px;
+  width: 75px;
+  background-color: #26292f;
+  border-radius: 3px;
+  margin-bottom: 5px;
+  animation: notificationSkeletalColorChange 1s infinite alternate;
+}
+
+.notification-skeletal-right-col-large-element {
+  height: 15px;
+  width: 150px;
+  background-color: #26292f;
+  border-radius: 3px;
+  animation: notificationSkeletalColorChange 1s infinite alternate;
+}
+
+.notification-skeletal-right-col {
+  margin-left: 10px;
+}
+
+@keyframes notificationSkeletalColorChange {
+  0% {
+    background-color: #3f4247;
+  }
+
+  100% {
+    background-color: #5a5b5e; /* Change to your desired color */
+  }
+}
