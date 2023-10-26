@@ -235,6 +235,7 @@
   overflow-y: auto; */
   display: flex;
   border: 2px solid #3c414c;
+  height: 100%;
   /* margin-bottom: 500px; */
 }
 

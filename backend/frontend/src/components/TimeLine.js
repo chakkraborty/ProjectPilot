@@ -8,7 +8,13 @@ import { useParams } from "react-router-dom";
 import AddPeople from "./AddPeople";
 import { useState, useEffect } from "react";
 import MembersSkeletal from "../skeletal/membersSkeletal";
+import TimelineSkeletal from "../skeletal/timelineSkeletal";
 const TimeLine = () => {
+  const [loading, setLoading] = useState(true);
+  function toggleLoading() {
+    setLoading(false);
+    console.log("toggleLoadingCalled");
+  }
   const [addMembers, setAddMembers] = useState(0);
   let { projectId } = useParams();
   console.log(projectId);
@@ -109,7 +115,8 @@ const TimeLine = () => {
           ) : (
             <></>
           )}
-          <TableX />
+
+          <TableX toggleLoading={toggleLoading} />
         </div>
       </div>
     </div>

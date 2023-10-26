@@ -1,0 +1,84 @@
+.timeline-skeletal-wrapper {
+  height: 100%;
+  border: 2px solid #26292f;
+  display: flex;
+}
+
+.timeline-skeletal-left-col {
+  border-right: 2px solid #26292f;
+  width: 300px !important;
+  height: 100%;
+}
+.timeline-skeletal-left-col-top-header {
+  height: 66px;
+  border-bottom: 2px solid #26292f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.timeline-skeletal-right-col {
+  width: 100px;
+  flex: 1;
+}
+.timeline-skeletal-left-col-top-header-item {
+  width: 100px;
+  height: 30px;
+  background-color: #25292e;
+  border-radius: 3px;
+}
+
+.timeline-skeletal-left-col-item {
+  width: 80%;
+  margin: auto;
+  height: 30px;
+  background-color: #25292e;
+  border-radius: 3px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.timeline-skeletal-right-col-top-header-item {
+  width: 90%;
+
+  background-color: #25292e;
+  height: 30px;
+  border-radius: 3px;
+}
+
+.timeline-skeletal-right-col-top-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 66px;
+  border-bottom: 2px solid #26292f;
+}
+
+.timeline-skeletal-right-col-item {
+  width: 70%;
+  margin: auto;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-radius: 3px;
+  background-color: #26292f;
+  border-radius: 3px;
+  height: 30px;
+}
+
+.timeline-skeletal-item {
+  background-color: #26292f;
+  animation: timelineItemColorChange 1s infinite alternate;
+}
+
+@keyframes timelineItemColorChange {
+  0% {
+    background-color: #26292f;
+  }
+
+  100% {
+    background-color: #2e323a; /* Change to your desired color */
+  }
+}
+
+.timeline-skeletal-wrapper {
+  margin-top: 50px;
+}
