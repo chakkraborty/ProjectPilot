@@ -12,6 +12,31 @@ const Notifications = () => {
 
   const [p, setP] = useState([]);
 
+  async function fetchNotifications() {
+    try {
+      setLoading(true);
+
+      let userId = localStorage.getItem("_id");
+      console.log(userId);
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      let a = await axios.post("/api/getNotifications", { userId }, config);
+      if (a.data) {
+        setP([]);
+
+        setP([...a.data]);
+        setLoading(false);
+      }
+      console.log(p);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  }
+
   async function acceptInvitation(notifId) {
     try {
       console.log(notifId);
@@ -25,27 +50,6 @@ const Notifications = () => {
       if (a) fetchNotifications();
     } catch (error) {
       console.log(error);
-    }
-  }
-
-  async function fetchNotifications() {
-    try {
-      let userId = localStorage.getItem("_id");
-      console.log(userId);
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-      let a = await axios.post("/api/getNotifications", { userId }, config);
-      if (a.data) {
-        setP([...a.data]);
-        setLoading(false);
-      }
-      console.log(p);
-    } catch (error) {
-      console.log(error);
-      setLoading(false);
     }
   }
 

@@ -1,0 +1,79 @@
+.session-error-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgb(0, 0, 0, 0.5);
+  z-index: 1;
+  display: flex;
+
+  justify-content: center;
+}
+
+.session-error-circle {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  border: 2px solid rgb(255, 232, 190);
+}
+
+.session-error-div {
+  display: flex;
+  height: fit-content;
+  animation: slideIn 0.5s ease;
+}
+
+.session-error-right-col {
+  margin-left: 10px;
+}
+@keyframes slideIn {
+  from {
+    margin-top: -1px; /* Start from 30px above the final position */
+  }
+  to {
+    margin-top: 10%; /* Move to 10% from the top */
+  }
+}
+
+.session-error-div {
+  background-color: #27313b;
+  padding: 20px;
+  border-radius: 6px;
+  margin-top: 10%;
+}
+
+.session-error-text-1 {
+  font-size: 16px;
+  font-weight: 500;
+  color: #c8d7e6;
+  margin-bottom: 10px;
+}
+
+.session-error-text-2 {
+  font-size: 14px;
+  font-weight: 500;
+  color: #e3e9f0;
+  margin-bottom: 10px;
+}
+
+.session-error-login-button {
+  margin-left: 72%;
+  margin-top: 15px;
+  margin-right: 20px;
+  font-size: 13px;
+  background-color: #586e81;
+  width: fit-content;
+  padding: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  color: rgb(230, 230, 230);
+  border-radius: 5px;
+  border: 1.5px solid rgb(79, 101, 132);
+  font-weight: 500;
+}
+
+.session-error-login-button:hover {
+  cursor: pointer;
+  background-color: #6c879e;
+}

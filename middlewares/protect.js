@@ -8,12 +8,15 @@ const protect = async (req, res, next) => {
 
       res
         .status(401)
-        .json({ message: "Invalid user detected! Please Login again" });
+        .json({
+          type: 2,
+          message: "Invalid user detected! Please Login again",
+        });
     }
     const dec = jwt.verify(token, process.env.secret);
     const user = await User.findById(dec._id);
     if (!user) {
-      res.status(401).json({ message: "User not found using token" });
+      res.status(401).json({ type: 2, message: "User not found using token" });
     }
     console.log("success fully executed the protected route");
 
@@ -21,7 +24,7 @@ const protect = async (req, res, next) => {
   } catch (error) {
     res
       .status(401)
-      .send({ message: "Invalid user detected. Please login again!" });
+      .send({ type: 2, message: "Invalid user detected. Please login again!" });
     console.log(error);
   }
 };

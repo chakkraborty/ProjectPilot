@@ -3,7 +3,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import CreateProject from "./CreateProject";
 import { useState, useEffect } from "react";
 import ProjectListSkeletal from "../skeletal/projectSettingsSkeletal.js";
-
+import SessionError from "./SessionError";
 import axios from "axios";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
@@ -44,6 +44,7 @@ const PorjectList = () => {
         { userId, token: localStorage.getItem("token") },
         config
       );
+      console.log("this occured");
 
       if (a.data) {
         // console.log(a.data);
@@ -55,6 +56,8 @@ const PorjectList = () => {
       }
     } catch (error) {
       console.log(error);
+      console.log(error.response.data.message);
+
       setLoading(false);
     }
   }
