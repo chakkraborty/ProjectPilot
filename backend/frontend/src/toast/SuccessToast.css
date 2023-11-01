@@ -1,0 +1,7 @@
+.success-toast-wrapper {
+  position: absolute;
+
+  z-index: 10;
+  background-color: aquamarine;
+  margin: auto;
+}

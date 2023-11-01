@@ -2,6 +2,8 @@ import React from "react";
 import Navbar from "./Navbar";
 import SearchIcon from "@mui/icons-material/Search";
 import axios from "axios";
+import SuccessToast from "../toast/SuccessToast.js";
+
 import AddPeople from "./AddPeople";
 import MembersSkeletal from "../skeletal/membersSkeletal.js";
 import { useCallback } from "react";
@@ -120,6 +122,7 @@ const ProjectPage = () => {
   return (
     <div className="project-board-page">
       <Navbar />
+      <SuccessToast />
       <div className="project-board-lower-wrapper">
         <ProjectLeftPanel type={2} />
         <div className="project-board-right-panel">
