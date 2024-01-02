@@ -4,7 +4,7 @@ import { useState } from "react";
 import axios from "axios";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import CircularProgress from "@mui/material/CircularProgress";
-const AddPeople = ({ projectId, toggleAddMembers }) => {
+const AddPeople = ({ projectId, toggleAddMembers, triggerMembersAdded }) => {
   const [arr, setArr] = useState([]);
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(0);
@@ -37,6 +37,7 @@ const AddPeople = ({ projectId, toggleAddMembers }) => {
         console.log(a);
         setLoading(0);
         toggleAddMembers();
+        triggerMembersAdded();
       }
     } catch (error) {
       console.log(error);

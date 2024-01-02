@@ -22,6 +22,24 @@ const ProjectPage = () => {
   function toggleAddMembers() {
     setAddMembers(!addMembers);
   }
+
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+
+  const handleSuccessMessageTimeout = () => {
+    setTimeout(() => {
+      setShowSuccessMessage(false);
+    }, 2000);
+  };
+
+  function successMessageFunction(incomingMessage) {
+    setSuccessMessage(incomingMessage);
+    if (successMessage === incomingMessage) {
+      setShowSuccessMessage(true);
+    }
+    handleSuccessMessageTimeout();
+  }
+
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [open, setOpen] = useState(false);
   function closeDeleteModal() {
@@ -68,6 +86,7 @@ const ProjectPage = () => {
   //   await handleDeleteClose();
   //   setDeleteOpen(true);
   // }
+  const [taskLoading, setTaskLoading] = useState(false);
 
   const [tasks, setTasks] = useState([]);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -113,7 +132,10 @@ const ProjectPage = () => {
       await setTasks(a.data);
     }
   }
-
+  function triggerMembersAdded() {
+    successMessageFunction("Success ! Invitations for joining sent !");
+    setShowSuccessMessage(true);
+  }
   useEffect(() => {
     fetchMembers();
     fetchTasks();
@@ -122,7 +144,8 @@ const ProjectPage = () => {
   return (
     <div className="project-board-page">
       <Navbar />
-      <SuccessToast />
+
+      {showSuccessMessage ? <SuccessToast message={successMessage} /> : <></>}
       <div className="project-board-lower-wrapper">
         <ProjectLeftPanel type={2} />
         <div className="project-board-right-panel">
@@ -200,6 +223,7 @@ const ProjectPage = () => {
             <AddPeople
               projectId={projectId}
               toggleAddMembers={toggleAddMembers}
+              triggerMembersAdded={triggerMembersAdded}
             />
           ) : (
             <></>
