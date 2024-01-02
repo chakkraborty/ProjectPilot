@@ -1,0 +1,28 @@
+.failure-toast-wrapper {
+  z-index: 10;
+  position: absolute;
+  background-color: aquamarine;
+  margin: auto;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border-radius: 3px;
+  background-color: rgba(154, 38, 0, 0.769);
+  animation: slideIn 0.5s ease;
+}
+
+@keyframes slideIn {
+  from {
+    margin-top: -10px; /* Start from 30px above the final position */
+  }
+  to {
+    margin-top: 0px; /* Move to 10% from the top */
+  }
+}
+
+.success-toast-wrapper {
+  margin-top: 0px;
+}

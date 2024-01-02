@@ -8,6 +8,7 @@ const DeleteModal = ({
   closeDeleteModal,
   deleteTaskId,
   fetchTasks,
+  failureMessageFunction,
 }) => {
   async function deleteTaskHandler() {
     const config = {
@@ -21,7 +22,9 @@ const DeleteModal = ({
     if (a) {
       fetchTasks();
     }
+
     closeDeleteModal();
+    failureMessageFunction("Task deleted !");
     //let a = await axios.post("/api/deleteTask");
     // if (a) {
     //   fetchTasks();

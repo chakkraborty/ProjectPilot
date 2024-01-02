@@ -3,7 +3,7 @@ import Navbar from "./Navbar";
 import SearchIcon from "@mui/icons-material/Search";
 import axios from "axios";
 import SuccessToast from "../toast/SuccessToast.js";
-
+import FailureToast from "../toast/FailureToast.js";
 import AddPeople from "./AddPeople";
 import MembersSkeletal from "../skeletal/membersSkeletal.js";
 import { useCallback } from "react";
@@ -31,13 +31,30 @@ const ProjectPage = () => {
       setShowSuccessMessage(false);
     }, 2000);
   };
-
+  const handleFailureMessageTimeout = () => {
+    setTimeout(() => {
+      setShowFailureMessage(false);
+    }, 2000);
+  };
   function successMessageFunction(incomingMessage) {
     setSuccessMessage(incomingMessage);
     if (successMessage === incomingMessage) {
       setShowSuccessMessage(true);
     }
     handleSuccessMessageTimeout();
+  }
+
+  const [showFailureMessage, setShowFailureMessage] = useState(false);
+  const [failureMessage, setFailureMessage] = useState("");
+
+  function failureMessageFunction(incomingMessage) {
+    setFailureMessage(incomingMessage);
+    console.log("evoked");
+
+    if (failureMessage === incomingMessage) {
+      setShowFailureMessage(true);
+    }
+    handleFailureMessageTimeout();
   }
 
   const [deleteOpen, setDeleteOpen] = useState(false);
@@ -147,6 +164,7 @@ const ProjectPage = () => {
       <Navbar />
 
       {showSuccessMessage ? <SuccessToast message={successMessage} /> : <></>}
+      {showFailureMessage ? <FailureToast message={failureMessage} /> : <></>}
       <div className="project-board-lower-wrapper">
         <ProjectLeftPanel type={2} />
         <div className="project-board-right-panel">
@@ -301,6 +319,7 @@ const ProjectPage = () => {
                               closeDeleteModal={closeDeleteModal}
                               deleteTaskId={deleteTaskId}
                               fetchTasks={fetchTasks}
+                              failureMessageFunction={failureMessageFunction}
                             />
                           ) : (
                             <></>
