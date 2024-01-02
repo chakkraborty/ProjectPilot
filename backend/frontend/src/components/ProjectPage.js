@@ -86,7 +86,7 @@ const ProjectPage = () => {
   //   await handleDeleteClose();
   //   setDeleteOpen(true);
   // }
-  const [taskLoading, setTaskLoading] = useState(false);
+  const [taskLoading, setTaskLoading] = useState(true);
 
   const [tasks, setTasks] = useState([]);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -131,6 +131,7 @@ const ProjectPage = () => {
     if (a) {
       await setTasks(a.data);
     }
+    setTaskLoading(false);
   }
   function triggerMembersAdded() {
     successMessageFunction("Success ! Invitations for joining sent !");
@@ -229,7 +230,7 @@ const ProjectPage = () => {
             <></>
           )}
 
-          {!tasks.length ? (
+          {taskLoading ? (
             <KanbanSkeletal />
           ) : (
             <div className="project-page-lower-wrapper">
