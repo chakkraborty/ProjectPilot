@@ -14,6 +14,8 @@
   animation: slideIn 0.5s ease;
 }
 
+/* animation */
+
 @keyframes slideIn {
   from {
     margin-top: -10px; /* Start from 30px above the final position */
