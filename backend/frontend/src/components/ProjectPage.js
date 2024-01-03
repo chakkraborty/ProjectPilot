@@ -38,9 +38,9 @@ const ProjectPage = () => {
   };
   function successMessageFunction(incomingMessage) {
     setSuccessMessage(incomingMessage);
-    if (successMessage === incomingMessage) {
-      setShowSuccessMessage(true);
-    }
+
+    setShowSuccessMessage(true);
+
     handleSuccessMessageTimeout();
   }
 
@@ -49,7 +49,6 @@ const ProjectPage = () => {
 
   function failureMessageFunction(incomingMessage) {
     setFailureMessage(incomingMessage);
-    console.log("evoked");
 
     if (failureMessage === incomingMessage) {
       setShowFailureMessage(true);

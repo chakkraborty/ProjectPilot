@@ -4,9 +4,14 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import AddPeople from "./AddPeople";
 import axios from "axios";
+import SuccessToast from "../toast/SuccessToast";
 import ProjectSettingsSkeletal from "../skeletal/projectSettingsSkeletal";
-
-const MembersList = () => {
+import FailureToast from "../toast/FailureToast";
+const MembersList = ({
+  deletedMemberHandler,
+  triggerMembersAdded,
+  deleteMemberError,
+}) => {
   let { projectId } = useParams();
   const [addPeopleState, setAddPeopleState] = useState(false);
 
@@ -33,10 +38,15 @@ const MembersList = () => {
       console.log(a);
 
       if (a) {
+        deletedMemberHandler("Success! Member removed.");
         fetchMembers();
       }
     } catch (error) {
       console.log(error);
+      console.log(error.response.data);
+      if (error.response.data.type === 102) {
+        deleteMemberError();
+      }
     }
   }
 
@@ -132,6 +142,7 @@ const MembersList = () => {
           <AddPeople
             projectId={projectId}
             toggleAddMembers={toggleAddMembers}
+            triggerMembersAdded={triggerMembersAdded}
           />
         ) : (
           <></>

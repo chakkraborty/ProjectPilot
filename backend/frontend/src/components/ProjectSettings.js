@@ -9,11 +9,65 @@ import { useState, useEffect } from "react";
 import MembersList from "./MembersList";
 import { useParams } from "react-router-dom";
 import AddPeople from "./AddPeople";
+import SuccessToast from "../toast/SuccessToast.js";
 import axios from "axios";
+import FailureToast from "../toast/FailureToast.js";
 const ProjectSettings = () => {
   const [catList, setCatList] = useState(false);
   const [category, setCategory] = useState("");
   const [changesLoader, setChangesLoader] = useState(false);
+
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+
+  const [showFailureMessage, setShowFailureMessage] = useState(false);
+  const [failureMessage, setFailureMessage] = useState("");
+
+  const handleFailureMessageTimeout = () => {
+    setTimeout(() => {
+      setShowFailureMessage(false);
+    }, 2000);
+  };
+
+  const handleSuccessMessageTimeout = () => {
+    setTimeout(() => {
+      setShowSuccessMessage(false);
+    }, 2000);
+  };
+
+  function triggerMembersAdded() {
+    successMessageFunction("Success ! Invitations for joining sent !");
+    setShowSuccessMessage(true);
+  }
+
+  function successMessageFunction(incomingMessage) {
+    setSuccessMessage(incomingMessage);
+
+    setShowSuccessMessage(true);
+
+    handleSuccessMessageTimeout();
+  }
+
+  function saveChangesHandler(message) {
+    setSuccessMessage(message);
+    console.log("save changes handler");
+
+    setShowSuccessMessage(true);
+
+    handleSuccessMessageTimeout();
+  }
+
+  function deletedMemberHandler(message) {
+    setFailureMessage(message);
+
+    setShowFailureMessage(true);
+
+    handleFailureMessageTimeout();
+  }
+
+  function deleteMemberError() {
+    deletedMemberHandler("Error! Cannot delete project admin.");
+  }
 
   function toggleList() {
     setCatList(!catList);
@@ -44,6 +98,7 @@ const ProjectSettings = () => {
       if (a) {
         setChangesLoader(0);
         fetchProjectDetails();
+        saveChangesHandler("Success! Changes saved.");
       }
     } catch (error) {
       console.log(error);
@@ -74,6 +129,8 @@ const ProjectSettings = () => {
   return (
     <div className="project-settings-page">
       <Navbar />
+      {showSuccessMessage ? <SuccessToast message={successMessage} /> : <></>}
+      {showFailureMessage ? <FailureToast message={failureMessage} /> : <></>}
       <div className="project-settings-lower-wrapper">
         <ProjectLeftPanel type={4} />
         <div className="project-settings-right-panel">
@@ -144,7 +201,11 @@ const ProjectSettings = () => {
                 <>Save changes</>
               )}
             </div>
-            <MembersList />
+            <MembersList
+              deletedMemberHandler={deletedMemberHandler}
+              triggerMembersAdded={triggerMembersAdded}
+              deleteMemberError={deleteMemberError}
+            />
           </div>
         </div>
       </div>

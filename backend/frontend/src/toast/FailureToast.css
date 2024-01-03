@@ -10,8 +10,12 @@
   align-items: center;
   padding: 15px;
   border-radius: 3px;
-  background-color: rgba(154, 38, 0, 0.769);
+  background-color: rgba(154, 38, 0);
   animation: slideIn 0.5s ease;
+}
+
+.failure-toast-text {
+  margin-left: 10px;
 }
 
 /* animation */

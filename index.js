@@ -150,6 +150,15 @@ app.post("/api/deleteMember", async (req, res) => {
     if (a) {
       let userId = a._id;
       let x = await Project.findOne({ _id: projectId });
+      console.log("createdBy    " + x.createdBy);
+      console.log(userId);
+
+      if (x.createdBy === userId.toString().trim()) {
+        res.status(401).json({ type: 102, message: "Cannot Remove Admin" });
+        console.log("yessss");
+
+        return;
+      }
       if (x) {
         console.log("userId to be deleted is : " + userId);
 
