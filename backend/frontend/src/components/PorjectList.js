@@ -11,9 +11,10 @@ import { deepOrange, deepPurple } from "@mui/material/colors";
 import Box from "./box.png";
 import { useNavigate } from "react-router-dom";
 import "./ProjectList.css";
+import SuccessToast from "../toast/SuccessToast.js";
 import NavbarSettingsDropdown from "./NavbarSettingsDropdown";
 import Pagination from "./Pagination";
-const PorjectList = () => {
+const PorjectList = ({ triggerProjectCreated }) => {
   const [open, setOpen] = useState(false);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -120,6 +121,7 @@ const PorjectList = () => {
         isOpen={open}
         onClose={onClose}
         fetchProjects={fetchProjects}
+        triggerProjectCreated={triggerProjectCreated}
       />
       {/* table section */}
 

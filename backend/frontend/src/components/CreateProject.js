@@ -4,7 +4,12 @@ import axios from "axios";
 import "./CreateProject.css";
 
 import CircularProgress from "@mui/material/CircularProgress";
-const CreateProject = ({ isOpen, onClose, fetchProjects }) => {
+const CreateProject = ({
+  isOpen,
+  onClose,
+  fetchProjects,
+  triggerProjectCreated,
+}) => {
   let createdBy = localStorage.getItem("_id");
   let leadName = localStorage.getItem("name");
 
@@ -29,6 +34,7 @@ const CreateProject = ({ isOpen, onClose, fetchProjects }) => {
         setLoading(0);
         onClose();
         fetchProjects();
+        triggerProjectCreated();
       } else {
         setLoading(0);
       }

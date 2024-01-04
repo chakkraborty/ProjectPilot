@@ -5,8 +5,29 @@ import Navbar from "./Navbar";
 import ProjectList from "./PorjectList";
 import SessionError from "./SessionError";
 import axios from "axios";
+import SuccessToast from "../toast/SuccessToast";
 
 const Home = () => {
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+
+  const handleSuccessMessageTimeout = () => {
+    setTimeout(() => {
+      setShowSuccessMessage(false);
+    }, 2000);
+  };
+
+  function successMessageFunction(incomingMessage) {
+    setSuccessMessage(incomingMessage);
+
+    setShowSuccessMessage(true);
+
+    handleSuccessMessageTimeout();
+  }
+
+  function triggerProjectCreated() {
+    successMessageFunction("Success! New project created!");
+  }
   const [showError, setShowError] = useState(false);
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
@@ -51,8 +72,9 @@ const Home = () => {
       {showError ? <SessionError /> : <></>}
 
       <Navbar />
+      {showSuccessMessage ? <SuccessToast message={successMessage} /> : <></>}
       <div className="project-list-home-wrapper">
-        <ProjectList />
+        <ProjectList triggerProjectCreated={triggerProjectCreated} />
       </div>
     </div>
   );
