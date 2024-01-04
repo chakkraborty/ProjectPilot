@@ -40,7 +40,7 @@
 }
 
 .project-settings-name-input-field:focus {
-  outline: 1.5px solid #3c8eff;
+  outline: 1.5px solid #85b8ff;
 }
 .project-settings-name-input-field:hover {
   background-color: #313737;
@@ -57,7 +57,7 @@
   padding: 10px;
 }
 .project-category-wrapper:hover {
-  outline: 1.5px solid #3c8eff;
+  outline: 1.5px solid #85b8ff;
 }
 
 .project-category-wrapper > p {

@@ -11,13 +11,14 @@ import LoadingPage from "./components/LoadingPage";
 import Toast from "./Toast";
 
 const Register = () => {
+  const navigate = useNavigate();
   let currId = localStorage.getItem("_id");
   if (currId) {
     navigate("/home");
   }
 
   const [loaderScreen, setLoaderScreen] = useState(false);
-  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -68,6 +69,7 @@ const Register = () => {
 
       localStorage.setItem("name", a.data.name);
       localStorage.setItem("_id", a.data._id);
+      localStorage.setItem("email", a.data.email);
       setLoading(0);
     } catch (error) {
       errorDisplay(error.response.data.message);

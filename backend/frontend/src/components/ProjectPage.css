@@ -91,12 +91,12 @@
   align-items: center;
   border: 2px solid #374048;
   width: fit-content;
-  border-radius: 1px;
+  border-radius: 3px;
   background-color: #22272b;
 }
 
 .project-page-search-wrapper:focus-within {
-  border: 2px solid #0052cc;
+  border: 2px solid #85b8ff;
 }
 
 .project-page-input {
