@@ -22,6 +22,7 @@
   outline: none;
   color: #d4d4d4;
 }
+
 .members-list {
   margin-top: 10px;
 }
@@ -34,6 +35,10 @@
   padding: 7px;
   border-radius: 2px;
   border: 1.5px solid #34393f;
+}
+
+.members-list-search-div:focus-within {
+  border: 1.5px solid #85b8ff;
 }
 
 .members-list-invite-button:hover {

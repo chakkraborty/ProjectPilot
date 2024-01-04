@@ -19,7 +19,18 @@ const MembersList = ({
     setAddPeopleState(!addPeopleState);
   }
 
+  const [membersLoading, setMembersLoading] = useState(true);
+
   const [members, setMembers] = useState([]);
+  const [membersInit, setMembersInit] = useState([]);
+
+  async function handleMemberSearch(str) {
+    const searchResults = await membersInit.filter((item) =>
+      item.name.toLowerCase().includes(str.toLowerCase())
+    );
+
+    await setMembers(searchResults);
+  }
 
   async function deleteMember(emailId) {
     try {
@@ -61,6 +72,8 @@ const MembersList = ({
       if (a) {
         setMembers(a.data);
         console.log(a.data);
+        setMembersInit(a.data);
+        setMembersLoading(false);
       }
     } catch (error) {
       console.log(error);
@@ -81,6 +94,7 @@ const MembersList = ({
               <input
                 placeholder="Search Name,Emails,etc."
                 className="members-list-search-input-area"
+                onChange={(e) => handleMemberSearch(e.target.value)}
               />
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -114,7 +128,7 @@ const MembersList = ({
             Action
           </div>
         </div>
-        {!members.length ? (
+        {membersLoading ? (
           <ProjectSettingsSkeletal />
         ) : (
           <div className="members-list-table-items-wrapper">
