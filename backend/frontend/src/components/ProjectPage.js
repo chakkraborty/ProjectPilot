@@ -18,6 +18,9 @@ import "./ProjectPage.css";
 import KanbanSkeletal from "../skeletal/kanbanSkeletal.js";
 import ProjectLeftPanel from "./ProjectLeftPanel";
 const ProjectPage = () => {
+  const [tasks, setTasks] = useState([]);
+  const [tasksInit, setTasksInit] = useState([]);
+
   const [addMembers, setAddMembers] = useState(0);
   function toggleAddMembers() {
     setAddMembers(!addMembers);
@@ -54,6 +57,16 @@ const ProjectPage = () => {
       setShowFailureMessage(true);
     }
     handleFailureMessageTimeout();
+  }
+
+  async function handleTaskSearchKanban(str) {
+    const searchResults = await tasksInit.filter((item) =>
+      item.title.toLowerCase().includes(str.toLowerCase())
+    );
+
+    console.log("str");
+
+    await setTasks(searchResults);
   }
 
   const [deleteOpen, setDeleteOpen] = useState(false);
@@ -104,7 +117,6 @@ const ProjectPage = () => {
   // }
   const [taskLoading, setTaskLoading] = useState(true);
 
-  const [tasks, setTasks] = useState([]);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [taskId, setTaskId] = useState("");
 
@@ -146,6 +158,7 @@ const ProjectPage = () => {
     let a = await axios.post("/api/fetchTasks", { projectId }, config);
     if (a) {
       await setTasks(a.data);
+      await setTasksInit(a.data);
     }
     setTaskLoading(false);
   }
@@ -184,6 +197,7 @@ const ProjectPage = () => {
                   type="text"
                   className="project-page-input text-dark"
                   placeholder=""
+                  onChange={(e) => handleTaskSearchKanban(e.target.value)}
                 ></input>
 
                 <svg
