@@ -9,7 +9,29 @@ import AddPeople from "./AddPeople";
 import { useState, useEffect } from "react";
 import MembersSkeletal from "../skeletal/membersSkeletal";
 import TimelineSkeletal from "../skeletal/timelineSkeletal";
+import SuccessToast from "../toast/SuccessToast";
 const TimeLine = () => {
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+
+  const handleSuccessMessageTimeout = () => {
+    setTimeout(() => {
+      setShowSuccessMessage(false);
+    }, 2000);
+  };
+
+  function successMessageFunction(incomingMessage) {
+    setSuccessMessage(incomingMessage);
+
+    setShowSuccessMessage(true);
+
+    handleSuccessMessageTimeout();
+  }
+
+  function triggerMembersAdded() {
+    successMessageFunction("Success ! Invitations for joining sent !");
+  }
+
   const [loading, setLoading] = useState(true);
   function toggleLoading() {
     setLoading(false);
@@ -42,6 +64,7 @@ const TimeLine = () => {
   return (
     <div className="t-wrapper">
       <Navbar />
+
       <div className="t-lower-wrapper">
         <div className="t-left">
           <ProjectLeftPanel type={3} />
@@ -51,6 +74,11 @@ const TimeLine = () => {
           <div className="project-right-panel-header-top">
             <div className="projects-right-panel-header-wrapper">
               <div className="projects-right-panel-name-wrapper margin-top-10px">
+                {showSuccessMessage ? (
+                  <SuccessToast message={successMessage} />
+                ) : (
+                  <></>
+                )}
                 <p className="projects-right-panel-header-top">
                   Project / Timeline
                 </p>
@@ -111,6 +139,7 @@ const TimeLine = () => {
             <AddPeople
               projectId={projectId}
               toggleAddMembers={toggleAddMembers}
+              triggerMembersAdded={triggerMembersAdded}
             />
           ) : (
             <></>
