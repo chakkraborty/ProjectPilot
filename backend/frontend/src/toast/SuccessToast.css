@@ -13,6 +13,7 @@
   border-radius: 3px;
   background-color: rgb(7, 129, 7);
   animation: slideIn 0.5s ease;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 }
 
 @keyframes slideIn {

@@ -21,7 +21,7 @@ const App = ({ toggleLoading }) => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   function taskRouting(taskId) {
-    navigate(`/task/${taskId}`);
+    navigate(`/task/${projectId}/${taskId}`);
   }
 
   let { projectId } = useParams();

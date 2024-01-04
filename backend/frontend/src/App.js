@@ -20,7 +20,7 @@ function App() {
           <Route exact path="/register" element={<Register />}></Route>
           <Route exact path="/home" element={<Home />}></Route>
           <Route path="/project/:projectId" element={<ProjectPage />}></Route>
-          <Route path="/task/:taskId" element={<TaskPage />}></Route>
+          <Route path="/task/:projectId/:taskId" element={<TaskPage />}></Route>
           <Route path="/notifications" element={<Notifications />}></Route>
           <Route
             path="/timeline/:projectId"

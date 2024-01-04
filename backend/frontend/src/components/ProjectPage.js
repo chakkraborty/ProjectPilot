@@ -474,6 +474,7 @@ const ProjectPage = () => {
                               closeDeleteModal={closeDeleteModal}
                               deleteTaskId={deleteTaskId}
                               fetchTasks={fetchTasks}
+                              failureMessageFunction={failureMessageFunction}
                             />
                           ) : (
                             <></>
@@ -615,6 +616,7 @@ const ProjectPage = () => {
                               closeDeleteModal={closeDeleteModal}
                               deleteTaskId={deleteTaskId}
                               fetchTasks={fetchTasks}
+                              failureMessageFunction={failureMessageFunction}
                             />
                           ) : (
                             <></>
