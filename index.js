@@ -556,6 +556,24 @@ app.post("/api/acceptInvitation", async (req, res) => {
   }
 });
 
+app.post("/api/rejectInvitation", async (req, res) => {
+  try {
+    const { notifId } = req.body;
+    console.log("reject notif " + notifId);
+
+    let a = await Notification.findOne({ _id: notifId });
+    if (a) {
+      console.log(a);
+      let x = await Notification.findByIdAndDelete({ _id: notifId });
+      if (x) {
+        res.status(201).send("Invitation Reected!");
+      }
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 app.post("/api/setStartDate", async (req, res) => {
   try {
     let taskId = req.body.taskId;

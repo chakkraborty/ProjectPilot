@@ -37,6 +37,25 @@ const Notifications = () => {
     }
   }
 
+  async function rejectInvitation(notifId) {
+    try {
+      console.log("holla");
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      let a = await axios.post("/api/rejectInvitation", { notifId }, config);
+      if (a) {
+        await fetchNotifications();
+        console.log("Notif fetched");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   async function acceptInvitation(notifId) {
     try {
       console.log(notifId);
@@ -108,7 +127,12 @@ const Notifications = () => {
                   >
                     Accept
                   </div>
-                  <div className="notifications-cancel-button">Decline</div>
+                  <div
+                    className="notifications-cancel-button"
+                    onClick={() => rejectInvitation(notif._id)}
+                  >
+                    Decline
+                  </div>
                 </div>
               </div>
             ))}
