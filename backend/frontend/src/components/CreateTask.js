@@ -21,6 +21,7 @@ import StatusSelector from "./StatusSelector";
 // import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 const CreateTask = ({ onClose, onOpen, fetchTasks }) => {
   const [loader, setLoader] = useState(false);
+  const [warningMessage, setWarningMessage] = useState(false);
 
   const [status, setStatus] = React.useState("");
   const [title, setTitle] = useState("");
@@ -101,6 +102,12 @@ const CreateTask = ({ onClose, onOpen, fetchTasks }) => {
           "Content-Type": "application/json",
         },
       };
+      if (!title) {
+        setWarningMessage(true);
+        setLoader(false);
+
+        return;
+      }
       let createdById = await localStorage.getItem("_id");
       let a = await axios.post(
         "/api/createTask",
@@ -147,11 +154,20 @@ const CreateTask = ({ onClose, onOpen, fetchTasks }) => {
             <p className="create-task-title-top">
               Title<span className="red">*</span>
             </p>
+
             <input
               type="text"
               className="border-1px-solid-grey create-task-title-input"
               onChange={(e) => setTitle(e.target.value)}
             />
+            {warningMessage ? (
+              <p className="create-task-warning-message">
+                * Please add a title. Mandatory field.
+              </p>
+            ) : (
+              <></>
+            )}
+
             <p className="create-task-description margin-top-10px">
               Description
             </p>
