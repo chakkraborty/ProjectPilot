@@ -544,6 +544,9 @@ app.post("/api/acceptInvitation", async (req, res) => {
           proj = await proj.save();
         }
         let x = await Notification.findByIdAndDelete({ _id: notifId });
+        if (x) {
+          res.status(201).send("Successfully invitation accepted !");
+        }
       }
     } else {
       console.log("not found");

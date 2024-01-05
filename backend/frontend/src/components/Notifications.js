@@ -47,7 +47,10 @@ const Notifications = () => {
         },
       };
       let a = await axios.post("/api/acceptInvitation", { notifId }, config);
-      if (a) fetchNotifications();
+      if (a) {
+        await fetchNotifications();
+        console.log("notif fetched");
+      }
     } catch (error) {
       console.log(error);
     }
