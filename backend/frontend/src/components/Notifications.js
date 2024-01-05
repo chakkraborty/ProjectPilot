@@ -65,9 +65,13 @@ const Notifications = () => {
   return (
     <div>
       <div className="notifications-wrapper">
-        <p className="notifications-title color-off-white" onClick={testFunc}>
-          Notifications
-        </p>
+        <div className="notifications-top-wrapper">
+          <p className="notifications-title color-off-white" onClick={testFunc}>
+            Notifications
+          </p>
+          <p className="notifications-decline-all">Decline all</p>
+        </div>
+
         {loading ? (
           <NotificationSkeletal />
         ) : (
@@ -75,12 +79,14 @@ const Notifications = () => {
             {p.map((notif) => (
               <div className="notifications-item-wrapper">
                 <div className="notifications-sender-details-wrapper">
-                  <div className="notifications-sender-icon">A</div>
+                  <div className="notifications-sender-icon">
+                    {notif.fromName[0].toUpperCase()}
+                  </div>
                   <p className="notifications-top-content">{notif.fromName}</p>
                 </div>
-                <div className="notifications-email-span">
+                {/* <div className="notifications-email-span">
                   {notif.fromEmail}
-                </div>
+                </div> */}
 
                 <p className="notifications-invited">
                   Invited you to join a project.
@@ -99,7 +105,7 @@ const Notifications = () => {
                   >
                     Accept
                   </div>
-                  <div className="notifications-cancel-button">Cancel</div>
+                  <div className="notifications-cancel-button">Decline</div>
                 </div>
               </div>
             ))}
