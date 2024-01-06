@@ -108,7 +108,7 @@ const App = ({ toggleLoading }) => {
     setC([...a]);
     console.log(a);
     console.log(c);
-    fetchMembers();
+
     fetchTasks();
     // window.addEventListener("resize", resizeTableX);
 

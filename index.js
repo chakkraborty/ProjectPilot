@@ -142,11 +142,12 @@ app.post("/api/getMembers", protect, async (req, res) => {
     }
     res.status(201).json(ans);
   } catch (error) {
+    console.log("here ");
     console.log(error);
   }
 });
 
-app.post("/api/deleteMember", async (req, res) => {
+app.post("/api/deleteMember", protect, async (req, res) => {
   try {
     let { emailId, projectId } = req.body;
     console.log(emailId);
@@ -192,17 +193,14 @@ app.post("/api/deleteMember", async (req, res) => {
   }
 });
 
-app.post("/api/createTask", async (req, res) => {
-  let {
-    createdById,
-    projectId,
-    title,
-    description,
-    status,
-    tags,
-    startDate,
-    dueDate,
-  } = req.body;
+app.post("/api/createTask", protect, async (req, res) => {
+  let { projectId, title, description, status, tags, startDate, dueDate } =
+    req.body;
+
+  let token = req.headers.authorization.split(" ")[1];
+  const dec = jwt.verify(token, process.env.secret);
+  const createdById = await User.findById(dec._id);
+
   //console.log(req.body);
   let a = await Task.create({
     createdById,
@@ -222,7 +220,7 @@ app.post("/api/createTask", async (req, res) => {
   }
 });
 
-app.post("/api/fetchTasks", async (req, res) => {
+app.post("/api/fetchTasks", protect, async (req, res) => {
   try {
     let { projectId } = req.body;
     let a = await Task.find({ projectId });

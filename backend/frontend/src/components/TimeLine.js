@@ -10,10 +10,12 @@ import { useState, useEffect } from "react";
 import MembersSkeletal from "../skeletal/membersSkeletal";
 import TimelineSkeletal from "../skeletal/timelineSkeletal";
 import SuccessToast from "../toast/SuccessToast";
+import SessionError from "./SessionError";
 const TimeLine = () => {
+  const [showError, setShowError] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
-
+  let token = localStorage.getItem("token");
   const handleSuccessMessageTimeout = () => {
     setTimeout(() => {
       setShowSuccessMessage(false);
@@ -46,16 +48,23 @@ const TimeLine = () => {
 
   const [members, setMembers] = useState([]);
   async function fetchMembers() {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-
-    let a = await axios.post("/api/getMembers", { projectId }, config);
-    if (a) {
-      setMembers(a.data);
-      console.log(a.data);
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      };
+      let a = await axios.post("/api/getMembers", { projectId }, config);
+      if (a) {
+        setMembers(a.data);
+        console.log(a.data);
+      }
+    } catch (error) {
+      console.log(error);
+      if (error.response.data.type === 2) {
+        setShowError(true);
+      }
     }
   }
   useEffect(() => {
@@ -63,6 +72,7 @@ const TimeLine = () => {
   }, []);
   return (
     <div className="t-wrapper">
+      {showError ? <SessionError /> : <></>}
       <Navbar />
 
       <div className="t-lower-wrapper">

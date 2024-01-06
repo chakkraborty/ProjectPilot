@@ -161,17 +161,25 @@ const ProjectPage = () => {
   const openn = Boolean(anchorEl);
   const id = openn ? "simple-popover" : undefined;
   async function fetchTasks() {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-    let a = await axios.post("/api/fetchTasks", { projectId }, config);
-    if (a) {
-      await setTasks(a.data);
-      await setTasksInit(a.data);
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      };
+      let a = await axios.post("/api/fetchTasks", { projectId }, config);
+      if (a) {
+        await setTasks(a.data);
+        await setTasksInit(a.data);
+      }
+      setTaskLoading(false);
+    } catch (error) {
+      console.log(error);
+      if (error.response.data.type === 2) {
+        setShowError(true);
+      }
     }
-    setTaskLoading(false);
   }
   function triggerMembersAdded() {
     successMessageFunction("Success ! Invitations for joining sent !");

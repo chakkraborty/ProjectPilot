@@ -22,6 +22,7 @@ import StatusSelector from "./StatusSelector";
 const CreateTask = ({ onClose, onOpen, fetchTasks }) => {
   const [loader, setLoader] = useState(false);
   const [warningMessage, setWarningMessage] = useState(false);
+  let token = localStorage.getItem("token");
 
   const [status, setStatus] = React.useState("todo");
   const [title, setTitle] = useState("");
@@ -99,6 +100,7 @@ const CreateTask = ({ onClose, onOpen, fetchTasks }) => {
 
       const config = {
         headers: {
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       };
