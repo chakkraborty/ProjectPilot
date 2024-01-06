@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import AddPeople from "./AddPeople";
 import axios from "axios";
 import SuccessToast from "../toast/SuccessToast";
+import SessionError from "./SessionError";
 import ProjectSettingsSkeletal from "../skeletal/projectSettingsSkeletal";
 import FailureToast from "../toast/FailureToast";
 const MembersList = ({
@@ -12,6 +13,9 @@ const MembersList = ({
   triggerMembersAdded,
   deleteMemberError,
 }) => {
+  let token = localStorage.getItem("token");
+  const [showError, setShowError] = useState(false);
+
   let { projectId } = useParams();
   const [addPeopleState, setAddPeopleState] = useState(false);
 
@@ -36,6 +40,7 @@ const MembersList = ({
     try {
       const config = {
         headers: {
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       };
@@ -58,6 +63,9 @@ const MembersList = ({
       if (error.response.data.type === 102) {
         deleteMemberError();
       }
+      if (error.response.data.type === 2) {
+        setShowError(true);
+      }
     }
   }
 
@@ -65,6 +73,7 @@ const MembersList = ({
     try {
       const config = {
         headers: {
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       };
@@ -77,6 +86,9 @@ const MembersList = ({
       }
     } catch (error) {
       console.log(error);
+      if (error.response.data.type === 2) {
+        setShowError(true);
+      }
     }
   }
 
@@ -86,6 +98,7 @@ const MembersList = ({
 
   return (
     <div className="members-list">
+      {showError ? <SessionError /> : <></>}
       <p className="members-list-title">Members</p>
       <div className="members-list-component-wrapper">
         <div className="members-list-top-section-wrapper">

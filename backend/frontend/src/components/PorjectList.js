@@ -15,6 +15,8 @@ import SuccessToast from "../toast/SuccessToast.js";
 import NavbarSettingsDropdown from "./NavbarSettingsDropdown";
 import Pagination from "./Pagination";
 const PorjectList = ({ triggerProjectCreated }) => {
+  let token = localStorage.getItem("token");
+
   const [open, setOpen] = useState(false);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -34,6 +36,7 @@ const PorjectList = ({ triggerProjectCreated }) => {
     try {
       const config = {
         headers: {
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       };

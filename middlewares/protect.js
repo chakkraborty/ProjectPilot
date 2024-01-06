@@ -4,9 +4,13 @@ const protect = async (req, res, next) => {
   try {
     console.log(req.body);
 
-    let { token } = req.body;
-    console.log("token is : proted route :");
-    console.timeLog(token);
+    let token;
+    if (
+      req.headers.authorization &&
+      req.headers.authorization.startsWith("Bearer")
+    ) {
+      token = req.headers.authorization.split(" ")[1];
+    }
 
     if (!token) {
       console.log("lmao no token");
@@ -16,6 +20,7 @@ const protect = async (req, res, next) => {
         message: "Invalid user detected! Please Login again",
       });
     }
+
     const dec = jwt.verify(token, process.env.secret);
     const user = await User.findById(dec._id);
     if (!user) {
@@ -25,6 +30,8 @@ const protect = async (req, res, next) => {
 
     next();
   } catch (error) {
+    console.log("error found");
+
     res
       .status(401)
       .send({ type: 2, message: "Invalid user detected. Please login again!" });

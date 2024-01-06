@@ -10,6 +10,11 @@ const CreateProject = ({
   fetchProjects,
   triggerProjectCreated,
 }) => {
+  let token = localStorage.getItem("token");
+
+  if (!token) {
+  }
+
   let createdBy = localStorage.getItem("_id");
   let leadName = localStorage.getItem("name");
 
@@ -21,6 +26,7 @@ const CreateProject = ({
     try {
       const config = {
         headers: {
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       };

@@ -15,11 +15,14 @@ import LiveSearch from "./LiveSearch";
 import Popover from "@mui/material/Popover";
 import DeleteModal from "./DeleteModal";
 import "./ProjectPage.css";
+import SessionError from "./SessionError.js";
 import KanbanSkeletal from "../skeletal/kanbanSkeletal.js";
 import ProjectLeftPanel from "./ProjectLeftPanel";
 const ProjectPage = () => {
+  let token = localStorage.getItem("token");
   const [tasks, setTasks] = useState([]);
   const [tasksInit, setTasksInit] = useState([]);
+  const [showError, setShowError] = useState(false);
 
   const [addMembers, setAddMembers] = useState(0);
   function toggleAddMembers() {
@@ -95,16 +98,24 @@ const ProjectPage = () => {
 
   const [members, setMembers] = useState([]);
   async function fetchMembers() {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      };
 
-    let a = await axios.post("/api/getMembers", { projectId }, config);
-    if (a) {
-      setMembers(a.data);
-      console.log(a.data);
+      let a = await axios.post("/api/getMembers", { projectId }, config);
+      if (a) {
+        setMembers(a.data);
+        console.log(a.data);
+      }
+    } catch (error) {
+      console.log(error);
+      if (error.response.data.type === 2) {
+        setShowError(true);
+      }
     }
   }
 
@@ -173,6 +184,7 @@ const ProjectPage = () => {
 
   return (
     <div className="project-board-page">
+      {showError ? <SessionError /> : <></>}
       <Navbar />
 
       {showSuccessMessage ? <SuccessToast message={successMessage} /> : <></>}

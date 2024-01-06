@@ -91,7 +91,7 @@ app.post("/api/register", async (req, res) => {
   }
 });
 
-app.post("/api/createProject", async (req, res) => {
+app.post("/api/createProject", protect, async (req, res) => {
   let { createdBy, name, leadName } = req.body;
   let a = await Project.create({ createdBy, name, leadName });
   if (a) {
@@ -126,9 +126,10 @@ app.post("/api/getProjects", protect, async (req, res) => {
   }
 });
 
-app.post("/api/getMembers", async (req, res) => {
+app.post("/api/getMembers", protect, async (req, res) => {
   try {
     let { projectId } = req.body;
+    console.log("get members called");
 
     let a = await Project.findOne({ _id: projectId });
     let b = [];
@@ -222,11 +223,17 @@ app.post("/api/createTask", async (req, res) => {
 });
 
 app.post("/api/fetchTasks", async (req, res) => {
-  let { projectId } = req.body;
-  let a = await Task.find({ projectId });
-  if (a) res.status(201).json(a);
-  else {
-    res.status(401).json({ message: "There was an error fetching the tasks" });
+  try {
+    let { projectId } = req.body;
+    let a = await Task.find({ projectId });
+    if (a) res.status(201).json(a);
+    else {
+      res
+        .status(401)
+        .json({ message: "There was an error fetching the tasks" });
+    }
+  } catch (error) {
+    console.log(error);
   }
 });
 
