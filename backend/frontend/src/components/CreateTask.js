@@ -23,7 +23,7 @@ const CreateTask = ({ onClose, onOpen, fetchTasks }) => {
   const [loader, setLoader] = useState(false);
   const [warningMessage, setWarningMessage] = useState(false);
 
-  const [status, setStatus] = React.useState("");
+  const [status, setStatus] = React.useState("todo");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [tag, setTag] = useState("");

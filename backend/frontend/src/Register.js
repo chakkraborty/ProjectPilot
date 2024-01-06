@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Alert from "@mui/material/Alert";
 import CircularProgress from "@mui/material/CircularProgress";
-import Logo5 from "./components/Logo5.png";
+import Logo5 from "./components/logonew.png";
 import LoadingPage from "./components/LoadingPage";
 import Toast from "./Toast";
 

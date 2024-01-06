@@ -4,7 +4,7 @@ import Notifications from "./Notifications";
 import { useState, useEffect } from "react";
 import { useRef } from "react";
 import Box from "./box.png";
-import Logo from "./Logo5.png";
+import Logo from "./logonew.png";
 import NavbarSettingsDropdown from "./NavbarSettingsDropdown";
 const Navbar = () => {
   const ll = "(@arnikchakraborty2001@gmad.com)";

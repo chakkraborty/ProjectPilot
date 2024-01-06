@@ -1,27 +1,46 @@
 import React from "react";
 import "./SessionError.css";
 import { useNavigate } from "react-router-dom";
+import CircularProgress from "@mui/material/CircularProgress";
+import { useState } from "react";
+import LoaderScreen from "./LoaderScreen";
 const SessionError = () => {
+  const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
+  const [loadScreen, setLoadScreen] = useState(false);
+  const handleTimeout = () => {
+    setTimeout(() => {
+      setLoadScreen(true);
+      handleTimeoutLoader();
+    }, 2000);
+  };
+  const handleTimeoutLoader = () => {
+    setTimeout(() => {
+      navigate("/login");
+    }, 2000);
+  };
+
   function navigateToLogin() {
+    setLoader(true);
     localStorage.removeItem("_id");
     localStorage.removeItem("name");
 
     localStorage.removeItem("email");
 
     localStorage.removeItem("token");
-    navigate("/login");
+    handleTimeout();
   }
 
   return (
     <div className="session-error-wrapper">
+      {loadScreen ? <LoaderScreen /> : <></>}
       <div className="session-error-div session-error-div-show">
         {/* <div className="session-error-circle"></div> */}
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="30"
-          height="30"
-          fill="rgb(201, 65, 50)"
+          width="25"
+          height="25"
+          fill="#f15b50"
           class="bi bi-exclamation-circle"
           viewBox="0 0 16 16"
         >
@@ -39,7 +58,12 @@ const SessionError = () => {
             className="session-error-login-button"
             onClick={() => navigateToLogin()}
           >
-            Log in
+            {loader ? (
+              <CircularProgress size={15} className="session-error-loader" />
+            ) : (
+              <></>
+            )}
+            <p>Login</p>
           </div>
         </div>
       </div>

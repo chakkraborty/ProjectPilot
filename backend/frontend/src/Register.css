@@ -8,7 +8,7 @@
   background-color: #1d2125;
 }
 .register-page-logo {
-  width: 40px;
+  width: 55px;
   position: absolute;
   top: 0;
   margin-top: 20px;
@@ -97,4 +97,15 @@
 .register-page-subwrapper {
   display: flex;
   flex-direction: column;
+
+  animation: registerPageAnimation 1s ease;
+}
+
+@keyframes registerPageAnimation {
+  from {
+    margin-top: -35px;
+  }
+  to {
+    margin-top: 0px;
+  }
 }

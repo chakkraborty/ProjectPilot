@@ -106,19 +106,23 @@ app.post("/api/createProject", async (req, res) => {
 // fetch all projects that the current user is participating in
 
 app.post("/api/getProjects", protect, async (req, res) => {
-  let { userId } = req.body;
-  console.log(userId);
+  try {
+    let { userId } = req.body;
+    console.log(userId);
 
-  let ans = await Project.find({ list: userId });
-  if (ans) {
-    console.log(ans);
-    console.log(typeof ans);
+    let ans = await Project.find({ list: userId });
+    if (ans) {
+      console.log(ans);
+      console.log(typeof ans);
 
-    res.status(201).json(ans);
-  } else {
-    res
-      .status(401)
-      .json({ message: "No projects foudn for this particular userId" });
+      res.status(201).json(ans);
+    } else {
+      res
+        .status(401)
+        .json({ message: "No projects foudn for this particular userId" });
+    }
+  } catch (error) {
+    console.log(error);
   }
 });
 

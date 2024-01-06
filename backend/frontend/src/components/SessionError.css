@@ -4,7 +4,7 @@
   left: 0;
   height: 100%;
   width: 100%;
-  background-color: rgb(0, 0, 0, 0.5);
+  background-color: rgb(0, 0, 0, 0.8);
   z-index: 1;
   display: flex;
 
@@ -21,25 +21,25 @@
 .session-error-div {
   display: flex;
   height: fit-content;
-  animation: slideIn 0.5s ease;
+  animation: slideSessionError 1s ease;
 }
 
 .session-error-right-col {
   margin-left: 10px;
 }
-@keyframes slideIn {
+@keyframes slideSessionError {
   from {
-    margin-top: -1px; /* Start from 30px above the final position */
+    margin-top: 10px; /* Start from 30px above the final position */
   }
   to {
-    margin-top: 10%; /* Move to 10% from the top */
+    margin-top: 20px; /* Move to 10% from the top */
   }
 }
 
 .session-error-div {
-  background-color: #27313b;
+  background-color: #282e33;
   padding: 20px;
-  border-radius: 6px;
+  border-radius: 4px;
   margin-top: 10%;
 }
 
@@ -69,11 +69,17 @@
   padding-right: 15px;
   color: rgb(230, 230, 230);
   border-radius: 5px;
-  border: 1.5px solid rgb(79, 101, 132);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-weight: 500;
 }
 
 .session-error-login-button:hover {
   cursor: pointer;
   background-color: #6c879e;
+}
+
+.session-error-loader {
+  margin-right: 10px;
 }

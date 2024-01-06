@@ -3,7 +3,7 @@ import "./landingStyles.css";
 import GroupWorkIcon from "@mui/icons-material/GroupWork";
 import { blue, blueGrey } from "@mui/material/colors";
 import { useNavigate } from "react-router-dom";
-import Logo5 from "./components/Logo5.png";
+import Logo5 from "./components/logonew.png";
 const LandingPage = () => {
   const navigate = useNavigate();
   function navLoginPage() {
