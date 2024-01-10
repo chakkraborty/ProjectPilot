@@ -13,6 +13,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useParams } from "react-router-dom";
 import "./Description.css";
 const Description = ({ taskId }) => {
+  let token = localStorage.getItem("token");
   console.log(taskId);
 
   const [selectedStartDate, setSelectedStartDate] = useState(null);
@@ -22,6 +23,7 @@ const Description = ({ taskId }) => {
       setSelectedStartDate(date);
       const config = {
         headers: {
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       };
@@ -43,6 +45,7 @@ const Description = ({ taskId }) => {
       setSelectedDueDate(date);
       const config = {
         headers: {
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       };
@@ -92,6 +95,7 @@ const Description = ({ taskId }) => {
 
     const config = {
       headers: {
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
     };
@@ -106,6 +110,7 @@ const Description = ({ taskId }) => {
       setStatus(a);
       const config = {
         headers: {
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       };
@@ -141,6 +146,7 @@ const Description = ({ taskId }) => {
   async function fetchDescriptionDetails() {
     const config = {
       headers: {
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
     };
@@ -185,6 +191,7 @@ const Description = ({ taskId }) => {
     try {
       const config = {
         headers: {
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       };

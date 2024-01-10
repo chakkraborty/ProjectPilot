@@ -10,9 +10,12 @@ const DeleteModal = ({
   fetchTasks,
   failureMessageFunction,
 }) => {
+  let token = localStorage.getItem("token");
+
   async function deleteTaskHandler() {
     const config = {
       headers: {
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
     };

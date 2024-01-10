@@ -235,6 +235,8 @@ app.post("/api/fetchTasks", protect, async (req, res) => {
   }
 });
 
+// realtime search , to be removed
+
 app.post("/api/getUsers", async (req, res) => {
   let { email } = req.body;
   let substring = email;
@@ -246,6 +248,8 @@ app.post("/api/getUsers", async (req, res) => {
   }
   res.status(201).json(response);
 });
+
+//realtime search , to be removed
 
 app.post("/api/searchProjects", async (req, res) => {
   try {
@@ -266,24 +270,28 @@ app.post("/api/searchProjects", async (req, res) => {
   }
 });
 
-app.post("/api/assignToTask", async (req, res) => {
-  let { taskId, email } = req.body;
-  console.log(req.body);
+app.post("/api/assignToTask", protect, async (req, res) => {
+  try {
+    let { taskId, email } = req.body;
+    console.log(req.body);
 
-  let a = await User.findOne({ email });
-  let b = await Task.findOne({ _id: taskId });
-  if (b) {
-    b.assignedToName = a.name;
-    b.assignedToId = a._id;
-    b = await b.save();
-    console.log(b);
-  }
-  if (b) {
-    res.status(201).json("Successfully assigned it !");
+    let a = await User.findOne({ email });
+    let b = await Task.findOne({ _id: taskId });
+    if (b) {
+      b.assignedToName = a.name;
+      b.assignedToId = a._id;
+      b = await b.save();
+      console.log(b);
+    }
+    if (b) {
+      res.status(201).json("Successfully assigned it !");
+    }
+  } catch (error) {
+    console.log(error);
   }
 });
 
-app.post("api/deleteTask", async (req, res) => {
+app.post("api/deleteTask", protect, async (req, res) => {
   let { taskId } = req.body;
   console.log(req.body);
 
@@ -295,7 +303,7 @@ app.post("api/deleteTask", async (req, res) => {
   // }
 });
 
-app.post("/api/abc", async (req, res) => {
+app.post("/api/abc", protect, async (req, res) => {
   let { taskId } = req.body;
   console.log(req.body);
 
@@ -307,7 +315,7 @@ app.post("/api/abc", async (req, res) => {
   }
 });
 
-app.post("/api/getTaskById", async (req, res) => {
+app.post("/api/getTaskById", protect, async (req, res) => {
   try {
     let { taskId } = req.body;
     let a = await Task.findOne({ _id: taskId });
@@ -323,7 +331,7 @@ app.post("/api/getTaskById", async (req, res) => {
   }
 });
 
-app.post("/api/task/updateDescription/", async (req, res) => {
+app.post("/api/task/updateDescription/", protect, async (req, res) => {
   try {
     let { taskId, description } = req.body;
     let a = await Task.findOne({ _id: taskId });
@@ -340,7 +348,7 @@ app.post("/api/task/updateDescription/", async (req, res) => {
   }
 });
 
-app.post("/api/issue/createIssue", async (req, res) => {
+app.post("/api/issue/createIssue", protect, async (req, res) => {
   try {
     let { taskId, createdByName, comment } = req.body;
     let a = await Issue.create({ taskId, createdByName, comment });
@@ -354,7 +362,7 @@ app.post("/api/issue/createIssue", async (req, res) => {
   }
 });
 
-app.post("/api/issue/getIssuesById", async (req, res) => {
+app.post("/api/issue/getIssuesById", protect, async (req, res) => {
   try {
     let { taskId } = req.body;
     let a = await Issue.find({ taskId });
@@ -365,7 +373,7 @@ app.post("/api/issue/getIssuesById", async (req, res) => {
   }
 });
 
-app.post("/api/deleteIssue", async (req, res) => {
+app.post("/api/deleteIssue", protect, async (req, res) => {
   try {
     let { _id } = req.body;
     let a = await Issue.findByIdAndDelete({ _id });
@@ -376,7 +384,7 @@ app.post("/api/deleteIssue", async (req, res) => {
   }
 });
 
-app.post("/api/issue/markAsResolved", async (req, res) => {
+app.post("/api/issue/markAsResolved", protect, async (req, res) => {
   try {
     let { _id } = req.body;
     let a = await Issue.findOne({ _id });
@@ -388,7 +396,7 @@ app.post("/api/issue/markAsResolved", async (req, res) => {
     console.log(error);
   }
 });
-app.post("/api/issue/openIssue", async (req, res) => {
+app.post("/api/issue/openIssue", protect, async (req, res) => {
   try {
     let { _id } = req.body;
     let a = await Issue.findOne({ _id });
@@ -401,7 +409,7 @@ app.post("/api/issue/openIssue", async (req, res) => {
   }
 });
 
-app.post("/api/fetchDescriptionDetails", async (req, res) => {
+app.post("/api/fetchDescriptionDetails", protect, async (req, res) => {
   try {
     let { taskId } = req.body;
     let a = await Task.findOne({ _id: taskId });
@@ -427,7 +435,7 @@ app.post("/api/fetchDescriptionDetails", async (req, res) => {
   }
 });
 
-app.post("/api/task/updateTags", async (req, res) => {
+app.post("/api/task/updateTags", protect, async (req, res) => {
   try {
     let { taskId, tags } = req.body;
     let a = await Task.findOne({ _id: taskId });
@@ -442,7 +450,7 @@ app.post("/api/task/updateTags", async (req, res) => {
   }
 });
 
-app.post("/api/task/updateStatus", async (req, res) => {
+app.post("/api/task/updateStatus", protect, async (req, res) => {
   try {
     let { taskId, status } = req.body;
     let a = await Task.findOne({ _id: taskId });
@@ -462,7 +470,7 @@ app.post("/api/task/updateStatus", async (req, res) => {
   }
 });
 
-app.post("/api/task/updateSummary", async (req, res) => {
+app.post("/api/task/updateSummary", protect, async (req, res) => {
   try {
     let { taskId, summary } = req.body;
     let a = await Task.findOne({ _id: taskId });
@@ -476,7 +484,7 @@ app.post("/api/task/updateSummary", async (req, res) => {
   }
 });
 
-app.post("/api/invite", async (req, res) => {
+app.post("/api/invite", protect, async (req, res) => {
   try {
     let { fromId, arr, projectId } = req.body;
     for (let i = 0; i < arr.length; i++) {
@@ -512,7 +520,7 @@ app.post("/api/invite", async (req, res) => {
   }
 });
 
-app.post("/api/getNotifications", async (req, res) => {
+app.post("/api/getNotifications", protect, async (req, res) => {
   try {
     const { userId } = req.body;
     let a = await Notification.find({ toId: userId });
@@ -530,7 +538,7 @@ app.post("/api/getNotifications", async (req, res) => {
   }
 });
 
-app.post("/api/acceptInvitation", async (req, res) => {
+app.post("/api/acceptInvitation", protect, async (req, res) => {
   try {
     const { notifId } = req.body;
     let a = await Notification.findOne({ _id: notifId });
@@ -565,7 +573,7 @@ app.post("/api/acceptInvitation", async (req, res) => {
   }
 });
 
-app.post("/api/rejectInvitation", async (req, res) => {
+app.post("/api/rejectInvitation", protect, async (req, res) => {
   try {
     const { notifId } = req.body;
     console.log("reject notif " + notifId);
@@ -583,7 +591,7 @@ app.post("/api/rejectInvitation", async (req, res) => {
   }
 });
 
-app.post("/api/setStartDate", async (req, res) => {
+app.post("/api/setStartDate", protect, async (req, res) => {
   try {
     let taskId = req.body.taskId;
     let date = req.body.stDate;
@@ -595,7 +603,7 @@ app.post("/api/setStartDate", async (req, res) => {
     console.log(error);
   }
 });
-app.post("/api/setDueDate", async (req, res) => {
+app.post("/api/setDueDate", protect, async (req, res) => {
   try {
     let taskId = req.body.taskId;
     let date = req.body.dueDate;
@@ -608,6 +616,8 @@ app.post("/api/setDueDate", async (req, res) => {
   }
 });
 
+// issue with making this route protected
+
 app.post("/api/getProjectDetails", async (req, res) => {
   try {
     let { projectId } = req.body;
@@ -618,13 +628,13 @@ app.post("/api/getProjectDetails", async (req, res) => {
         leadName: a.leadName,
         category: a.category,
       });
-    } else res.status(401).send({ message: "Project Not Found !" });
+    } else res.status(201).send({ message: "Project Not Found !" });
   } catch (error) {
     console.log(error);
   }
 });
 
-app.post("/api/updateProject", async (req, res) => {
+app.post("/api/updateProject", protect, async (req, res) => {
   try {
     let { name, projectId, category } = req.body;
     let a = await Project.findOne({ _id: projectId });

@@ -8,7 +8,7 @@ const AddPeople = ({ projectId, toggleAddMembers, triggerMembersAdded }) => {
   const [arr, setArr] = useState([]);
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(0);
-
+  let token = localStorage.getItem("token");
   async function handleEmail(event) {
     if (event.key === "Enter") {
       if (email) {
@@ -22,6 +22,7 @@ const AddPeople = ({ projectId, toggleAddMembers, triggerMembersAdded }) => {
     try {
       const config = {
         headers: {
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       };
@@ -41,6 +42,8 @@ const AddPeople = ({ projectId, toggleAddMembers, triggerMembersAdded }) => {
       }
     } catch (error) {
       console.log(error);
+      setLoading(0);
+      toggleAddMembers();
     }
   }
 

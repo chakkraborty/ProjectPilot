@@ -9,7 +9,7 @@ import NotificationSkeletal from "../skeletal/notificationSkeletal";
 const Notifications = () => {
   const ll = "(@arnikchakraborty2001@gmad.com)";
   const [loading, setLoading] = useState(true);
-
+  let token = localStorage.getItem("token");
   const [p, setP] = useState([]);
 
   async function fetchNotifications() {
@@ -20,6 +20,7 @@ const Notifications = () => {
       console.log(userId);
       const config = {
         headers: {
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       };
@@ -43,6 +44,7 @@ const Notifications = () => {
 
       const config = {
         headers: {
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       };
@@ -62,6 +64,7 @@ const Notifications = () => {
 
       const config = {
         headers: {
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       };

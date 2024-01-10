@@ -13,6 +13,7 @@ import SuccessToast from "../toast/SuccessToast.js";
 import axios from "axios";
 import FailureToast from "../toast/FailureToast.js";
 const ProjectSettings = () => {
+  let token = localStorage.getItem("token");
   const [catList, setCatList] = useState(false);
   const [category, setCategory] = useState("");
   const [changesLoader, setChangesLoader] = useState(false);
@@ -86,6 +87,7 @@ const ProjectSettings = () => {
     try {
       const config = {
         headers: {
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       };
@@ -109,6 +111,7 @@ const ProjectSettings = () => {
     try {
       const config = {
         headers: {
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       };

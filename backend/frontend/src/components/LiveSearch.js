@@ -6,7 +6,7 @@ function LiveSearch({ taskId, onClose, fetchTasks }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(false);
-
+  let token = localStorage.getItem("token");
   function display() {
     // console.log(a + "  |  " + b);
     console.log("temp");
@@ -15,6 +15,7 @@ function LiveSearch({ taskId, onClose, fetchTasks }) {
   async function handleAssign(email, taskId) {
     const config = {
       headers: {
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
     };

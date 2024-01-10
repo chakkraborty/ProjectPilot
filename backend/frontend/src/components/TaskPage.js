@@ -5,9 +5,11 @@ import Description from "./Description";
 import { useParams } from "react-router-dom";
 import ProjectLeftPanel from "./ProjectLeftPanel.js";
 import "./TaskPage.css";
-
+import SessionError from "./SessionError.js";
 import axios from "axios";
 const TaskPage = () => {
+  let token = localStorage.getItem("token");
+  const [showError, setShowError] = useState(false); //session error modal
   const [trigger, setTrigger] = useState(false);
   const [triggReport, setTriggReport] = useState(false);
   const [summary, setSummary] = useState("");
@@ -26,6 +28,7 @@ const TaskPage = () => {
     try {
       const config = {
         headers: {
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       };
@@ -34,6 +37,9 @@ const TaskPage = () => {
       fetchIssues();
     } catch (error) {
       console.log(error);
+      if (error.response.data.type === 2) {
+        setShowError(true);
+      }
     }
   }
 
@@ -41,6 +47,7 @@ const TaskPage = () => {
     try {
       const config = {
         headers: {
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       };
@@ -49,12 +56,17 @@ const TaskPage = () => {
       fetchIssues();
     } catch (error) {
       console.log(error);
+
+      if (error.response.data.type === 2) {
+        setShowError(true);
+      }
     }
   }
   async function openIssueHandler(a) {
     try {
       const config = {
         headers: {
+          Authorizaton: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       };
@@ -63,6 +75,9 @@ const TaskPage = () => {
       fetchIssues();
     } catch (error) {
       console.log(error);
+      if (error.response.data.type === 2) {
+        setShowError(true);
+      }
     }
   }
 
@@ -70,6 +85,7 @@ const TaskPage = () => {
     try {
       const config = {
         headers: {
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       };
@@ -79,6 +95,9 @@ const TaskPage = () => {
       }
     } catch (error) {
       console.log(error);
+      if (error.response.data.type === 2) {
+        setShowError(true);
+      }
     }
   }
 
@@ -86,6 +105,7 @@ const TaskPage = () => {
     try {
       const config = {
         headers: {
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       };
@@ -97,6 +117,9 @@ const TaskPage = () => {
       setSummary(a.data.title);
     } catch (error) {
       console.log(error);
+      if (error.response.data.type === 2) {
+        setShowError(true);
+      }
     }
   }
 
@@ -104,6 +127,7 @@ const TaskPage = () => {
     try {
       const config = {
         headers: {
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       };
@@ -115,6 +139,9 @@ const TaskPage = () => {
       );
     } catch (error) {
       console.log(error);
+      if (error.response.data.type === 2) {
+        setShowError(true);
+      }
     }
   }
 
@@ -129,6 +156,7 @@ const TaskPage = () => {
     try {
       const config = {
         headers: {
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       };
@@ -155,6 +183,7 @@ const TaskPage = () => {
     try {
       const config = {
         headers: {
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       };
@@ -172,6 +201,9 @@ const TaskPage = () => {
       setTrigger(false);
     } catch (error) {
       console.log(error);
+      if (error.response.data.type === 2) {
+        setShowError(true);
+      }
     }
   }
 
@@ -182,6 +214,7 @@ const TaskPage = () => {
 
   return (
     <div className="container">
+      {showError ? <SessionError /> : <></>}
       <Navbar />
 
       <div className="content-container">

@@ -11,6 +11,8 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import MergeTypeRoundedIcon from "@mui/icons-material/MergeTypeRounded";
 const App = ({ toggleLoading }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
+  let token = localStorage.getItem("token");
+
   let m = currentDate.getMonth();
 
   let diff = new Date() - new Date(currentDate.getFullYear(), m - 2, 0);
@@ -147,6 +149,7 @@ const App = ({ toggleLoading }) => {
     try {
       const config = {
         headers: {
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       };
