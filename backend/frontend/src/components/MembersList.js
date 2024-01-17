@@ -12,6 +12,8 @@ const MembersList = ({
   deletedMemberHandler,
   triggerMembersAdded,
   deleteMemberError,
+  showErrorTrigger,
+  showLoadingTrigger,
 }) => {
   let token = localStorage.getItem("token");
   const [showError, setShowError] = useState(false);
@@ -38,6 +40,11 @@ const MembersList = ({
 
   async function deleteMember(emailId) {
     try {
+      let token = localStorage.getItem("token");
+      if (!token) {
+        showLoadingTrigger();
+        return;
+      }
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -64,13 +71,18 @@ const MembersList = ({
         deleteMemberError();
       }
       if (error.response.data.type === 2) {
-        setShowError(true);
+        showErrorTrigger();
       }
     }
   }
 
   async function fetchMembers() {
     try {
+      let token = localStorage.getItem("token");
+      if (!token) {
+        showLoadingTrigger();
+        return;
+      }
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -87,7 +99,7 @@ const MembersList = ({
     } catch (error) {
       console.log(error);
       if (error.response.data.type === 2) {
-        setShowError(true);
+        showErrorTrigger();
       }
     }
   }
@@ -170,6 +182,8 @@ const MembersList = ({
             projectId={projectId}
             toggleAddMembers={toggleAddMembers}
             triggerMembersAdded={triggerMembersAdded}
+            showLoadingTrigger={showLoadingTrigger}
+            showErrorTrigger={showErrorTrigger}
           />
         ) : (
           <></>

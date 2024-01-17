@@ -17,7 +17,7 @@ import LoaderScreen from "./LoaderScreen.js";
 import FailureToast from "../toast/FailureToast.js";
 const ProjectSettings = () => {
   const navigate = useNavigate();
-  let token = localStorage.getItem("token");
+
   const [catList, setCatList] = useState(false);
   const [category, setCategory] = useState("");
   const [changesLoader, setChangesLoader] = useState(false);
@@ -103,6 +103,11 @@ const ProjectSettings = () => {
 
   async function updateProject() {
     try {
+      let token = localStorage.getItem("token");
+      if (!token) {
+        showLoadingTrigger();
+        return;
+      }
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -130,6 +135,11 @@ const ProjectSettings = () => {
 
   async function fetchProjectDetails() {
     try {
+      let token = localStorage.getItem("token");
+      if (!token) {
+        showLoadingTrigger();
+        return;
+      }
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -151,6 +161,7 @@ const ProjectSettings = () => {
 
   useEffect(() => {
     fetchProjectDetails();
+    let token = localStorage.getItem("token");
     if (!token) {
       showLoadingTrigger();
     }
@@ -238,6 +249,7 @@ const ProjectSettings = () => {
               triggerMembersAdded={triggerMembersAdded}
               deleteMemberError={deleteMemberError}
               showErrorTrigger={showErrorTrigger}
+              showLoadingTrigger={showLoadingTrigger}
             />
           </div>
         </div>

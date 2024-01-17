@@ -19,7 +19,13 @@ import StatusSelector from "./StatusSelector";
 // import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 // import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 // import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-const CreateTask = ({ onClose, onOpen, fetchTasks }) => {
+const CreateTask = ({
+  onClose,
+  onOpen,
+  fetchTasks,
+  showLoadingTrigger,
+  showErrorTrigger,
+}) => {
   const [loader, setLoader] = useState(false);
   const [warningMessage, setWarningMessage] = useState(false);
   let token = localStorage.getItem("token");
@@ -97,7 +103,11 @@ const CreateTask = ({ onClose, onOpen, fetchTasks }) => {
   async function addTaskHandler() {
     try {
       setLoader(true);
-
+      let token = localStorage.getItem("token");
+      if (!token) {
+        showLoadingTrigger();
+        return;
+      }
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -134,6 +144,9 @@ const CreateTask = ({ onClose, onOpen, fetchTasks }) => {
     } catch (error) {
       console.log(error);
       setLoader(false);
+      if (error.response.data === 2) {
+        showErrorTrigger();
+      }
     }
   }
 

@@ -20,6 +20,7 @@ import SessionError from "./SessionError.js";
 import KanbanSkeletal from "../skeletal/kanbanSkeletal.js";
 import ProjectLeftPanel from "./ProjectLeftPanel";
 const ProjectPage = () => {
+  let tkn = localStorage.getItem("token");
   const [showError, setShowError] = useState(false);
   const [showLoading, setShowLoading] = useState(false);
   function showLoadingTrigger() {
@@ -35,15 +36,9 @@ const ProjectPage = () => {
 
   // showLoadingTrigger={showLoadingTrigger}
   // showErrorTrigger={showErrorTrigger}
-  let token = localStorage.getItem("token");
-  const navigate = useNavigate();
-  if (!token) {
-    localStorage.clear();
 
-    setTimeout(() => {
-      navigate("/login");
-    }, 1500);
-  }
+  const navigate = useNavigate();
+
   const [tasks, setTasks] = useState([]);
   const [tasksInit, setTasksInit] = useState([]);
 
@@ -122,6 +117,11 @@ const ProjectPage = () => {
   const [members, setMembers] = useState([]);
   async function fetchMembers() {
     try {
+      let token = localStorage.getItem("token");
+      if (!token) {
+        showLoadingTrigger();
+        return;
+      }
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -185,6 +185,11 @@ const ProjectPage = () => {
   const id = openn ? "simple-popover" : undefined;
   async function fetchTasks() {
     try {
+      let token = localStorage.getItem("token");
+      if (!token) {
+        showLoadingTrigger();
+        return;
+      }
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -209,13 +214,17 @@ const ProjectPage = () => {
     setShowSuccessMessage(true);
   }
   useEffect(() => {
+    let token = localStorage.getItem("token");
+    if (!token) {
+      showLoadingTrigger();
+    }
     fetchMembers();
     fetchTasks();
   }, []);
 
   return (
     <>
-      {token ? (
+      {tkn ? (
         <>
           <div className="project-board-page">
             {showError ? <SessionError /> : <></>}

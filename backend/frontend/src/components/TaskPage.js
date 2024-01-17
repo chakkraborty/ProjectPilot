@@ -31,7 +31,7 @@ const TaskPage = () => {
   }
 
   function loadingTrigger() {
-    showLoading(true);
+    setShowLoading(true);
     setTimeout(() => {
       localStorage.clear();
       navigate("/login");
@@ -148,6 +148,7 @@ const TaskPage = () => {
       };
 
       let a = await axios.post("/api/getTaskById", { taskId }, config);
+      console.log(a.data);
 
       setDescription(a.data.description);
       setPrevDesc(a.data.description);
@@ -221,6 +222,9 @@ const TaskPage = () => {
       setTriggReport(false);
     } catch (error) {
       console.log(error);
+      if (error.response.data.type === 2) {
+        setShowError(true);
+      }
     }
   }
 
@@ -444,8 +448,8 @@ const TaskPage = () => {
         <div className="right-col">
           <Description
             taskId={taskId}
-            loadingTrigger={loadingTrigger}
-            triggerSessionError={triggerSessionError}
+            // loadingTrigger={loadingTrigger}
+            // triggerSessionError={triggerSessionError}
           />
         </div>
       </div>

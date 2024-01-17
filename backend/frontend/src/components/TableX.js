@@ -9,7 +9,7 @@ import StarsIcon from "@mui/icons-material/Stars";
 import { useNavigate } from "react-router-dom";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import MergeTypeRoundedIcon from "@mui/icons-material/MergeTypeRounded";
-const App = ({ toggleLoading, showLoadingTrigger, triggerSessionError }) => {
+const App = ({ toggleLoading, showLoadingTrigger, showErrorTrigger }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   let token = localStorage.getItem("token");
 
@@ -181,7 +181,7 @@ const App = ({ toggleLoading, showLoadingTrigger, triggerSessionError }) => {
       console.log(error);
       toggleLoading();
       if (error.response.data.type === 2) {
-        triggerSessionError();
+        showErrorTrigger();
       }
     }
   }
@@ -249,7 +249,6 @@ const App = ({ toggleLoading, showLoadingTrigger, triggerSessionError }) => {
                   </p>
                 </div>
               ))}
-              <div className="table-x-create-task-wrapper">+ Create Task</div>
             </div>
             <div className="div-list">
               <div className="div-item">

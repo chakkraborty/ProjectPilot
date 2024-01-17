@@ -48,6 +48,9 @@ const TaskSchema = new mongoose.Schema({
     type: Date,
     default: null,
   },
+  createdByName: {
+    type: String,
+  },
 });
 
 module.exports = mongoose.model("Task", TaskSchema);

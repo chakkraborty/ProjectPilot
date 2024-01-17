@@ -12,10 +12,9 @@ const DeleteModal = ({
   showLoadingTrigger,
   showErrorTrigger,
 }) => {
-  let token = localStorage.getItem("token");
-
   async function deleteTaskHandler() {
     try {
+      let token = localStorage.getItem("token");
       if (!token) {
         showLoadingTrigger();
         return;

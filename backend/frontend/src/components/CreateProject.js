@@ -12,11 +12,6 @@ const CreateProject = ({
   showLoadingTrigger,
   showErrorTrigger,
 }) => {
-  let token = localStorage.getItem("token");
-
-  if (!token) {
-  }
-
   let createdBy = localStorage.getItem("_id");
   let leadName = localStorage.getItem("name");
 
@@ -26,8 +21,14 @@ const CreateProject = ({
   async function createProject() {
     setLoading(1);
     try {
+      let token = localStorage.getItem("token");
+
       if (!token) {
         showLoadingTrigger();
+        console.log("here");
+        console.log(token);
+        console.log("token value ->");
+        return;
       }
       const config = {
         headers: {

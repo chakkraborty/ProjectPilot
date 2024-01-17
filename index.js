@@ -200,7 +200,7 @@ app.post("/api/createTask", protect, async (req, res) => {
   let token = req.headers.authorization.split(" ")[1];
   const dec = jwt.verify(token, process.env.secret);
   const createdById = await User.findById(dec._id);
-
+  const u = await User.findById(createdById);
   //console.log(req.body);
   let a = await Task.create({
     createdById,
@@ -211,6 +211,7 @@ app.post("/api/createTask", protect, async (req, res) => {
     tags,
     startDate,
     dueDate,
+    createdByName: u.name,
   });
   if (a) res.status(201).json(a);
   else {
@@ -416,12 +417,11 @@ app.post("/api/fetchDescriptionDetails", protect, async (req, res) => {
 
     if (a) {
       let uid = a.createdById;
-      let c = await User.findOne({ _id: uid });
 
       let b = {
         tags: a.tags,
         assignedToName: a.assignedToName,
-        createdByName: c.name,
+        createdByName: a.createdByName,
         status: a.status,
         startDate: a.startDate,
         dueDate: a.dueDate,

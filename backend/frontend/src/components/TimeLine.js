@@ -17,7 +17,7 @@ const TimeLine = () => {
   const navigate = useNavigate();
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
-  let token = localStorage.getItem("token");
+
   const handleSuccessMessageTimeout = () => {
     setTimeout(() => {
       setShowSuccessMessage(false);
@@ -61,6 +61,7 @@ const TimeLine = () => {
   const [members, setMembers] = useState([]);
   async function fetchMembers() {
     try {
+      let token = localStorage.getItem("token");
       if (!token) {
         showLoadingTrigger();
         return;
@@ -84,6 +85,7 @@ const TimeLine = () => {
     }
   }
   useEffect(() => {
+    let token = localStorage.getItem("token");
     if (!token) {
       showLoadingTrigger();
     }
@@ -170,6 +172,8 @@ const TimeLine = () => {
               projectId={projectId}
               toggleAddMembers={toggleAddMembers}
               triggerMembersAdded={triggerMembersAdded}
+              showErrorTrigger={triggerSessionError}
+              showLoadingTrigger={showLoadingTrigger}
             />
           ) : (
             <></>
@@ -178,7 +182,7 @@ const TimeLine = () => {
           <TableX
             toggleLoading={toggleLoading}
             showLoadingTrigger={showLoadingTrigger}
-            triggerSessionError={triggerSessionError}
+            showErrorTrigger={triggerSessionError}
           />
         </div>
       </div>

@@ -12,7 +12,7 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useParams } from "react-router-dom";
 import "./Description.css";
-const Description = ({ taskId, loadingTrigger, triggerSessionError }) => {
+const Description = ({ taskId }) => {
   let token = localStorage.getItem("token");
   console.log(taskId);
 
@@ -21,7 +21,6 @@ const Description = ({ taskId, loadingTrigger, triggerSessionError }) => {
   const handleStartDateChange = async (date) => {
     try {
       if (!token) {
-        loadingTrigger();
         return;
       }
       setSelectedStartDate(date);
@@ -36,7 +35,7 @@ const Description = ({ taskId, loadingTrigger, triggerSessionError }) => {
     } catch (error) {
       console.log(error);
       if (error.response.data.type === 2) {
-        triggerSessionError();
+        // triggerSessionError();
       }
     }
   };
@@ -50,7 +49,6 @@ const Description = ({ taskId, loadingTrigger, triggerSessionError }) => {
   const handleDueDateChange = async (date) => {
     try {
       if (!token) {
-        loadingTrigger();
         return;
       }
       setSelectedDueDate(date);
@@ -65,7 +63,7 @@ const Description = ({ taskId, loadingTrigger, triggerSessionError }) => {
     } catch (error) {
       console.log(error);
       if (error.response.data.type === 2) {
-        triggerSessionError();
+        // triggerSessionError();
       }
     }
   };
@@ -108,7 +106,6 @@ const Description = ({ taskId, loadingTrigger, triggerSessionError }) => {
     setUpdateTag(0);
     try {
       if (!token) {
-        loadingTrigger();
         return;
       }
       const config = {
@@ -127,7 +124,7 @@ const Description = ({ taskId, loadingTrigger, triggerSessionError }) => {
       }
     } catch (error) {
       if (error.response.data.type === 2) {
-        triggerSessionError();
+        // triggerSessionError();
       }
     }
   }
@@ -135,7 +132,6 @@ const Description = ({ taskId, loadingTrigger, triggerSessionError }) => {
   async function updateStatus(a) {
     try {
       if (!token) {
-        loadingTrigger();
         return;
       }
       setStatus(a);
@@ -155,7 +151,7 @@ const Description = ({ taskId, loadingTrigger, triggerSessionError }) => {
     } catch (error) {
       console.log(error);
       if (error.response.data.type === 2) {
-        triggerSessionError();
+        // triggerSessionError();
       }
     }
   }
@@ -165,7 +161,6 @@ const Description = ({ taskId, loadingTrigger, triggerSessionError }) => {
   async function fetchUsers(email) {
     try {
       if (!token) {
-        loadingTrigger();
         return;
       }
       console.log(email);
@@ -181,7 +176,7 @@ const Description = ({ taskId, loadingTrigger, triggerSessionError }) => {
       console.log(users);
     } catch (error) {
       if (error.response.data.type === 2) {
-        triggerSessionError();
+        // triggerSessionError();
       }
     }
   }
@@ -190,7 +185,6 @@ const Description = ({ taskId, loadingTrigger, triggerSessionError }) => {
   async function fetchDescriptionDetails() {
     try {
       if (!token) {
-        loadingTrigger();
         return;
       }
       const config = {
@@ -208,6 +202,7 @@ const Description = ({ taskId, loadingTrigger, triggerSessionError }) => {
       setTags(a.data.tags);
       setAssignedTo(a.data.assignedToName);
       console.log(typeof a.data.startDate);
+      setCreatedByName(a.data.createdByName);
       console.log(a.data.startDate);
       if (a.data.startDate) {
         let x = a.data.startDate.substring(0, 10);
@@ -236,7 +231,7 @@ const Description = ({ taskId, loadingTrigger, triggerSessionError }) => {
       }
     } catch (error) {
       if (error.response.data.type === 2) {
-        triggerSessionError();
+        // triggerSessionError();
       }
     }
   }
@@ -244,7 +239,6 @@ const Description = ({ taskId, loadingTrigger, triggerSessionError }) => {
   async function handleAssignToUpdate(email) {
     try {
       if (!token) {
-        loadingTrigger();
         return;
       }
       const config = {
@@ -260,7 +254,7 @@ const Description = ({ taskId, loadingTrigger, triggerSessionError }) => {
     } catch (error) {
       console.log(error);
       if (error.response.data.type === 2) {
-        triggerSessionError();
+        // triggerSessionError();
       }
     }
   }
@@ -272,7 +266,6 @@ const Description = ({ taskId, loadingTrigger, triggerSessionError }) => {
 
   useEffect(() => {
     if (!token) {
-      loadingTrigger();
     }
     setTags(temp);
     fetchDescriptionDetails();
@@ -575,8 +568,6 @@ const Description = ({ taskId, loadingTrigger, triggerSessionError }) => {
         <div className="description-created-by-wrapper display-flex">
           <div className="description-created-by-icon">
             {createdByName ? <>{createdByName[0].toUpperCase()}</> : <></>}
-
-            {}
           </div>
           <div className="description-created-by-name">{createdByName}</div>
         </div>

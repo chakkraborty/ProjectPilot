@@ -4,11 +4,17 @@ import { useState } from "react";
 import axios from "axios";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import CircularProgress from "@mui/material/CircularProgress";
-const AddPeople = ({ projectId, toggleAddMembers, triggerMembersAdded }) => {
+const AddPeople = ({
+  projectId,
+  toggleAddMembers,
+  triggerMembersAdded,
+  showLoadingTrigger,
+  showErrorTrigger,
+}) => {
   const [arr, setArr] = useState([]);
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(0);
-  let token = localStorage.getItem("token");
+
   async function handleEmail(event) {
     if (event.key === "Enter") {
       if (email) {
@@ -20,6 +26,11 @@ const AddPeople = ({ projectId, toggleAddMembers, triggerMembersAdded }) => {
 
   async function inviteHandler() {
     try {
+      let token = localStorage.getItem("token");
+      if (!token) {
+        showLoadingTrigger();
+        return;
+      }
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -44,6 +55,9 @@ const AddPeople = ({ projectId, toggleAddMembers, triggerMembersAdded }) => {
       console.log(error);
       setLoading(0);
       toggleAddMembers();
+      if (error.response.data.type === 2) {
+        showErrorTrigger();
+      }
     }
   }
 
