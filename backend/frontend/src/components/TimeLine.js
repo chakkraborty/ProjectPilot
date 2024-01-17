@@ -4,15 +4,17 @@ import TableX from "./TableX";
 import ProjectLeftPanel from "./ProjectLeftPanel";
 import Navbar from "./Navbar";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import AddPeople from "./AddPeople";
 import { useState, useEffect } from "react";
 import MembersSkeletal from "../skeletal/membersSkeletal";
 import TimelineSkeletal from "../skeletal/timelineSkeletal";
 import SuccessToast from "../toast/SuccessToast";
 import SessionError from "./SessionError";
+import LoaderScreen from "./LoaderScreen";
 const TimeLine = () => {
   const [showError, setShowError] = useState(false);
+  const navigate = useNavigate();
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   let token = localStorage.getItem("token");
@@ -21,7 +23,17 @@ const TimeLine = () => {
       setShowSuccessMessage(false);
     }, 2000);
   };
-
+  const [showLoading, setShowLoading] = useState(false);
+  function showLoadingTrigger() {
+    setShowLoading(true);
+    localStorage.clear();
+    setTimeout(() => {
+      navigate("/login");
+    }, 1500);
+  }
+  function triggerSessionError() {
+    setShowError(true);
+  }
   function successMessageFunction(incomingMessage) {
     setSuccessMessage(incomingMessage);
 
@@ -49,6 +61,10 @@ const TimeLine = () => {
   const [members, setMembers] = useState([]);
   async function fetchMembers() {
     try {
+      if (!token) {
+        showLoadingTrigger();
+        return;
+      }
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -68,11 +84,15 @@ const TimeLine = () => {
     }
   }
   useEffect(() => {
+    if (!token) {
+      showLoadingTrigger();
+    }
     fetchMembers();
   }, []);
   return (
     <div className="t-wrapper">
       {showError ? <SessionError /> : <></>}
+      {showLoading ? <LoaderScreen /> : <></>}
       <Navbar />
 
       <div className="t-lower-wrapper">
@@ -155,7 +175,11 @@ const TimeLine = () => {
             <></>
           )}
 
-          <TableX toggleLoading={toggleLoading} />
+          <TableX
+            toggleLoading={toggleLoading}
+            showLoadingTrigger={showLoadingTrigger}
+            triggerSessionError={triggerSessionError}
+          />
         </div>
       </div>
     </div>

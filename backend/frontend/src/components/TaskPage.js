@@ -4,11 +4,15 @@ import { useState, useRef } from "react";
 import Description from "./Description";
 import { useParams } from "react-router-dom";
 import ProjectLeftPanel from "./ProjectLeftPanel.js";
+import { useNavigate } from "react-router-dom";
 import "./TaskPage.css";
+import LoaderScreen from "./LoaderScreen.js";
 import SessionError from "./SessionError.js";
 import axios from "axios";
 const TaskPage = () => {
   let token = localStorage.getItem("token");
+
+  const navigate = useNavigate();
   const [showError, setShowError] = useState(false); //session error modal
   const [trigger, setTrigger] = useState(false);
   const [triggReport, setTriggReport] = useState(false);
@@ -20,12 +24,29 @@ const TaskPage = () => {
   const [issueDescription, setIssueDescription] = useState("");
   const [issues, setIssues] = useState([]);
   const [descriptionTextAreaStatus, setDescriptionTextAreaStatus] = useState(0);
+  const [showLoading, setShowLoading] = useState(false);
+
+  function triggerSessionError() {
+    setShowError(true);
+  }
+
+  function loadingTrigger() {
+    showLoading(true);
+    setTimeout(() => {
+      localStorage.clear();
+      navigate("/login");
+    }, 1500);
+  }
 
   let { taskId } = useParams();
   console.log("id is :  " + taskId);
 
   async function deleteIssueHandler(a) {
     try {
+      if (!token) {
+        loadingTrigger();
+        return;
+      }
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -45,6 +66,10 @@ const TaskPage = () => {
 
   async function markIssueHandler(a) {
     try {
+      if (!token) {
+        loadingTrigger();
+        return;
+      }
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -64,6 +89,10 @@ const TaskPage = () => {
   }
   async function openIssueHandler(a) {
     try {
+      if (!token) {
+        loadingTrigger();
+        return;
+      }
       const config = {
         headers: {
           Authorizaton: `Bearer ${token}`,
@@ -83,6 +112,10 @@ const TaskPage = () => {
 
   async function fetchIssues() {
     try {
+      if (!token) {
+        loadingTrigger();
+        return;
+      }
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -103,6 +136,10 @@ const TaskPage = () => {
 
   async function fetchTask() {
     try {
+      if (!token) {
+        loadingTrigger();
+        return;
+      }
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -125,6 +162,10 @@ const TaskPage = () => {
 
   async function updateSummaryHandler(a) {
     try {
+      if (!token) {
+        loadingTrigger();
+        return;
+      }
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -154,6 +195,10 @@ const TaskPage = () => {
   async function handleReportIssue() {
     let name = localStorage.getItem("name");
     try {
+      if (!token) {
+        loadingTrigger();
+        return;
+      }
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -181,6 +226,10 @@ const TaskPage = () => {
 
   async function updateDesc() {
     try {
+      if (!token) {
+        loadingTrigger();
+        return;
+      }
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -208,12 +257,16 @@ const TaskPage = () => {
   }
 
   useEffect(() => {
+    if (!token) {
+      loadingTrigger();
+    }
     fetchTask();
     fetchIssues();
   }, []);
 
   return (
     <div className="container">
+      {showLoading ? <LoaderScreen /> : <></>}
       {showError ? <SessionError /> : <></>}
       <Navbar />
 
@@ -389,7 +442,11 @@ const TaskPage = () => {
         </div>
 
         <div className="right-col">
-          <Description taskId={taskId} />
+          <Description
+            taskId={taskId}
+            loadingTrigger={loadingTrigger}
+            triggerSessionError={triggerSessionError}
+          />
         </div>
       </div>
     </div>

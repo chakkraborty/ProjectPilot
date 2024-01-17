@@ -6,8 +6,23 @@ import ProjectList from "./PorjectList";
 import SessionError from "./SessionError";
 import axios from "axios";
 import SuccessToast from "../toast/SuccessToast";
+import LoaderScreen from "./LoaderScreen";
 
 const Home = () => {
+  const [showLoading, setShowLoading] = useState(false);
+  const token = localStorage.getItem("token");
+  const navigate = useNavigate();
+  function showLoadingTrigger() {
+    setShowLoading(true);
+    localStorage.clear();
+    setTimeout(() => {
+      navigate("/login");
+    }, 1500);
+  }
+  // if (!token) {
+  //   showLoadingTrigger();
+  // }
+
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
 
@@ -29,13 +44,16 @@ const Home = () => {
     successMessageFunction("Success! New project created!");
   }
   const [showError, setShowError] = useState(false);
-  const token = localStorage.getItem("token");
-  const navigate = useNavigate();
-  if (!token) {
-    navigate("/");
+
+  function showErrorTrigger() {
+    setShowError(true);
   }
   async function fetchProjects() {
     try {
+      if (!token) {
+        showLoadingTrigger();
+        return;
+      }
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -67,15 +85,23 @@ const Home = () => {
   }
   useEffect(() => {
     fetchProjects();
+    if (!token) {
+      showLoadingTrigger();
+    } // if (!token) {
   }, []);
   return (
     <div>
       {showError ? <SessionError /> : <></>}
+      {showLoading ? <LoaderScreen /> : <></>}
 
       <Navbar />
       {showSuccessMessage ? <SuccessToast message={successMessage} /> : <></>}
       <div className="project-list-home-wrapper">
-        <ProjectList triggerProjectCreated={triggerProjectCreated} />
+        <ProjectList
+          triggerProjectCreated={triggerProjectCreated}
+          showLoadingTrigger={showLoadingTrigger}
+          showErrorTrigger={showErrorTrigger}
+        />
       </div>
     </div>
   );

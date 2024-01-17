@@ -9,30 +9,43 @@ const DeleteModal = ({
   deleteTaskId,
   fetchTasks,
   failureMessageFunction,
+  showLoadingTrigger,
+  showErrorTrigger,
 }) => {
   let token = localStorage.getItem("token");
 
   async function deleteTaskHandler() {
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    };
-    console.log(deleteTaskId);
-    let a = await axios.post("/api/abc", { taskId: deleteTaskId }, config);
+    try {
+      if (!token) {
+        showLoadingTrigger();
+        return;
+      }
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      };
+      console.log(deleteTaskId);
+      let a = await axios.post("/api/abc", { taskId: deleteTaskId }, config);
 
-    if (a) {
-      fetchTasks();
+      if (a) {
+        fetchTasks();
+      }
+
+      closeDeleteModal();
+      failureMessageFunction("Task deleted !");
+      //let a = await axios.post("/api/deleteTask");
+      // if (a) {
+      //   fetchTasks();
+      // }
+      // closeDeleteModal();
+    } catch (error) {
+      console.log(error);
+      if (error.response.data.type === 2) {
+        showErrorTrigger();
+      }
     }
-
-    closeDeleteModal();
-    failureMessageFunction("Task deleted !");
-    //let a = await axios.post("/api/deleteTask");
-    // if (a) {
-    //   fetchTasks();
-    // }
-    // closeDeleteModal();
   }
 
   return (

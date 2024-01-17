@@ -9,6 +9,8 @@ const CreateProject = ({
   onClose,
   fetchProjects,
   triggerProjectCreated,
+  showLoadingTrigger,
+  showErrorTrigger,
 }) => {
   let token = localStorage.getItem("token");
 
@@ -24,6 +26,9 @@ const CreateProject = ({
   async function createProject() {
     setLoading(1);
     try {
+      if (!token) {
+        showLoadingTrigger();
+      }
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -46,6 +51,9 @@ const CreateProject = ({
       }
     } catch (error) {
       setLoading(0);
+      if (error.response.data.type === 2) {
+        showErrorTrigger();
+      }
     }
   }
 

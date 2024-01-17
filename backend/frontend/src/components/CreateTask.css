@@ -11,8 +11,8 @@
   align-items: center;
   z-index: 1;
   overflow-y: auto;
-  padding-top: 50px;
-  padding-bottom: 50px;
+  /* padding-top: 50px;
+  padding-bottom: 50px; */
 }
 
 /* @media (max-width: 700px) {
@@ -30,8 +30,8 @@
 .modal-content-1 {
   background-color: #282e33;
   width: 800px !important;
-  margin-top: 150px;
-
+  margin-top: 200px;
+  margin-bottom: 50px;
   outline: 1px solid rgb(87, 87, 87);
   padding: 20px;
   border-radius: 2px;
@@ -41,6 +41,16 @@
   flex-direction: column;
   justify-content: space-between;
   height: fit-content;
+  animation: createTaskAnimation 0.5s ease;
+}
+
+@keyframes createTaskAnimation {
+  from {
+    margin-top: 150px;
+  }
+  to {
+    margin-top: 200px;
+  }
 }
 
 /* Styles for the close button */

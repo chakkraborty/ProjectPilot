@@ -339,3 +339,9 @@
 .navbar-middle-section {
   margin-left: 20px;
 }
+
+@media (max-width: 610px) {
+  .navbar-middle-section {
+    display: none;
+  }
+}

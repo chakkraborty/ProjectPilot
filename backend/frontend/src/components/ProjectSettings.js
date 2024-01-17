@@ -7,12 +7,16 @@ import ProjectLeftPanel from "./ProjectLeftPanel";
 import Navbar from "./Navbar.js";
 import { useState, useEffect } from "react";
 import MembersList from "./MembersList";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import AddPeople from "./AddPeople";
 import SuccessToast from "../toast/SuccessToast.js";
 import axios from "axios";
+import SessionError from "./SessionError.js";
+import LeftPanel from "./LeftPanel.js";
+import LoaderScreen from "./LoaderScreen.js";
 import FailureToast from "../toast/FailureToast.js";
 const ProjectSettings = () => {
+  const navigate = useNavigate();
   let token = localStorage.getItem("token");
   const [catList, setCatList] = useState(false);
   const [category, setCategory] = useState("");
@@ -23,6 +27,16 @@ const ProjectSettings = () => {
 
   const [showFailureMessage, setShowFailureMessage] = useState(false);
   const [failureMessage, setFailureMessage] = useState("");
+
+  const [showLoading, setShowLoading] = useState(false);
+  const [showError, setShowError] = useState(false);
+  function showLoadingTrigger() {
+    setShowLoading(true);
+    localStorage.clear();
+    setTimeout(() => {
+      navigate("/login");
+    }, 1500);
+  }
 
   const handleFailureMessageTimeout = () => {
     setTimeout(() => {
@@ -78,6 +92,10 @@ const ProjectSettings = () => {
     toggleList();
   }
 
+  function showErrorTrigger() {
+    setShowError(true);
+  }
+
   const { projectId } = useParams();
   console.log(projectId);
 
@@ -104,6 +122,9 @@ const ProjectSettings = () => {
       }
     } catch (error) {
       console.log(error);
+      if (error.response.data.type === 2) {
+        setShowError(true);
+      }
     }
   }
 
@@ -122,15 +143,23 @@ const ProjectSettings = () => {
       }
     } catch (error) {
       console.log(error);
+      if (error.response.data.type === 2) {
+        setShowError(true);
+      }
     }
   }
 
   useEffect(() => {
     fetchProjectDetails();
+    if (!token) {
+      showLoadingTrigger();
+    }
   }, []);
 
   return (
     <div className="project-settings-page">
+      {showLoading ? <LoaderScreen /> : <></>}
+      {showError ? <SessionError /> : <></>}
       <Navbar />
       {showSuccessMessage ? <SuccessToast message={successMessage} /> : <></>}
       {showFailureMessage ? <FailureToast message={failureMessage} /> : <></>}
@@ -208,6 +237,7 @@ const ProjectSettings = () => {
               deletedMemberHandler={deletedMemberHandler}
               triggerMembersAdded={triggerMembersAdded}
               deleteMemberError={deleteMemberError}
+              showErrorTrigger={showErrorTrigger}
             />
           </div>
         </div>

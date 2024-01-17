@@ -20,8 +20,8 @@
 }
 
 .add-people-wrapper {
-  margin-top: 10%;
   width: 400px;
+  margin-top: 60px;
   height: 300px;
   background-color: #282e33;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -31,8 +31,8 @@
   flex-direction: column;
   justify-content: space-between;
   border-radius: 3px;
-
   box-shadow: 0 20px 20px rgba(0, 0, 0, 0.5);
+  animation: addPeopleAnimation 0.5s ease;
 }
 .add-members-title {
   font-size: 20px;
@@ -116,4 +116,13 @@
   display: flex;
   margin-top: 30px;
   margin-bottom: 10px;
+}
+
+@keyframes addPeopleAnimation {
+  from {
+    margin-top: 20px;
+  }
+  to {
+    margin-top: 60px;
+  }
 }

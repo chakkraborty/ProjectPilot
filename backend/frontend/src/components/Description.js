@@ -12,7 +12,7 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useParams } from "react-router-dom";
 import "./Description.css";
-const Description = ({ taskId }) => {
+const Description = ({ taskId, loadingTrigger, triggerSessionError }) => {
   let token = localStorage.getItem("token");
   console.log(taskId);
 
@@ -20,6 +20,10 @@ const Description = ({ taskId }) => {
 
   const handleStartDateChange = async (date) => {
     try {
+      if (!token) {
+        loadingTrigger();
+        return;
+      }
       setSelectedStartDate(date);
       const config = {
         headers: {
@@ -31,6 +35,9 @@ const Description = ({ taskId }) => {
       let a = await axios.post("/api/setStartDate", { taskId, stDate }, config);
     } catch (error) {
       console.log(error);
+      if (error.response.data.type === 2) {
+        triggerSessionError();
+      }
     }
   };
 
@@ -42,6 +49,10 @@ const Description = ({ taskId }) => {
 
   const handleDueDateChange = async (date) => {
     try {
+      if (!token) {
+        loadingTrigger();
+        return;
+      }
       setSelectedDueDate(date);
       const config = {
         headers: {
@@ -53,6 +64,9 @@ const Description = ({ taskId }) => {
       let a = await axios.post("/api/setDueDate", { taskId, dueDate }, config);
     } catch (error) {
       console.log(error);
+      if (error.response.data.type === 2) {
+        triggerSessionError();
+      }
     }
   };
 
@@ -92,21 +106,38 @@ const Description = ({ taskId }) => {
 
   async function updateTagsDescription() {
     setUpdateTag(0);
-
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    };
-    let a = await axios.post("/api/task/updateTags", { taskId, tags }, config);
-    if (a) {
-      fetchDescriptionDetails();
+    try {
+      if (!token) {
+        loadingTrigger();
+        return;
+      }
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      };
+      let a = await axios.post(
+        "/api/task/updateTags",
+        { taskId, tags },
+        config
+      );
+      if (a) {
+        fetchDescriptionDetails();
+      }
+    } catch (error) {
+      if (error.response.data.type === 2) {
+        triggerSessionError();
+      }
     }
   }
 
   async function updateStatus(a) {
     try {
+      if (!token) {
+        loadingTrigger();
+        return;
+      }
       setStatus(a);
       const config = {
         headers: {
@@ -123,72 +154,99 @@ const Description = ({ taskId }) => {
       setDisplayList(0);
     } catch (error) {
       console.log(error);
+      if (error.response.data.type === 2) {
+        triggerSessionError();
+      }
     }
   }
 
   const [tagsUpdate, setTagsUpdate] = useState([]);
 
   async function fetchUsers(email) {
-    console.log(email);
+    try {
+      if (!token) {
+        loadingTrigger();
+        return;
+      }
+      console.log(email);
 
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-    let a = await axios.post("/api/getUsers", { email }, config);
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      let a = await axios.post("/api/getUsers", { email }, config);
 
-    setUsers(a.data);
-    console.log(users);
+      setUsers(a.data);
+      console.log(users);
+    } catch (error) {
+      if (error.response.data.type === 2) {
+        triggerSessionError();
+      }
+    }
   }
   const moment = require("moment");
 
   async function fetchDescriptionDetails() {
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    };
-    let a = await axios.post(
-      "/api/fetchDescriptionDetails",
-      { taskId },
-      config
-    );
-    console.log(a.data);
-    setTags(a.data.tags);
-    setAssignedTo(a.data.assignedToName);
-    console.log(typeof a.data.startDate);
-    console.log(a.data.startDate);
-    if (a.data.startDate) {
-      let x = a.data.startDate.substring(0, 10);
-      console.log("x is :");
-      console.log(x);
-      setSelectedStartDate(new Date(x));
-    }
-    if (a.data.dueDate) {
-      let y = a.data.dueDate.substring(0, 10);
-      setSelectedDueDate(new Date(y));
-    }
+    try {
+      if (!token) {
+        loadingTrigger();
+        return;
+      }
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      };
+      let a = await axios.post(
+        "/api/fetchDescriptionDetails",
+        { taskId },
+        config
+      );
+      console.log(a.data);
+      setTags(a.data.tags);
+      setAssignedTo(a.data.assignedToName);
+      console.log(typeof a.data.startDate);
+      console.log(a.data.startDate);
+      if (a.data.startDate) {
+        let x = a.data.startDate.substring(0, 10);
+        console.log("x is :");
+        console.log(x);
+        setSelectedStartDate(new Date(x));
+      }
+      if (a.data.dueDate) {
+        let y = a.data.dueDate.substring(0, 10);
+        setSelectedDueDate(new Date(y));
+      }
 
-    // setSelectedStartDate(a.data.startDate.substring(0, 10));
+      // setSelectedStartDate(a.data.startDate.substring(0, 10));
 
-    if (!assignedTo) {
-      setAssignedTo("Unassigned");
-    }
-    setCreatedByName(a.data.createdByName);
-    setStatus(a.data.status);
+      if (!assignedTo) {
+        setAssignedTo("Unassigned");
+      }
+      setCreatedByName(a.data.createdByName);
+      setStatus(a.data.status);
 
-    console.log(a.data);
-    assignToRef.current.value = a.data.assignedToName;
-    if (assignToRef.current.value === "") {
-      assignToRef.current.value = "Unassigned";
-      setAssignedTo("Unassigned");
+      console.log(a.data);
+      assignToRef.current.value = a.data.assignedToName;
+      if (assignToRef.current.value === "") {
+        assignToRef.current.value = "Unassigned";
+        setAssignedTo("Unassigned");
+      }
+    } catch (error) {
+      if (error.response.data.type === 2) {
+        triggerSessionError();
+      }
     }
   }
 
   async function handleAssignToUpdate(email) {
     try {
+      if (!token) {
+        loadingTrigger();
+        return;
+      }
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -201,6 +259,9 @@ const Description = ({ taskId }) => {
       }
     } catch (error) {
       console.log(error);
+      if (error.response.data.type === 2) {
+        triggerSessionError();
+      }
     }
   }
 
@@ -210,6 +271,9 @@ const Description = ({ taskId }) => {
   }
 
   useEffect(() => {
+    if (!token) {
+      loadingTrigger();
+    }
     setTags(temp);
     fetchDescriptionDetails();
 

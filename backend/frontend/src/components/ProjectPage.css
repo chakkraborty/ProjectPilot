@@ -1,5 +1,6 @@
 .project-page-lower-wrapper {
   display: flex;
+  flex: 1;
 }
 
 .project-page-left-panel {
@@ -39,24 +40,16 @@
 }
 
 @media (max-width: 1000px) {
-  .project-left-panel-items-wrapper > p {
-    display: none;
-  }
   .project-left-panel-items-wrapper {
     width: fit-content;
   }
 }
 
 .kanban-board-overflow-wrapper {
-  height: 400px;
+  height: 100%;
   overflow-y: auto;
 }
 
-@media (max-width: 780px) {
-  .project-page-left-panel {
-    display: none;
-  }
-}
 .projects-right-panel-header {
   color: #aab8c2;
 }
@@ -189,7 +182,7 @@
   border-radius: 5px;
   margin-right: 5px;
   margin-top: 10px;
-  height: fit-content;
+  height: 100%;
   padding: 5px;
 }
 
@@ -310,21 +303,8 @@
   height: 100vh;
   background-color: #1d2125;
   overflow: hidden !important;
-  box-sizing: border-box;
-}
-
-.project-board-lower-wrapper {
-  width: 100%;
-  margin: auto;
-  height: 100vh;
-  overflow: hidden;
   display: flex;
-}
-
-.project-board-right-panel {
-  margin-left: 20px;
-  margin-top: 10px;
-  overflow-y: auto;
+  flex-direction: column;
 }
 
 /* body {
@@ -386,4 +366,30 @@
 
 body {
   overflow: hidden;
+}
+
+@media (max-width: 780px) {
+  .project-page-left-panel {
+    width: fit-content;
+  }
+  .project-left-panel-project-info-wrapper {
+    display: none;
+  }
+  .project-left-panel-items-wrapper > p {
+    display: none;
+  }
+}
+.project-board-lower-wrapper {
+  width: 100%;
+  margin: auto;
+
+  overflow: hidden;
+  display: flex;
+}
+.project-board-right-panel {
+  margin-left: 20px;
+  margin-top: 10px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }

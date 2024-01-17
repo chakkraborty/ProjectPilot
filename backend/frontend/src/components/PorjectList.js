@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import ProjectListSkeletal from "../skeletal/projectSettingsSkeletal.js";
 import SessionError from "./SessionError";
 import axios from "axios";
+import LoaderScreen from "./LoaderScreen.js";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import { deepOrange, deepPurple } from "@mui/material/colors";
@@ -14,14 +15,22 @@ import "./ProjectList.css";
 import SuccessToast from "../toast/SuccessToast.js";
 import NavbarSettingsDropdown from "./NavbarSettingsDropdown";
 import Pagination from "./Pagination";
-const PorjectList = ({ triggerProjectCreated }) => {
+const PorjectList = ({
+  triggerProjectCreated,
+  showLoadingTrigger,
+  showErrorTrigger,
+}) => {
   let token = localStorage.getItem("token");
+  if (!token) {
+    showLoadingTrigger();
+  }
+  const navigate = useNavigate();
 
   const [open, setOpen] = useState(false);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
-  const navigate = useNavigate();
+
   function projectRouting(projId) {
     navigate(`/project/${projId}`);
   }
@@ -125,6 +134,8 @@ const PorjectList = ({ triggerProjectCreated }) => {
         onClose={onClose}
         fetchProjects={fetchProjects}
         triggerProjectCreated={triggerProjectCreated}
+        showLoadingTrigger={showLoadingTrigger}
+        showErrorTrigger={showErrorTrigger}
       />
       {/* table section */}
 

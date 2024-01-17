@@ -9,7 +9,7 @@ import StarsIcon from "@mui/icons-material/Stars";
 import { useNavigate } from "react-router-dom";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import MergeTypeRoundedIcon from "@mui/icons-material/MergeTypeRounded";
-const App = ({ toggleLoading }) => {
+const App = ({ toggleLoading, showLoadingTrigger, triggerSessionError }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   let token = localStorage.getItem("token");
 
@@ -147,6 +147,10 @@ const App = ({ toggleLoading }) => {
 
   async function fetchTasks() {
     try {
+      if (!token) {
+        showLoadingTrigger();
+        return;
+      }
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -176,6 +180,9 @@ const App = ({ toggleLoading }) => {
     } catch (error) {
       console.log(error);
       toggleLoading();
+      if (error.response.data.type === 2) {
+        triggerSessionError();
+      }
     }
   }
 
