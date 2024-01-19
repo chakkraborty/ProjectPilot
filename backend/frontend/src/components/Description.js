@@ -12,15 +12,17 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useParams } from "react-router-dom";
 import "./Description.css";
-const Description = ({ taskId }) => {
-  let token = localStorage.getItem("token");
+const Description = ({ taskId, loadingTrigger, triggerSessionError }) => {
   console.log(taskId);
 
   const [selectedStartDate, setSelectedStartDate] = useState(null);
 
   const handleStartDateChange = async (date) => {
     try {
+      let token = localStorage.getItem("token");
+
       if (!token) {
+        loadingTrigger();
         return;
       }
       setSelectedStartDate(date);
@@ -35,7 +37,7 @@ const Description = ({ taskId }) => {
     } catch (error) {
       console.log(error);
       if (error.response.data.type === 2) {
-        // triggerSessionError();
+        triggerSessionError();
       }
     }
   };
@@ -48,7 +50,10 @@ const Description = ({ taskId }) => {
 
   const handleDueDateChange = async (date) => {
     try {
+      let token = localStorage.getItem("token");
+
       if (!token) {
+        loadingTrigger();
         return;
       }
       setSelectedDueDate(date);
@@ -63,7 +68,7 @@ const Description = ({ taskId }) => {
     } catch (error) {
       console.log(error);
       if (error.response.data.type === 2) {
-        // triggerSessionError();
+        triggerSessionError();
       }
     }
   };
@@ -105,7 +110,10 @@ const Description = ({ taskId }) => {
   async function updateTagsDescription() {
     setUpdateTag(0);
     try {
+      let token = localStorage.getItem("token");
+
       if (!token) {
+        loadingTrigger();
         return;
       }
       const config = {
@@ -124,14 +132,17 @@ const Description = ({ taskId }) => {
       }
     } catch (error) {
       if (error.response.data.type === 2) {
-        // triggerSessionError();
+        triggerSessionError();
       }
     }
   }
 
   async function updateStatus(a) {
     try {
+      let token = localStorage.getItem("token");
+
       if (!token) {
+        loadingTrigger();
         return;
       }
       setStatus(a);
@@ -151,7 +162,7 @@ const Description = ({ taskId }) => {
     } catch (error) {
       console.log(error);
       if (error.response.data.type === 2) {
-        // triggerSessionError();
+        triggerSessionError();
       }
     }
   }
@@ -160,7 +171,10 @@ const Description = ({ taskId }) => {
 
   async function fetchUsers(email) {
     try {
+      let token = localStorage.getItem("token");
+
       if (!token) {
+        loadingTrigger();
         return;
       }
       console.log(email);
@@ -176,7 +190,7 @@ const Description = ({ taskId }) => {
       console.log(users);
     } catch (error) {
       if (error.response.data.type === 2) {
-        // triggerSessionError();
+        triggerSessionError();
       }
     }
   }
@@ -184,7 +198,10 @@ const Description = ({ taskId }) => {
 
   async function fetchDescriptionDetails() {
     try {
+      let token = localStorage.getItem("token");
+
       if (!token) {
+        loadingTrigger();
         return;
       }
       const config = {
@@ -231,14 +248,17 @@ const Description = ({ taskId }) => {
       }
     } catch (error) {
       if (error.response.data.type === 2) {
-        // triggerSessionError();
+        triggerSessionError();
       }
     }
   }
 
   async function handleAssignToUpdate(email) {
     try {
+      let token = localStorage.getItem("token");
+
       if (!token) {
+        loadingTrigger();
         return;
       }
       const config = {
@@ -254,7 +274,7 @@ const Description = ({ taskId }) => {
     } catch (error) {
       console.log(error);
       if (error.response.data.type === 2) {
-        // triggerSessionError();
+        triggerSessionError();
       }
     }
   }
@@ -265,7 +285,11 @@ const Description = ({ taskId }) => {
   }
 
   useEffect(() => {
+    let token = localStorage.getItem("token");
+
     if (!token) {
+      loadingTrigger();
+      return;
     }
     setTags(temp);
     fetchDescriptionDetails();
@@ -294,9 +318,39 @@ const Description = ({ taskId }) => {
             id="description-status-wrapper"
             onClick={() => setDisplayList(!displayList)}
           >
-            <p className="">To Do</p>
+            <p className="margin-right-10px">To Do</p>
 
-            {displayList ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            {displayList ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="12"
+                height="12"
+                fill="white"
+                class="bi bi-chevron-up"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708z"
+                  stroke-width="5"
+                />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="12"
+                height="12"
+                fill="white"
+                class="bi bi-chevron-down"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"
+                  stroke-width="5"
+                />
+              </svg>
+            )}
           </div>
         ) : (
           <></>
@@ -308,9 +362,38 @@ const Description = ({ taskId }) => {
             id="description-status-wrapper"
             onClick={() => setDisplayList(!displayList)}
           >
-            <p className="">In Progress</p>
-
-            {displayList ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            <p className="margin-right-10px">In Progress</p>
+            {displayList ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="12"
+                height="12"
+                fill="black"
+                class="bi bi-chevron-up"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708z"
+                  stroke-width="5"
+                />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="12"
+                height="12"
+                fill="black"
+                class="bi bi-chevron-down"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"
+                  stroke-width="5"
+                />
+              </svg>
+            )}
           </div>
         ) : (
           <></>
@@ -322,9 +405,39 @@ const Description = ({ taskId }) => {
             id="description-status-wrapper"
             onClick={() => setDisplayList(!displayList)}
           >
-            <p className="">Done</p>
+            <p className="margin-right-10px">Done</p>
 
-            {displayList ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            {displayList ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="12"
+                height="12"
+                fill="black"
+                class="bi bi-chevron-up"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708z"
+                  stroke-width="5"
+                />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="12"
+                height="12"
+                fill="black"
+                class="bi bi-chevron-down"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"
+                  stroke-width="5"
+                />
+              </svg>
+            )}
           </div>
         ) : (
           <></>
@@ -336,25 +449,25 @@ const Description = ({ taskId }) => {
               className="description-status-item desc-to-do"
               onClick={() => updateStatus("todo")}
             >
-              <p className="text-color-dark-grey description-status-list-text-1">
-                To Do
-              </p>
+              <div className="text-color-dark-grey description-status-list-text-1">
+                TO DO
+              </div>
             </div>
             <div
               className="description-status-item desc-progress"
               onClick={() => updateStatus("inprogress")}
             >
-              <p className="text-color-dark-grey description-status-list-text-2">
-                In Progress
-              </p>
+              <div className="text-color-dark-grey description-status-list-text-2">
+                IN PROGRESS
+              </div>
             </div>
             <div
               className="description-status-item desc-done"
               onClick={() => updateStatus("done")}
             >
-              <p className="text-color-dark-grey description-status-list-text-3">
-                Done
-              </p>
+              <div className="text-color-dark-grey description-status-list-text-3">
+                DONE
+              </div>
             </div>
           </div>
         ) : (
@@ -363,7 +476,7 @@ const Description = ({ taskId }) => {
       </div>
 
       <div className="text-color-dark-grey yy description-content-wrapper">
-        <h3 className="description-title">Task details</h3>
+        <h3 className="description-title">Details</h3>
         <p className="text-color-light-dark description-assign-to">
           Assigned to :
         </p>

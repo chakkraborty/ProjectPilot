@@ -10,8 +10,6 @@ import LoaderScreen from "./LoaderScreen.js";
 import SessionError from "./SessionError.js";
 import axios from "axios";
 const TaskPage = () => {
-  let token = localStorage.getItem("token");
-
   const navigate = useNavigate();
   const [showError, setShowError] = useState(false); //session error modal
   const [trigger, setTrigger] = useState(false);
@@ -43,6 +41,7 @@ const TaskPage = () => {
 
   async function deleteIssueHandler(a) {
     try {
+      let token = localStorage.getItem("token");
       if (!token) {
         loadingTrigger();
         return;
@@ -66,6 +65,7 @@ const TaskPage = () => {
 
   async function markIssueHandler(a) {
     try {
+      let token = localStorage.getItem("token");
       if (!token) {
         loadingTrigger();
         return;
@@ -89,6 +89,7 @@ const TaskPage = () => {
   }
   async function openIssueHandler(a) {
     try {
+      let token = localStorage.getItem("token");
       if (!token) {
         loadingTrigger();
         return;
@@ -112,6 +113,7 @@ const TaskPage = () => {
 
   async function fetchIssues() {
     try {
+      let token = localStorage.getItem("token");
       if (!token) {
         loadingTrigger();
         return;
@@ -136,6 +138,7 @@ const TaskPage = () => {
 
   async function fetchTask() {
     try {
+      let token = localStorage.getItem("token");
       if (!token) {
         loadingTrigger();
         return;
@@ -163,6 +166,7 @@ const TaskPage = () => {
 
   async function updateSummaryHandler(a) {
     try {
+      let token = localStorage.getItem("token");
       if (!token) {
         loadingTrigger();
         return;
@@ -196,6 +200,7 @@ const TaskPage = () => {
   async function handleReportIssue() {
     let name = localStorage.getItem("name");
     try {
+      let token = localStorage.getItem("token");
       if (!token) {
         loadingTrigger();
         return;
@@ -230,6 +235,7 @@ const TaskPage = () => {
 
   async function updateDesc() {
     try {
+      let token = localStorage.getItem("token");
       if (!token) {
         loadingTrigger();
         return;
@@ -261,6 +267,7 @@ const TaskPage = () => {
   }
 
   useEffect(() => {
+    let token = localStorage.getItem("token");
     if (!token) {
       loadingTrigger();
     }
@@ -448,8 +455,8 @@ const TaskPage = () => {
         <div className="right-col">
           <Description
             taskId={taskId}
-            // loadingTrigger={loadingTrigger}
-            // triggerSessionError={triggerSessionError}
+            loadingTrigger={loadingTrigger}
+            triggerSessionError={triggerSessionError}
           />
         </div>
       </div>
