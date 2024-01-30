@@ -19,6 +19,7 @@ import "./ProjectPage.css";
 import SessionError from "./SessionError.js";
 import KanbanSkeletal from "../skeletal/kanbanSkeletal.js";
 import ProjectLeftPanel from "./ProjectLeftPanel";
+import KanbanCard from "./KanbanCard.js";
 const ProjectPage = () => {
   let tkn = localStorage.getItem("token");
   const [showError, setShowError] = useState(false);
@@ -335,146 +336,155 @@ const ProjectPage = () => {
                     <div className="text-color-grey kanban-board-wrapper">
                       <div className="kanban-board-title">
                         <p className="task-card-top-text-color">TO DO</p>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="30"
-                          height="30"
-                          fill="#8c9bab"
-                          class="bi bi-plus"
-                          viewBox="0 0 16 16"
-                          className="kanban-board-header-add-icon"
-                          onClick={onOpen}
-                        >
-                          <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                        </svg>
+                        <div className="kanban-card-dots">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="30"
+                            height="30"
+                            fill="#8c9bab"
+                            class="bi bi-plus"
+                            viewBox="0 0 16 16"
+                            className=""
+                            onClick={onOpen}
+                          >
+                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                          </svg>
+                        </div>
                       </div>
                       <div className="kanban-board-overflow-wrapper">
                         {tasks.map((p) => {
                           if (p.status === "todo") {
                             return (
-                              <div className="task-card" key={p._id}>
-                                <div className="task-card-top-wrapper">
-                                  <div className="task-card-left task-card-title-text">
-                                    {p.title}
-                                  </div>
-                                  <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="18"
-                                    height="18"
-                                    class="bi bi-three-dots-vertical"
-                                    viewBox="0 0 16 16"
-                                    fill="#8c9bab"
-                                    className="task-card-right"
-                                    onClick={(event) =>
-                                      handleDeleteOpen(event, p._id)
-                                    }
-                                  >
-                                    <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
-                                  </svg>
-                                  <Popover
-                                    id={id}
-                                    open={deleteOpener}
-                                    anchorEl={anchorDeleteModal}
-                                    onClose={handleDeleteClose}
-                                    anchorOrigin={{
-                                      vertical: "bottom",
-                                      horizontal: "left",
-                                    }}
-                                    className="delete-popover-wrapper"
-                                    PaperProps={{ style: popoverStyle }}
-                                    onClick={deleteHandler}
-                                  >
-                                    <div
-                                      className="delete-popover"
-                                      onClick={deleteHandler}
-                                    >
-                                      Delete
-                                    </div>
-                                  </Popover>
-                                </div>
+                              <KanbanCard
+                                title={p.title}
+                                tags={p.tags}
+                                assignedToName={p.assignedToName}
+                                _id={p._id}
+                                fetchTasksMain={fetchTasks}
+                              />
+                              // <div className="task-card" key={p._id}>
+                              //   <div className="task-card-top-wrapper">
+                              //     <div className="task-card-left task-card-title-text">
+                              //       {p.title}
+                              //     </div>
+                              //     <svg
+                              //       xmlns="http://www.w3.org/2000/svg"
+                              //       width="18"
+                              //       height="18"
+                              //       class="bi bi-three-dots-vertical"
+                              //       viewBox="0 0 16 16"
+                              //       fill="#8c9bab"
+                              //       className="task-card-right"
+                              //       onClick={(event) =>
+                              //         handleDeleteOpen(event, p._id)
+                              //       }
+                              //     >
+                              //       <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                              //     </svg>
+                              //     <Popover
+                              //       id={id}
+                              //       open={deleteOpener}
+                              //       anchorEl={anchorDeleteModal}
+                              //       onClose={handleDeleteClose}
+                              //       anchorOrigin={{
+                              //         vertical: "bottom",
+                              //         horizontal: "left",
+                              //       }}
+                              //       className="delete-popover-wrapper"
+                              //       PaperProps={{ style: popoverStyle }}
+                              //       onClick={deleteHandler}
+                              //     >
+                              //       <div
+                              //         className="delete-popover"
+                              //         onClick={deleteHandler}
+                              //       >
+                              //         Delete
+                              //       </div>
+                              //     </Popover>
+                              //   </div>
 
-                                {deleteOpen ? (
-                                  <DeleteModal
-                                    openDeleteModal={openDeleteModal}
-                                    closeDeleteModal={closeDeleteModal}
-                                    deleteTaskId={deleteTaskId}
-                                    fetchTasks={fetchTasks}
-                                    failureMessageFunction={
-                                      failureMessageFunction
-                                    }
-                                    showLoadingTrigger={showLoadingTrigger}
-                                    showErrorTrigger={showErrorTrigger}
-                                  />
-                                ) : (
-                                  <></>
-                                )}
+                              //   {deleteOpen ? (
+                              //     <DeleteModal
+                              //       openDeleteModal={openDeleteModal}
+                              //       closeDeleteModal={closeDeleteModal}
+                              //       deleteTaskId={deleteTaskId}
+                              //       fetchTasks={fetchTasks}
+                              //       failureMessageFunction={
+                              //         failureMessageFunction
+                              //       }
+                              //       showLoadingTrigger={showLoadingTrigger}
+                              //       showErrorTrigger={showErrorTrigger}
+                              //     />
+                              //   ) : (
+                              //     <></>
+                              //   )}
 
-                                <div className="task-card-tags-wrapper">
-                                  {p.tags.map((tag) => (
-                                    <div className="task-card-tag-wrapper text-color-off-white">
-                                      {tag}
-                                    </div>
-                                  ))}
-                                </div>
+                              //   <div className="task-card-tags-wrapper">
+                              //     {p.tags.map((tag) => (
+                              //       <div className="task-card-tag-wrapper text-color-off-white">
+                              //         {tag}
+                              //       </div>
+                              //     ))}
+                              //   </div>
 
-                                <div className="task-card-assigned-to-wrapper">
-                                  {p.assignedToName ? (
-                                    <div
-                                      onClick={(event) =>
-                                        handleClick(p._id, event)
-                                      }
-                                      className="task-card-assigned-to cbdc text-color-off-white"
-                                    >
-                                      {p.assignedToName[0].toUpperCase()}
-                                    </div>
-                                  ) : (
-                                    <svg
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      width="23"
-                                      height="23"
-                                      fill="rgb(57, 57, 57)"
-                                      className="bi bi-person-circle margin-top-10px card-icon-project-page cbdc"
-                                      viewBox="0 0 16 16"
-                                      aria-describedby={id}
-                                      variant="contained"
-                                      onClick={(event) =>
-                                        handleClick(p._id, event)
-                                      }
-                                    >
-                                      <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                                      <path
-                                        fill-rule="evenodd"
-                                        d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
-                                      />
-                                    </svg>
-                                  )}
+                              //   <div className="task-card-assigned-to-wrapper">
+                              //     {p.assignedToName ? (
+                              //       <div
+                              //         onClick={(event) =>
+                              //           handleClick(p._id, event)
+                              //         }
+                              //         className="task-card-assigned-to cbdc text-color-off-white"
+                              //       >
+                              //         {p.assignedToName[0].toUpperCase()}
+                              //       </div>
+                              //     ) : (
+                              //       <svg
+                              //         xmlns="http://www.w3.org/2000/svg"
+                              //         width="23"
+                              //         height="23"
+                              //         fill="rgb(57, 57, 57)"
+                              //         className="bi bi-person-circle margin-top-10px card-icon-project-page cbdc"
+                              //         viewBox="0 0 16 16"
+                              //         aria-describedby={id}
+                              //         variant="contained"
+                              //         onClick={(event) =>
+                              //           handleClick(p._id, event)
+                              //         }
+                              //       >
+                              //         <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                              //         <path
+                              //           fill-rule="evenodd"
+                              //           d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
+                              //         />
+                              //       </svg>
+                              //     )}
 
-                                  {p.assignedToName ? (
-                                    <p className="abcdd">{p.assignedToName}</p>
-                                  ) : (
-                                    <p className="abcdd">Unassigned</p>
-                                  )}
-                                </div>
+                              //     {p.assignedToName ? (
+                              //       <p className="abcdd">{p.assignedToName}</p>
+                              //     ) : (
+                              //       <p className="abcdd">Unassigned</p>
+                              //     )}
+                              //   </div>
 
-                                <Popover
-                                  id={id}
-                                  open={openn}
-                                  anchorEl={anchorEl}
-                                  onClose={handleClose}
-                                  anchorOrigin={{
-                                    vertical: "bottom",
-                                    horizontal: "left",
-                                  }}
-                                  className="padding-10-px"
-                                >
-                                  <LiveSearch
-                                    className="live-search-main-wrapper"
-                                    taskId={taskId}
-                                    onClose={handleClose}
-                                    fetchTasks={fetchTasks}
-                                  />
-                                </Popover>
-                              </div>
+                              //   <Popover
+                              //     id={id}
+                              //     open={openn}
+                              //     anchorEl={anchorEl}
+                              //     onClose={handleClose}
+                              //     anchorOrigin={{
+                              //       vertical: "bottom",
+                              //       horizontal: "left",
+                              //     }}
+                              //     className="padding-10-px"
+                              //   >
+                              //     <LiveSearch
+                              //       className="live-search-main-wrapper"
+                              //       taskId={taskId}
+                              //       onClose={handleClose}
+                              //       fetchTasks={fetchTasks}
+                              //     />
+                              //   </Popover>
+                              // </div>
                             );
                           } else {
                             return null;

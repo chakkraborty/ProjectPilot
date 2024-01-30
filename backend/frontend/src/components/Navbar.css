@@ -130,15 +130,18 @@
 }
 .live-search-list-item {
   padding: 10px;
+  color: #a7b2bf;
+}
+.live-search-list-item-name {
+  color: #a7b2bf;
 }
 .live-search-list-wrapper {
-  max-width: 200px;
-  max-height: 200px;
-
-  list-style: none;
+  width: 100%;
+  height: 200px;
+  overflow-y: auto;
 }
 .email-list-item {
-  color: grey;
+  color: #7d8c9a;
 }
 .flex {
   display: flex;
@@ -148,11 +151,11 @@
 }
 .live-search-items-wrapper:hover {
   cursor: pointer;
-  background-color: aliceblue;
-  border-left: 2px solid rgb(59, 59, 255);
+  background-color: #323940;
+  border-left: 2px solid #579dff;
 }
 .live-search-items-wrapper {
-  border-left: 2px solid white;
+  border-left: 2px solid #282e33;
   padding-left: 10px;
 }
 .live-search-wrapper {
@@ -210,7 +213,7 @@
 } */
 .abcdd {
   opacity: 1;
-  background-color: black;
+  background-color: #9fadbc;
   font-size: 12px;
   padding: 5px;
   margin-top: 4px;
@@ -218,6 +221,7 @@
   visibility: hidden;
   position: absolute;
   margin-top: 70px;
+  color: black;
 }
 .cbdc:hover + .abcdd {
   visibility: visible;

@@ -305,14 +305,20 @@ app.post("api/deleteTask", protect, async (req, res) => {
 });
 
 app.post("/api/abc", protect, async (req, res) => {
-  let { taskId } = req.body;
-  console.log(req.body);
+  try {
+    console.log(req.body);
 
-  let a = await Task.findByIdAndDelete({ _id: taskId });
-  if (a) {
-    res.status(201).json("successfully deleted");
-  } else {
-    res.status(401).json("Error occured while deleting this task!");
+    let { taskId } = req.body;
+    console.log(req.body);
+
+    let a = await Task.findByIdAndDelete({ _id: taskId });
+    if (a) {
+      res.status(201).json("successfully deleted");
+    } else {
+      res.status(401).json("Error occured while deleting this task!");
+    }
+  } catch (error) {
+    console.log(error);
   }
 });
 

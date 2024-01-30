@@ -23,6 +23,7 @@ const TaskPage = () => {
   const [issues, setIssues] = useState([]);
   const [descriptionTextAreaStatus, setDescriptionTextAreaStatus] = useState(0);
   const [showLoading, setShowLoading] = useState(false);
+  const [showTick, setShowTick] = useState(false);
 
   function triggerSessionError() {
     setShowError(true);
@@ -166,6 +167,8 @@ const TaskPage = () => {
 
   async function updateSummaryHandler(a) {
     try {
+      setShowTick(true);
+
       let token = localStorage.getItem("token");
       if (!token) {
         loadingTrigger();
@@ -266,6 +269,11 @@ const TaskPage = () => {
     }
   }
 
+  function setter() {
+    setShowTick(true);
+    console.log("loaded");
+  }
+
   useEffect(() => {
     let token = localStorage.getItem("token");
     if (!token) {
@@ -273,6 +281,16 @@ const TaskPage = () => {
     }
     fetchTask();
     fetchIssues();
+    const handleDocumentClick = (event) => {
+      if (!event.target.closest("task-page-title-id")) {
+        setShowTick(false);
+      }
+    };
+
+    document.addEventListener("click", handleDocumentClick);
+    return () => {
+      document.removeEventListener("click", handleDocumentClick);
+    };
   }, []);
 
   return (
@@ -288,11 +306,46 @@ const TaskPage = () => {
           <div className="task-page-right-wrapper">
             <div className="task-page-title">Project / Task</div>
 
-            <textarea
-              defaultValue={summary}
-              className="background-color-dark-theme margin-top-10px task-page-summary-title"
-              onChange={(e) => updateSummaryHandler(e.target.value)}
-            ></textarea>
+            <div id="task-page-title-id">
+              <textarea
+                defaultValue={summary}
+                className="background-color-dark-theme margin-top-10px task-page-summary-title"
+                onChange={(e) => updateSummaryHandler(e.target.value)}
+                spellCheck="false"
+              ></textarea>
+            </div>
+
+            {/* {showTick ? (
+              <div className="desc-title-tic-box">
+                <div className="desc-title-tic-box-item">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="#b6c2cf
+"
+                    class="bi bi-check-lg"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425z" />
+                  </svg>
+                </div>
+                <div className="desc-title-tic-box-item">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="#b6c2cf"
+                    class="bi bi-x-lg"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
+                  </svg>
+                </div>
+              </div>
+            ) : (
+              <></>
+            )} */}
 
             <div className=" margin-top-10px task-page-description margin-bottom-5px">
               Description
@@ -310,6 +363,7 @@ const TaskPage = () => {
               }}
               onChange={(e) => setDescription(e.target.value)}
               id="descriptionTextArea"
+              spellCheck="false"
             ></textarea>
             {!trigger ? (
               <></>
@@ -340,28 +394,22 @@ const TaskPage = () => {
             </div>
 
             <div className="task-page-issues-title text-color-dark-grey display-flex">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="22"
-                height="22"
-                fill="rgb(208, 60, 20)"
-                class="bi bi-bug"
-                viewBox="0 0 16 16"
-              >
-                <path d="M4.355.522a.5.5 0 0 1 .623.333l.291.956A4.979 4.979 0 0 1 8 1c1.007 0 1.946.298 2.731.811l.29-.956a.5.5 0 1 1 .957.29l-.41 1.352A4.985 4.985 0 0 1 13 6h.5a.5.5 0 0 0 .5-.5V5a.5.5 0 0 1 1 0v.5A1.5 1.5 0 0 1 13.5 7H13v1h1.5a.5.5 0 0 1 0 1H13v1h.5a1.5 1.5 0 0 1 1.5 1.5v.5a.5.5 0 1 1-1 0v-.5a.5.5 0 0 0-.5-.5H13a5 5 0 0 1-10 0h-.5a.5.5 0 0 0-.5.5v.5a.5.5 0 1 1-1 0v-.5A1.5 1.5 0 0 1 2.5 10H3V9H1.5a.5.5 0 0 1 0-1H3V7h-.5A1.5 1.5 0 0 1 1 5.5V5a.5.5 0 0 1 1 0v.5a.5.5 0 0 0 .5.5H3c0-1.364.547-2.601 1.432-3.503l-.41-1.352a.5.5 0 0 1 .333-.623zM4 7v4a4 4 0 0 0 3.5 3.97V7H4zm4.5 0v7.97A4 4 0 0 0 12 11V7H8.5zM12 6a3.989 3.989 0 0 0-1.334-2.982A3.983 3.983 0 0 0 8 2a3.983 3.983 0 0 0-2.667 1.018A3.989 3.989 0 0 0 4 6h8z" />
-              </svg>
-              <p className="task-page-issues-header margin-left-10px">
-                Issues({issues.length}){" "}
+              <p className="task-page-issues-header">
+                Comments ({issues.length}){" "}
               </p>
             </div>
 
-            <textarea
-              placeholder="Report an issue..."
-              className="task-page-add-issue-text-area background-color-dark-theme"
-              ref={issueTextAreaRef}
-              onClick={() => setTriggReport(true)}
-              onChange={(e) => setIssueDescription(e.target.value)}
-            ></textarea>
+            <div className="task-page-add-issue-wrapper">
+              <div className="task-page-add-issue-name-icon">N</div>
+              <textarea
+                placeholder="Add a comment..."
+                className="task-page-add-issue-text-area"
+                ref={issueTextAreaRef}
+                onClick={() => setTriggReport(true)}
+                onChange={(e) => setIssueDescription(e.target.value)}
+              ></textarea>
+            </div>
+
             {!triggReport ? (
               <></>
             ) : (
@@ -370,7 +418,7 @@ const TaskPage = () => {
                   className="task-page-issue-report-button"
                   onClick={handleReportIssue}
                 >
-                  Report
+                  Add
                 </div>
                 <div
                   className="task-page-issue-cancel-button color-off-white"
@@ -383,11 +431,11 @@ const TaskPage = () => {
                 </div>
               </div>
             )}
-
-            {issues.map((p) => (
-              <div className="issue-wrapper">
-                <div className="display-flex">
-                  {p.status === 0 ? (
+            <div className="issue-parent-wrapper">
+              {issues.map((p) => (
+                <div className="issue-wrapper">
+                  <div className="display-flex">
+                    {/* {p.status === 0 ? (
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="25"
@@ -411,44 +459,45 @@ const TaskPage = () => {
                       <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
                       <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z" />
                     </svg>
-                  )}
-                  <div className="task-page-reported-wrapper">
-                    <div className="task-page-reported-by-icon">
-                      {p.createdByName[0].toUpperCase()}
+                  )} */}
+                    <div className="task-page-reported-wrapper">
+                      <div className="task-page-reported-by-icon">
+                        {p.createdByName[0].toUpperCase()}
+                      </div>
                     </div>
-                  </div>
-                  <div className="task-page-issue-summary">
-                    <p className="task-page-issue-createdBy">
-                      {p.createdByName}
-                    </p>
-                    <p className="task-page-issue-comment">{p.comment}</p>
-                    <div className="margin-top-10px task-issue-lower-text">
-                      <span
-                        className="task-issue-delete-wrapper"
-                        onClick={() => deleteIssueHandler(p._id)}
-                      >
-                        Delete
-                      </span>
-                      {p.status === 0 ? (
+                    <div className="task-page-issue-summary">
+                      <p className="task-page-issue-createdBy">
+                        {p.createdByName}
+                      </p>
+                      <p className="task-page-issue-comment">{p.comment}</p>
+                      <div className="margin-top-10px task-issue-lower-text">
                         <span
-                          className="task-issue-delete-wrapper margin-left-10px"
-                          onClick={() => markIssueHandler(p._id)}
+                          className="task-issue-delete-wrapper"
+                          onClick={() => deleteIssueHandler(p._id)}
                         >
-                          Mark as Resolved
+                          Delete
                         </span>
-                      ) : (
-                        <span
-                          className="text-color-dark-grey task-issue-delete-wrapper margin-left-10px"
-                          onClick={() => openIssueHandler(p._id)}
-                        >
-                          Open Issue
-                        </span>
-                      )}
+                        {/* {p.status === 0 ? (
+                          <span
+                            className="task-issue-delete-wrapper margin-left-10px"
+                            onClick={() => markIssueHandler(p._id)}
+                          >
+                            Mark as Resolved
+                          </span>
+                        ) : (
+                          <span
+                            className="text-color-dark-grey task-issue-delete-wrapper margin-left-10px"
+                            onClick={() => openIssueHandler(p._id)}
+                          >
+                            Open Issue
+                          </span>
+                        )} */}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
 

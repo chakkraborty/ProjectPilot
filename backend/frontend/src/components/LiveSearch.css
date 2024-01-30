@@ -1,0 +1,60 @@
+.live-search-kanban-wrapper {
+  background-color: #282e33;
+
+  border: 1px solid #39424a;
+}
+.live-search-dummy-wrapper {
+}
+
+.kanban-live-search-input {
+  background-color: #22272b;
+  border: none;
+  height: 40px;
+  width: 200px;
+  border-radius: 2px;
+  font-size: 15px;
+  padding-left: 10px;
+}
+.kanban-live-search-input {
+  outline: none;
+}
+
+.kanban-live-search-input-wrapper {
+  display: flex;
+  align-items: center;
+  border: 1.5px solid #85b8ff;
+  border-radius: 2px;
+  padding: 2px;
+  background-color: #22272b;
+  margin: 10px;
+}
+
+.kanban-live-search-input-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0052cc;
+  margin-left: 8px;
+}
+
+.live-search-items-wrapper-icon {
+  background-color: #0052cc;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.live-search-person-unassigned-icon {
+  margin-left: 8px;
+}
+
+.live-search-list-wrapper-fit-content {
+  height: fit-content;
+  width: 100%;
+}

@@ -79,7 +79,7 @@ const Description = ({ taskId, loadingTrigger, triggerSessionError }) => {
   const [updateTag, setUpdateTag] = useState(0);
   const [tags, setTags] = useState([]);
   const [displayList, setDisplayList] = useState(0);
-  const [assignedTo, setAssignedTo] = useState("Unassigned");
+  const [assignedTo, setAssignedTo] = useState("");
   const assignToRef = useRef();
   const [status, setStatus] = useState("todo");
   const [createdByName, setCreatedByName] = useState("");
@@ -218,9 +218,12 @@ const Description = ({ taskId, loadingTrigger, triggerSessionError }) => {
       console.log(a.data);
       setTags(a.data.tags);
       setAssignedTo(a.data.assignedToName);
+
       console.log(typeof a.data.startDate);
       setCreatedByName(a.data.createdByName);
       console.log(a.data.startDate);
+      console.log(a.data);
+
       if (a.data.startDate) {
         let x = a.data.startDate.substring(0, 10);
         console.log("x is :");
@@ -234,17 +237,12 @@ const Description = ({ taskId, loadingTrigger, triggerSessionError }) => {
 
       // setSelectedStartDate(a.data.startDate.substring(0, 10));
 
-      if (!assignedTo) {
-        setAssignedTo("Unassigned");
-      }
       setCreatedByName(a.data.createdByName);
       setStatus(a.data.status);
 
       console.log(a.data);
       assignToRef.current.value = a.data.assignedToName;
       if (assignToRef.current.value === "") {
-        assignToRef.current.value = "Unassigned";
-        setAssignedTo("Unassigned");
       }
     } catch (error) {
       if (error.response.data.type === 2) {
@@ -253,10 +251,11 @@ const Description = ({ taskId, loadingTrigger, triggerSessionError }) => {
     }
   }
 
-  async function handleAssignToUpdate(email) {
+  async function handleAssignToUpdate(name, email) {
     try {
       let token = localStorage.getItem("token");
-
+      setAssignedTo(name);
+      assignToRef.current.value = name;
       if (!token) {
         loadingTrigger();
         return;
@@ -280,6 +279,7 @@ const Description = ({ taskId, loadingTrigger, triggerSessionError }) => {
   }
 
   async function handler(email) {
+    setAssignedTo("");
     await fetchUsers(email);
     setShow(1);
   }
@@ -476,9 +476,9 @@ const Description = ({ taskId, loadingTrigger, triggerSessionError }) => {
       </div>
 
       <div className="text-color-dark-grey yy description-content-wrapper">
-        <h3 className="description-title">Details</h3>
+        <div className="description-title">Details</div>
         <p className="text-color-light-dark description-assign-to">
-          Assigned to :
+          Assigned to
         </p>
         <div className="description-text-area-top-wrapper">
           <div
@@ -489,6 +489,7 @@ const Description = ({ taskId, loadingTrigger, triggerSessionError }) => {
                 : "description-text-area-wrapper display-flex"
             }
             onClick={() => console.log(outLine)}
+            id="description-text-area-wrapper-id"
           >
             {/* {assignedTo === "Unassigned" ? (
               <svg
@@ -508,12 +509,12 @@ const Description = ({ taskId, loadingTrigger, triggerSessionError }) => {
             ) : (
               <></>
             )} */}
-            {assignedTo === "Unassigned" ? (
+            {!assignedTo ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="25"
                 height="25"
-                fill="#d4d4d4"
+                fill="#8c9bab"
                 class="bi bi-person-circle"
                 viewBox="0 0 16 16"
               >
@@ -525,12 +526,12 @@ const Description = ({ taskId, loadingTrigger, triggerSessionError }) => {
               </svg>
             ) : (
               <div className="description-text-area-icon">
-                {assignedTo ? <>{assignedTo[0].toUpperCase()}</> : <></>}
+                {assignedTo[0].toUpperCase()}
               </div>
             )}
 
             <input
-              defaultValue={assignedTo}
+              defaultValue={assignedTo ? assignedTo : "Unassigned"}
               className="description-text-area description-list-width"
               onChange={(e) => handler(e.target.value)}
               ref={assignToRef}
@@ -549,7 +550,7 @@ const Description = ({ taskId, loadingTrigger, triggerSessionError }) => {
                 {users.map((p) => (
                   <div
                     className="description-user-list-item description-list-width"
-                    onClick={(e) => handleAssignToUpdate(p.email)}
+                    onClick={(e) => handleAssignToUpdate(p.name, p.email)}
                   >
                     <div className="description-user-list-icon">
                       {p.email[0].toUpperCase()}
@@ -574,7 +575,7 @@ const Description = ({ taskId, loadingTrigger, triggerSessionError }) => {
             Start date
           </p>
         </div>
-        <div className="display-flex align-items-center margin-top-5px margin-left-20px">
+        <div className="display-flex align-items-center margin-top-5px margin-left-10px">
           {/* <svg
             xmlns="http://www.w3.org/2000/svg"
             width="15"
@@ -618,7 +619,7 @@ const Description = ({ taskId, loadingTrigger, triggerSessionError }) => {
           />
         </div>
 
-        <div className="margin-left-20px margin-top-15px task-page-tags-title">
+        <div className="margin-left-10px margin-top-15px task-page-tags-title">
           Tags
         </div>
         {updateTag ? (
@@ -660,13 +661,13 @@ const Description = ({ taskId, loadingTrigger, triggerSessionError }) => {
             </div>
             <div className="display-flex">
               <div
-                className="description-tags-save-button"
+                className="task-page-issue-report-button margin-left-10px"
                 onClick={() => updateTagsDescription()}
               >
                 Save
               </div>
               <div
-                className="description-tags-cancel-button"
+                className="task-page-issue-cancel-button"
                 onClick={() => setUpdateTag(0)}
               >
                 Cancel
@@ -677,7 +678,7 @@ const Description = ({ taskId, loadingTrigger, triggerSessionError }) => {
           <></>
         )}
 
-        <div className="description-created-by">Created by :</div>
+        <div className="description-created-by">Created by</div>
         <div className="description-created-by-wrapper display-flex">
           <div className="description-created-by-icon">
             {createdByName ? <>{createdByName[0].toUpperCase()}</> : <></>}

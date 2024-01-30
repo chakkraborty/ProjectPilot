@@ -1,0 +1,32 @@
+.delete-popover-main-wrapper {
+  background-color: #282e33;
+  width: 200px;
+  border: 1.5px solid #39424a;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.delete-popover-main-wrapper-item {
+  padding: 12px;
+  font-size: 14px;
+  padding-left: 18px;
+  color: #b6c2cf;
+}
+
+.delete-popover-main-wrapper-item:hover {
+  cursor: pointer;
+  background-color: #323940;
+}
+
+.kanban-card-dots {
+  height: 30px;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+}
+
+.kanban-card-dots:hover {
+  background-color: #323940;
+}

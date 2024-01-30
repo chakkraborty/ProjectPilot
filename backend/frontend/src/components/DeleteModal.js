@@ -27,12 +27,11 @@ const DeleteModal = ({
       };
       console.log(deleteTaskId);
       let a = await axios.post("/api/abc", { taskId: deleteTaskId }, config);
-
+      closeDeleteModal();
       if (a) {
         fetchTasks();
       }
 
-      closeDeleteModal();
       failureMessageFunction("Task deleted !");
       //let a = await axios.post("/api/deleteTask");
       // if (a) {
@@ -44,6 +43,7 @@ const DeleteModal = ({
       if (error.response.data.type === 2) {
         showErrorTrigger();
       }
+      closeDeleteModal();
     }
   }
 

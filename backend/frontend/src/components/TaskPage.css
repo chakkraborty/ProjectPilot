@@ -86,8 +86,7 @@
 .task-page-text-area {
   border: none;
   outline: none;
-
-  width: 100%;
+  width: auto;
   resize: none;
   background-color: #1d2125;
   color: black;
@@ -97,7 +96,7 @@
   padding: 15px;
   border: 1px solid rgb(52, 54, 72);
   border-radius: 2px;
-  width: 100%;
+  width: 99%;
   height: 300px;
 }
 
@@ -120,15 +119,16 @@
 }
 .task-page-save-changes-wrapper {
   display: flex;
+  margin-top: 5px;
 }
 
 .task-page-text-area-save-button {
-  background-color: #85b8ff;
+  background-color: #579dff;
   width: fit-content;
-  padding: 5px;
-  padding-left: 10px;
-  padding-right: 10px;
-  font-size: 13px;
+  padding: 8px;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 14px;
   border-radius: 3px;
   color: #000c18;
   font-weight: 500;
@@ -136,10 +136,16 @@
 .task-page-text-area-cancel-button {
   color: rgb(41, 41, 41);
   width: fit-content;
-  padding: 5px;
-  font-size: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 3px;
   margin-left: 10px;
+  color: #b2becb;
+  background-color: #282d33;
 }
 .task-page-text-area-save-button:hover {
   background-color: #a5c5f3;
@@ -149,19 +155,33 @@
   cursor: pointer;
   background-color: rgb(54, 63, 71);
 }
-
+.task-page-add-issue-wrapper {
+  display: flex;
+  margin-right: 10px;
+}
+.task-page-add-issue-name-icon {
+  height: 35px;
+  width: 37px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0052cc;
+  border-radius: 50%;
+  border: 1.5px solid #282e33;
+  margin-right: 10px;
+}
 .task-page-summary-title {
   font-size: 25px;
   font-weight: 600;
-
+  text-decoration: none;
   color: #b6c2cf;
   border: none;
   height: 40px;
-  width: 100%;
+  width: 99%;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   resize: none;
-
+  margin-left: 2px;
   overflow-x: hidden;
   padding: 3px;
 }
@@ -179,34 +199,48 @@
   outline: none;
   border: 1px solid rgb(50, 55, 71);
   border-radius: 3px;
+  background-color: #22272b;
 }
 .task-page-add-issue-text-area:focus {
-  outline: 1px solid rgb(255, 213, 213);
+  outline: 1px solid rgb(127, 197, 255);
   background-color: #282d33;
 }
 
 .task-page-issue-report-button {
-  background-color: rgb(199, 46, 46);
   width: fit-content;
-  font-size: 13px;
-  padding: 5px;
+
   font-weight: 500;
   border-radius: 3px;
   margin-top: 10px;
+  background-color: #579dff;
+
+  padding: 8px;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 14px;
+  border-radius: 3px;
+  color: #000c18;
+  font-weight: 500;
 }
 .task-page-issue-cancel-button {
-  font-size: 13px;
-  padding: 5px;
-  padding-left: 8px;
-  padding-right: 8px;
-  width: fit-content;
-  margin-left: 5px;
   margin-top: 10px;
+  color: rgb(41, 41, 41);
+  width: fit-content;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 3px;
-  font-weight: 500;
+  margin-left: 10px;
+  color: #b2becb;
+  background-color: #282d33;
 }
 .task-page-create-issue-wrapper {
   display: flex;
+  margin-left: 45px;
+  margin-bottom: 40px;
 }
 .task-page-issue-createdBy {
   color: #a2b3c5;
@@ -214,17 +248,18 @@
   font-size: 17px;
 }
 .task-page-issues-header {
-  color: #dce2f3;
-  font-size: 14px;
+  color: #b6c2cf;
+  font-size: 15px;
   font-weight: 500;
   margin-top: 1px;
+  margin-bottom: 5px;
 }
 .task-page-issue-cancel-button:hover {
   cursor: pointer;
   background-color: rgb(54, 63, 71);
 }
 .task-page-issue-report-button:hover {
-  background-color: rgb(208, 60, 20);
+  background-color: #a5c5f3;
   cursor: pointer;
 }
 
@@ -236,32 +271,30 @@
 .issue-wrapper {
   /* background-color: grey; */
   width: 100%;
-  background-color: #24292d;
-  border-radius: 5px;
-  margin-top: 5px;
+
+  margin-top: 10px;
 }
 .issue-wrapper {
   display: flex;
+}
 
-  padding: 8px;
+.issue-parent-wrapper {
+  margin-top: 30px;
+  margin-bottom: 50px;
 }
-.issue-wrapper:hover {
-  cursor: pointer;
-  background-color: rgb(51, 51, 62);
-}
+
 .task-page-reported-by {
   color: rgb(40, 40, 40);
   font-size: 12px;
 }
 .task-page-reported-by-icon {
-  width: 25px;
-  height: 25px;
-  background-color: #007bff;
+  width: 35px;
+  height: 35px;
+  background-color: #0052cc;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  margin-left: 5px;
 }
 /* .issue-wrapper-icon {
   margin-right: 5px;
@@ -301,9 +334,10 @@
   margin-top: 15px;
 }
 .task-issue-delete-wrapper {
-  font-size: 12px;
+  font-size: 15px;
 
-  color: #2d2d2d;
+  color: #9fadbc;
+
   font-weight: 500;
 }
 .task-issue-delete-wrapper:hover {
@@ -329,7 +363,8 @@
 }
 
 .task-page-issue-comment {
-  color: #c9c9c9;
+  color: #b2becb;
+  margin-top: 10px;
 }
 .background-color-dark-theme {
   background-color: #1d2125;
@@ -338,7 +373,7 @@
   margin-bottom: 5px;
 }
 .task-issue-delete-wrapper {
-  color: rgb(159, 159, 159);
+  color: #9fadbc;
 }
 
 @media (min-width: 750px) {
@@ -366,4 +401,23 @@
   .content-container {
     width: 100%;
   }
+}
+
+.desc-title-tic-box {
+  display: flex;
+  position: absolute;
+}
+
+.desc-title-tic-box-item {
+  padding: 8px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border: 1.5px solid rgb(57, 57, 57);
+  border-radius: 2px;
+  margin-left: 5px;
+  background-color: #282d33;
+}
+.desc-title-tic-box-item:hover {
+  cursor: pointer;
+  background-color: #3d444d;
 }

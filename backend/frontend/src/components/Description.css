@@ -9,26 +9,30 @@
 .description-title {
   color: #b6c2cf;
   font-weight: 500;
-  font-size: 17px;
+  font-size: 15px;
   background-color: #282e33;
   padding: 5px;
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
-  padding-bottom: 10px;
-  padding-top: 10px;
+  padding-bottom: 15px;
+  padding-top: 15px;
   padding-left: 10px;
 }
 
 .description-list-wrapper {
-  position: absolute;
   margin-top: 5px;
-  height: 140px;
+  height: 160px;
   overflow: hidden;
   z-index: 20;
-  background-color: rgb(48, 49, 63);
-  margin-left: 19px;
+  background-color: #282e33;
+  position: absolute;
   border-radius: 2px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  width: 97%;
 }
+
 .description-user-list-item {
   color: black;
   background-color: white;
@@ -38,11 +42,11 @@
   display: flex;
   align-items: center;
 
-  background-color: rgb(48, 49, 63);
+  background-color: #282e33;
   z-index: 20;
 }
 .description-user-list-item:hover {
-  background-color: rgb(60, 60, 70);
+  background-color: #323940;
   cursor: pointer;
   border-left: 2px solid rgb(0, 140, 255);
 }
@@ -61,7 +65,7 @@
   border: 1px solid #4e4e4e;
 }
 .description-user-list-icon {
-  background-color: #007bff;
+  background-color: #0052cc;
   width: 25px;
   height: 25px;
   border-radius: 50%;
@@ -78,7 +82,7 @@
   margin-top: 15px;
   font-size: 13px;
   font-weight: 500;
-  margin-left: 20px;
+  margin-left: 10px;
   color: #9fadb0;
 }
 .description-date-title {
@@ -91,7 +95,7 @@
 .date-picker-start-date-description {
   width: 100%;
   padding-left: 10px;
-  color: #c4cfd2;
+  color: #b6c2cf;
   height: 35px;
   background-color: #1d2125;
   border: none;
@@ -105,7 +109,7 @@
   outline: 2px solid #85b8ff;
 }
 .description-select-start-date-wrapper {
-  margin-left: 20px;
+  margin-left: 10px;
   margin-top: 10px;
 }
 
@@ -113,7 +117,7 @@
   margin-left: 20px;
 }
 .description-text-area-icon {
-  background-color: #007bff;
+  background-color: #0052cc;
   width: 25px;
   height: 25px;
   border-radius: 50%;
@@ -126,16 +130,24 @@
 .description-text-area-wrapper {
   display: flex;
   align-items: center;
-  margin-left: 20px;
+
   margin-top: 10px;
   width: fit-content;
   padding: 5px;
+  padding-left: 10px;
+  width: 100%;
+}
+
+.description-text-area-top-wrapper {
+  padding: 5px;
+
+  position: relative;
 }
 .description-text-area-outline-highlight {
   border: 1px solid rgb(0, 68, 255);
 }
 .description-text-area-wrapper:focus-within {
-  outline: 2px solid #85b8ff;
+  outline: 1.5px solid #85b8ff;
   background-color: #282e33;
 }
 
@@ -163,7 +175,7 @@
 .description-tags-wrapper {
   display: flex;
   flex-wrap: wrap;
-  margin-left: 20px;
+  margin-left: 10px;
   margin-top: 10px;
   min-height: 40px;
 }
@@ -241,7 +253,7 @@
 }
 
 .description-created-by {
-  margin-left: 20px;
+  margin-left: 10px;
   margin-top: 15px;
   font-size: 13px;
   font-weight: 500;
@@ -251,12 +263,12 @@
 
 .description-created-by-wrapper {
   margin-top: 10px;
-  margin-left: 20px;
+  margin-left: 10px;
   align-items: center;
 }
 
 .description-created-by-icon {
-  background-color: #075db9;
+  background-color: #0052cc;
   width: 25px;
   height: 25px;
   border-radius: 50%;
@@ -267,7 +279,7 @@
 .description-created-by-name {
   margin-left: 8px;
   font-size: 15px;
-  color: #d4d4d4;
+  color: #b1bdca;
 }
 
 .description-content-wrapper {
@@ -275,6 +287,7 @@
   padding-bottom: 20px;
   border-radius: 3px;
   width: 100%;
+
   border: 1px solid rgb(71, 71, 90);
 }
 .description-status-top-wrapper {
@@ -455,7 +468,7 @@
 }
 
 .description-text-area {
-  color: #d4d4d4;
+  color: #8c9bab;
   background-color: #1d2125;
 }
 
